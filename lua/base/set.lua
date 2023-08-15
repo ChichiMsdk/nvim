@@ -1,0 +1,14 @@
+local o = vim.opt
+o.guicursor= ""
+o.termguicolors = true
+o.nu= true
+o.relativenumber= true
+o.tabstop= 4
+o.shiftwidth= 4
+o.wrap= false
+o.hlsearch=false
+o.incsearch=true
+o.scrolloff= 8
+o.updatetime = 50
+o.colorcolumn = "80"
+vim.g.mapleader=" "
