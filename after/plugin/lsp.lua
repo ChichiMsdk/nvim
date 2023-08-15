@@ -5,12 +5,29 @@ local lsp = require('lsp-zero').preset({
 	}
 })
 
-vim.opt.signcolumn = 'no'
+vim.opt.signcolumn = 'yes'
+
+vim.diagnostic.config({
+	virtual_text = true,
+	signs = true,
+	update_in_insert = false,
+	underline = true,
+	severity_sort = true,
+})
+
 vim.cmd[[set pumheight=5]]
 --vim.cmd[[set pumblend=60]]
 vim.cmd[[hi PmenuSel blend=0]]
 
+lsp.set_sign_icons({
+	error = " ",
+	warn = " ",
+	hint = " ",
+	info = " ",
+})
+
 lsp.setup()
+
 local cmp = require('cmp')
 cmp.setup({
 	enabled = function()

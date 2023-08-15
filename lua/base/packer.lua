@@ -24,6 +24,7 @@ return require('packer').startup(function(use)
 	use ('hrsh7th/nvim-cmp')
 	use { "catppuccin/nvim", as = "catppuccin" }
 	use ('hrsh7th/cmp-nvim-lsp')
+	use {"Diogo-ss/42-header.nvim"}
 	use {
 		"zbirenbaum/copilot.lua",
 		cmd = "Copilot",

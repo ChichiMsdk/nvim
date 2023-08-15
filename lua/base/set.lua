@@ -12,3 +12,6 @@ o.scrolloff= 8
 o.updatetime = 50
 o.colorcolumn = "80"
 vim.g.mapleader=" "
+vim.cmd[[autocmd  InsertLeave * :set relativenumber]]
+vim.cmd[[autocmd  InsertEnter * :set norelativenumber]]
+
