@@ -6,7 +6,6 @@ local lsp = require('lsp-zero').preset({
 })
 
 vim.opt.signcolumn = 'yes'
-
 vim.diagnostic.config({
 	virtual_text = true,
 	signs = true,
@@ -14,7 +13,6 @@ vim.diagnostic.config({
 	underline = true,
 	severity_sort = true,
 })
-
 vim.cmd[[set pumheight=5]]
 --vim.cmd[[set pumblend=60]]
 vim.cmd[[hi PmenuSel blend=0]]
@@ -25,6 +23,23 @@ lsp.set_sign_icons({
 	hint = " ",
 	info = " ",
 })
+
+lsp.on_attach(function (client, bufnr)
+	local opts = {buffer = bufnr, silent = true}
+	vim.keymap.set("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
+	vim.keymap.set("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
+	vim.keymap.set("n", "<leader>n", function() vim.diagnostic.open_float() end, opts)
+end)
+
+lsp.configure('clangd', {
+  on_attach = function(client, bufnr)
+	  cmd = {
+		  "clangd",
+		  "--offset-encoding=UTF-16",
+	  }
+  end
+})
+
 
 lsp.setup()
 

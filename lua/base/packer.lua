@@ -13,6 +13,7 @@ return require('packer').startup(function(use)
 		requires = { {'nvim-lua/plenary.nvim'} }
 	}
 
+	use "preservim/nerdtree"
 	use "nvim-lua/plenary.nvim"
 	use ('nvim-treesitter/nvim-treesitter', {run = ':TSUpdate'})
 	use ('theprimeagen/harpoon')
@@ -25,6 +26,9 @@ return require('packer').startup(function(use)
 	use { "catppuccin/nvim", as = "catppuccin" }
 	use ('hrsh7th/cmp-nvim-lsp')
 	use {"Diogo-ss/42-header.nvim"}
+	use ('mfussenegger/nvim-dap')
+	use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"} }
+	use ('ldelossa/nvim-dap-projects')
 	use {
 		"zbirenbaum/copilot.lua",
 		cmd = "Copilot",
