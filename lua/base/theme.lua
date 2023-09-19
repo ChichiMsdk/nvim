@@ -9,28 +9,29 @@ require("catppuccin").setup({
     dim_inactive = {
         enabled = true, -- dims the background color of inactive window
         shade = "light",
-        percentage = 0.15, -- percentage of the shade to apply to the inactive window
+        percentage = 0.2, -- percentage of the shade to apply to the inactive window
     },
     no_italic = true, -- Force no italic
     no_bold = false, -- Force no bold
     no_underline = false, -- Force no underline
     styles = { -- Handles the styles of general hi groups (see `:h highlight-args`):
-        comments = { "italic" }, -- Change the style of comments
-        conditionals = { "italic" },
+        comments = {}, -- Change the style of comments
+        conditionals = {},
         loops = {},
         functions = {},
         keywords = {},
         strings = {},
         variables = {},
         numbers = {},
-        booleans = {"bold"},
+        booleans = {},
         properties = {},
         types = {},
         operators = {},
     },
     color_overrides = {
 		mocha = {
-			base = "#191927",
+			base = "#11111a",
+			--black
 		},
 	},
     custom_highlights = {},
@@ -47,4 +48,7 @@ require("catppuccin").setup({
 
 -- setup must be called before loading
 vim.cmd.colorscheme "catppuccin"
-vim.cmd[[hi LineNr guifg=#f77d31]]
+vim.cmd[[hi @function.builtin guifg=#7497d2]]
+--vim.cmd[[hi LineNr guifg=#f77d31]]
+vim.cmd[[hi LineNr guifg=#999999]]
+vim.cmd[[hi StatusLine guifg=#999999 guibg=#11111a]]

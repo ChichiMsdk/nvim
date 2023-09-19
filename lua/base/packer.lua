@@ -13,7 +13,16 @@ return require('packer').startup(function(use)
 		requires = { {'nvim-lua/plenary.nvim'} }
 	}
 
-	use "preservim/nerdtree"
+use({
+    "kylechui/nvim-surround",
+    tag = "*", -- Use for stability; omit to use `main` branch for the latest features
+    config = function()
+        require("nvim-surround").setup({
+            -- Configuration here, or leave empty to use defaults
+        })
+    end
+})
+--	use "preservim/nerdtree"
 	use "nvim-lua/plenary.nvim"
 	use ('nvim-treesitter/nvim-treesitter', {run = ':TSUpdate'})
 	use ('theprimeagen/harpoon')
@@ -29,6 +38,7 @@ return require('packer').startup(function(use)
 	use ('mfussenegger/nvim-dap')
 	use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"} }
 	use ('ldelossa/nvim-dap-projects')
+	use ('nvim-treesitter/playground')
 	use {
 		"zbirenbaum/copilot.lua",
 		cmd = "Copilot",

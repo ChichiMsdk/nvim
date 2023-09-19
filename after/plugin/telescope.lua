@@ -1,9 +1,10 @@
 local builtin = require('telescope.builtin')
+local actions = require'telescope.actions'
 vim.keymap.set('n', '<leader>fs', builtin.find_files, {})
 vim.keymap.set('n', '<leader>gf', builtin.git_files, {})
 vim.keymap.set('n', '<leader>ff', builtin.live_grep, {})
 vim.keymap.set('n', '<leader>s', builtin.grep_string, {})
-vim.keymap.set('n', '<leader>b',builtin.buffers, {})
+vim.keymap.set('n', '<leader>bb',builtin.buffers, {})
 
 require('telescope').setup{
 	defaults = {
@@ -15,6 +16,15 @@ require('telescope').setup{
 	}
 }
 
+require('telescope').setup{
+  defaults = {
+    mappings = {
+      i = {
+        ["<ESC>"] = actions.close,
+      },
+    },
+  },
+}
 --local telescope = pcall(require, 'telescope')
 --local actions = require 'telescope.actions'
 --local action_state = require 'telescope.actions.state'

@@ -26,9 +26,13 @@ lsp.set_sign_icons({
 
 lsp.on_attach(function (client, bufnr)
 	local opts = {buffer = bufnr, silent = true}
+--	vim.keymap.set("n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
+	vim.keymap.set("n", "<leader>rn", "<cmd>lua vim.lsp.buf.references.rename()<CR>", opts)
+	vim.keymap.set("n", "<leader>rf", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
+	vim.keymap.set("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
 	vim.keymap.set("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
 	vim.keymap.set("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
-	vim.keymap.set("n", "<leader>n", function() vim.diagnostic.open_float() end, opts)
+	vim.keymap.set("n", "<leader>dn", function() vim.diagnostic.open_float() end, opts)
 end)
 
 lsp.configure('clangd', {
