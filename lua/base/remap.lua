@@ -52,3 +52,48 @@ function ToggleDiagnostics()
 end
 
 vim.api.nvim_set_keymap('n', '<leader>dd', [[:lua ToggleDiagnostics()<CR>]], {noremap = true, silent = true})
+
+
+-- Add a function to add a prototype to a header file
+function add_to_header_file()
+  -- Get the current line
+  local line = vim.fn.getline('.')
+  local prototype = line .. ";"
+  local handle = io.popen('ls *.h')
+  local result = handle:read("*a"):gsub('%s+$', '')
+  handle:close()
+  if result == "" then
+	print("No header file found.")
+  else
+	print("Found header file(s): " .. result)
+  end
+  vim.api.nvim_command('edit ' .. result)
+  vim.api.nvim_command('normal G')
+  vim.api.nvim_command('normal o')
+  vim.api.nvim_put({prototype}, 'c', true, true)
+  vim.api.nvim_command('write')
+  vim.api.nvim_command('b#')
+
+--  local h_file = io.open("example.h", "a")
+--      if h_file then  -- Check if file is opened successfully
+--		print("Adding prototype to" result )
+--       h_file:write(prototype .. "\n")
+--        h_file:close()
+--      else
+--        print("Could not open header file.")
+--  end
+end
+
+-- Map the function to a key for quick access, for example <F5>
+vim.api.nvim_set_keymap('n', '<F5>', [[<Cmd>lua add_to_header_file()<CR>]], { noremap = true, silent = true })
+
+
+
+
+
+
+
+
+
+
+

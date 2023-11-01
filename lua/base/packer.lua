@@ -13,7 +13,8 @@ return require('packer').startup(function(use)
 		requires = { {'nvim-lua/plenary.nvim'} }
 	}
 
-use({
+	use("christoomey/vim-tmux-navigator")
+	use({
     "kylechui/nvim-surround",
     tag = "*", -- Use for stability; omit to use `main` branch for the latest features
     config = function()
@@ -21,8 +22,9 @@ use({
             -- Configuration here, or leave empty to use defaults
         })
     end
-})
+	})
 --	use "preservim/nerdtree"
+	use "folke/neodev.nvim"
 	use "nvim-lua/plenary.nvim"
 	use ('nvim-treesitter/nvim-treesitter', {run = ':TSUpdate'})
 	use ('theprimeagen/harpoon')
