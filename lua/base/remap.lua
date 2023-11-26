@@ -33,7 +33,7 @@ vim.api.nvim_set_keymap('n', '<leader>bd', ':bd<CR>', { noremap = true, silent =
 vim.api.nvim_set_keymap('n', 'gy', 'gt', { noremap = true })
 vim.api.nvim_set_keymap('n', 'gY', 'gT', { noremap = true })
 
-vim.api.nvim_set_keymap('n', '<leader>w', ':w<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>w', ':wa<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>aq', ':QA<CR>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<leader>aa', ':wincmd q<CR>', { noremap = true, silent = true })
 
@@ -69,10 +69,9 @@ function add_to_header_file()
   end
   vim.api.nvim_command('edit ' .. result)
   vim.api.nvim_command('normal G')
-  vim.api.nvim_command('normal o')
-  vim.api.nvim_put({prototype}, 'c', true, true)
+  vim.api.nvim_put({prototype}, 'l', true, true)
   vim.api.nvim_command('write')
-  vim.api.nvim_command('b#')
+  vim.api.nvim_command('normal b#')
 
 --  local h_file = io.open("example.h", "a")
 --      if h_file then  -- Check if file is opened successfully

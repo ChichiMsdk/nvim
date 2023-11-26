@@ -13,4 +13,4 @@ vim.g.clipboard = {
             ['*']= 'win32yank.exe -o --lf',
          },
          cache_enabled= 0,
-       }
+      }

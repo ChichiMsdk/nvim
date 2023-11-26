@@ -16,6 +16,7 @@ vim.diagnostic.config({
 vim.cmd[[set pumheight=5]]
 --vim.cmd[[set pumblend=60]]
 vim.cmd[[hi PmenuSel blend=0]]
+vim.cmd[[hi PmenuSel blend=0]]
 
 lsp.set_sign_icons({
 	error = " ",
@@ -40,7 +41,7 @@ lsp.configure('clangd', {
   on_attach = function(client, bufnr)
 	  cmd = {
 		  "clangd",
-		  "--offset-encoding=UTF-16",
+		  "--offset-encoding=UTF-8",
 	  }
   end
 })

@@ -50,14 +50,14 @@ return require('packer').startup(function(use)
 		config = function()
 			require('copilot').setup({
 				panel = {
-					enabled = true,
+					enabled = false,
 					auto_refresh = false,
 					keymap = {
 						jump_prev = "[[",
 						jump_next = "]]",
 						accept = "<CR>",
 						refresh = "gr",
-						open = "<M-CR>"
+						open = "<M-0>"
 					},
 					layout = {
 						position = "bottom", -- | top | left | right

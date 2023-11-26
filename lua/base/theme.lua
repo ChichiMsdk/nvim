@@ -30,8 +30,10 @@ require("catppuccin").setup({
     },
     color_overrides = {
 		mocha = {
-			base = "#11111a",
+--			base = "#11111a",
+			base = "#000000",
 			maroon = "#e7e7cb",
+			lavender = "#c6ba9d",
 			--base = "#000000",
 			--black
 		},
@@ -66,7 +68,7 @@ require('kanagawa').setup({
     overrides = function(colors) -- add/modify highlights
         return {}
     end,
-    theme = "dragon",              -- Load "wave" theme when 'background' option is not set
+    theme = "lotus",              -- Load "wave" theme when 'background' option is not set
     background = {               -- map the value of 'background' option to a theme
         dark = "wave",           -- try "dragon" !
         light = "lotus"
@@ -78,5 +80,5 @@ vim.cmd.colorscheme "catppuccin"
 vim.cmd[[hi @function.builtin guifg=#7497d2]]
 --vim.cmd[[hi LineNr guifg=#f77d31]]
 vim.cmd[[hi LineNr guifg=#999999]]
-vim.cmd[[hi StatusLine guifg=#999999 guibg=#11111a]]
+vim.cmd[[hi StatusLine guifg=#FFee96 guibg=#11111a]]
 --vim.cmd[[hi StatusLine guifg=#998999 guibg=#11111a]]
