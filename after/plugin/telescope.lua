@@ -15,7 +15,6 @@ require('telescope').setup{
 		layout_strategy = 'flex',
 	}
 }
-
 require('telescope').setup{
   defaults = {
     mappings = {

@@ -29,6 +29,7 @@ return require('packer').startup(function(use)
 	use "folke/neodev.nvim"
 	use "nvim-lua/plenary.nvim"
 	use ('nvim-treesitter/nvim-treesitter', {run = ':TSUpdate'})
+	use ('nvim-treesitter/playground')
 	use ('theprimeagen/harpoon')
 	use ('mbbill/undotree')
 	use ('tpope/vim-fugitive')
@@ -40,9 +41,10 @@ return require('packer').startup(function(use)
 	use ('hrsh7th/cmp-nvim-lsp')
 	use {"Diogo-ss/42-header.nvim"}
 	use ('mfussenegger/nvim-dap')
+	use	('nvim-telescope/telescope-dap.nvim')
+	use ('theHamsta/nvim-dap-virtual-text')
 	use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"} }
 	use ('ldelossa/nvim-dap-projects')
-	use ('nvim-treesitter/playground')
 	use {
 		"zbirenbaum/copilot.lua",
 		cmd = "Copilot",

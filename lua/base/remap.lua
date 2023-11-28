@@ -9,7 +9,6 @@ vim.api.nvim_set_keymap('n', 'p', '"+p', { noremap = true })
 vim.api.nvim_set_keymap('v', 'd', '"+d', { noremap = true })
 vim.api.nvim_set_keymap('n', 'd', '"+d', { noremap = true })
 --window navigation
-
 vim.api.nvim_set_keymap('n', '<C-k>', ':wincmd k<CR>', { noremap = true, silent=true })
 vim.api.nvim_set_keymap('n', '<C-j>', ':wincmd j<CR>', { noremap = true, silent=true })
 vim.api.nvim_set_keymap('n', '<C-h>', ':wincmd h<CR>', { noremap = true, silent=true })
@@ -22,7 +21,6 @@ vim.api.nvim_set_keymap('n', '<C-S-Left>', ':vertical resize -2<CR>', { noremap 
 --vsplit&hsplit
 vim.api.nvim_set_keymap("n","<leader>vs",":vs<CR>", {noremap=true, silent=true})
 vim.api.nvim_set_keymap("n","<leader>vh",":sp<CR>", {noremap=true, silent=true})
-
 --center screen after scroll or search
 vim.api.nvim_set_keymap('n', '<C-d>', '<C-d>M', { noremap = true })
 vim.api.nvim_set_keymap('n', '<C-u>', '<C-u>M', { noremap = true })
@@ -34,9 +32,9 @@ vim.api.nvim_set_keymap('n', 'gy', 'gt', { noremap = true })
 vim.api.nvim_set_keymap('n', 'gY', 'gT', { noremap = true })
 
 vim.api.nvim_set_keymap('n', '<leader>w', ':wa<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>aq', ':QA<CR>', { noremap = true })
-vim.api.nvim_set_keymap('n', '<leader>aa', ':wincmd q<CR>', { noremap = true, silent = true })
-
+vim.api.nvim_set_keymap('n', '<leader>qq', ':QA<CR>', { noremap = true })
+vim.api.nvim_set_keymap('n', '<leader>a', ':q<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>x', ':xa<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>rr', ':set norelativenumber!<CR>', { noremap = true, silent = true })
 
 local diagnostic_state = true
@@ -52,11 +50,9 @@ function ToggleDiagnostics()
 end
 
 vim.api.nvim_set_keymap('n', '<leader>dd', [[:lua ToggleDiagnostics()<CR>]], {noremap = true, silent = true})
+vim.api.nvim_set_keymap('n', '<F5>', [[<Cmd>lua add_to_header_file()<CR>]], { noremap = true, silent = true })
 
-
--- Add a function to add a prototype to a header file
 function add_to_header_file()
-  -- Get the current line
   local line = vim.fn.getline('.')
   local prototype = line .. ";"
   local handle = io.popen('ls *.h')
@@ -69,9 +65,11 @@ function add_to_header_file()
   end
   vim.api.nvim_command('edit ' .. result)
   vim.api.nvim_command('normal G')
+  vim.api.nvim_command('normal k')
   vim.api.nvim_put({prototype}, 'l', true, true)
   vim.api.nvim_command('write')
-  vim.api.nvim_command('normal b#')
+  vim.api.nvim_command('b#')
+end
 
 --  local h_file = io.open("example.h", "a")
 --      if h_file then  -- Check if file is opened successfully
@@ -81,18 +79,5 @@ function add_to_header_file()
 --      else
 --        print("Could not open header file.")
 --  end
-end
-
--- Map the function to a key for quick access, for example <F5>
-vim.api.nvim_set_keymap('n', '<F5>', [[<Cmd>lua add_to_header_file()<CR>]], { noremap = true, silent = true })
-
-
-
-
-
-
-
-
-
 
 
