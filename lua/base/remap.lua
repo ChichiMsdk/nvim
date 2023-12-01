@@ -1,6 +1,7 @@
 vim.g.mapleader = " "
 
-vim.api.nvim_set_keymap("n","<leader>vv",":Ex<CR>", {noremap=true, silent=true})
+--vim.api.nvim_set_keymap("n","<leader>vv",":Ex<CR>", {noremap=true, silent=true})
+vim.api.nvim_set_keymap("n","<leader>vv",":Oil<CR>", {noremap=true, silent=true})
 --copy to clipboard
 vim.api.nvim_set_keymap('n', 'y', '"+y', { noremap = true })
 vim.api.nvim_set_keymap('v', 'y', '"+y', { noremap = true })

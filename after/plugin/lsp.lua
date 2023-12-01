@@ -27,7 +27,8 @@ lsp.set_sign_icons({
 
 lsp.on_attach(function (client, bufnr)
 	local opts = {buffer = bufnr, silent = true}
---	vim.keymap.set("n", "<leader>rbn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
+	vim.keymap.set("n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
+--	vim.keymap.set("n", "<leader>rn", "<cmd>lua vim.lsp.util.rename()<CR>", opts)
 --	vim.keymap.set("n", "<leader>rn", "<cmd>lua vim.lsp.buf.references.rename()<CR>", opts)
 --	vim.keymap.set("n", "<leader>rf", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
 	vim.keymap.set("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)

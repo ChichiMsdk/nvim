@@ -26,6 +26,8 @@ return require('packer').startup(function(use)
     end
 	})
 --	use "preservim/nerdtree"
+  	use({"stevearc/oil.nvim",config = function() require("oil").setup()end,})
+	use 'nvim-tree/nvim-web-devicons'
 	use "folke/neodev.nvim"
 	use "nvim-lua/plenary.nvim"
 	use ('nvim-treesitter/nvim-treesitter', {run = ':TSUpdate'})
@@ -89,6 +91,7 @@ return require('packer').startup(function(use)
 					svn = false,
 					cvs = false,
 					["."] = false,
+					lua = true,
 				},
 				copilot_node_command = 'node', -- Node.js version must be > 16.x
 				server_opts_overrides = {},
@@ -97,7 +100,7 @@ return require('packer').startup(function(use)
 	}
 	use {
 		"windwp/nvim-autopairs",
-		config = function() require("nvim-autopairs").setup {} end
+		config = function() require("nvim-autopairs").setup ({}) end
 	}
 	use {
 		'VonHeikemen/lsp-zero.nvim',
