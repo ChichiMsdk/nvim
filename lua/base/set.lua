@@ -1,3 +1,4 @@
+local vim = vim
 local o = vim.opt
 o.guicursor= ""
 o.termguicolors = true
@@ -20,7 +21,7 @@ vim.cmd[[autocmd  InsertEnter * :set nohlsearch]]
 vim.cmd[[set cursorline]]
 vim.cmd[[set undofile]]
 vim.cmd[[set undolevels=10000]]
-vim.cmd[[set undodir=/mnt/a/nvim/undodir]]
+vim.cmd[[set undodir=/Users/chichi/.config/nvim/undodir]]
 vim.cmd('command! QA :mksession! ./session.vim | qa')
 
 local saved_views = {}

@@ -5,7 +5,7 @@
 
 return require('packer').startup(function(use)
 	--	-- Packer can manage itself
-	use 'cacharle/c_formatter_42.vim'
+--	use 'cacharle/c_formatter_42.vim'
 	use 'rebelot/kanagawa.nvim'
 	use 'wbthomason/packer.nvim'
 
