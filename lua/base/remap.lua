@@ -3,12 +3,16 @@ vim.g.mapleader = " "
 --vim.api.nvim_set_keymap("n","<leader>vv",":Ex<CR>", {noremap=true, silent=true})
 vim.api.nvim_set_keymap("n","<leader>vv",":Oil<CR>", {noremap=true, silent=true})
 --copy to clipboard
+--[[
 vim.api.nvim_set_keymap('n', 'y', '"+y', { noremap = true })
 vim.api.nvim_set_keymap('v', 'y', '"+y', { noremap = true })
 vim.api.nvim_set_keymap('v', 'p', '"+p', { noremap = true })
 vim.api.nvim_set_keymap('n', 'p', '"+p', { noremap = true })
 vim.api.nvim_set_keymap('v', 'd', '"+d', { noremap = true })
 vim.api.nvim_set_keymap('n', 'd', '"+d', { noremap = true })
+--]]
+vim.api.nvim_set_keymap('n', '<S-del>', '"_dd', { noremap = true })
+vim.api.nvim_set_keymap('v', '<S-del>', '"_d', { noremap = true })
 --window navigation
 vim.api.nvim_set_keymap('n', '<C-k>', ':wincmd k<CR>', { noremap = true, silent=true })
 vim.api.nvim_set_keymap('n', '<C-j>', ':wincmd j<CR>', { noremap = true, silent=true })
