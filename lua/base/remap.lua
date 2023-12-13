@@ -3,27 +3,22 @@ vim.g.mapleader = " "
 --vim.api.nvim_set_keymap("n","<leader>vv",":Ex<CR>", {noremap=true, silent=true})
 vim.api.nvim_set_keymap("n","<leader>vv",":Oil<CR>", {noremap=true, silent=true})
 --copy to clipboard
---[[
-vim.api.nvim_set_keymap('n', 'y', '"+y', { noremap = true })
-vim.api.nvim_set_keymap('v', 'y', '"+y', { noremap = true })
-vim.api.nvim_set_keymap('v', 'p', '"+p', { noremap = true })
-vim.api.nvim_set_keymap('n', 'p', '"+p', { noremap = true })
-vim.api.nvim_set_keymap('v', 'd', '"+d', { noremap = true })
-vim.api.nvim_set_keymap('n', 'd', '"+d', { noremap = true })
---]]
+vim.api.nvim_set_keymap('n', '<C-c>', '"+yy', { noremap = true })
+vim.api.nvim_set_keymap('v', '<C-c>', '"+y', { noremap = true })
+
 vim.api.nvim_set_keymap('n', '<S-del>', '"_dd', { noremap = true })
 vim.api.nvim_set_keymap('v', '<S-del>', '"_d', { noremap = true })
---window navigation
+
 vim.api.nvim_set_keymap('n', '<C-k>', ':wincmd k<CR>', { noremap = true, silent=true })
 vim.api.nvim_set_keymap('n', '<C-j>', ':wincmd j<CR>', { noremap = true, silent=true })
 vim.api.nvim_set_keymap('n', '<C-h>', ':wincmd h<CR>', { noremap = true, silent=true })
 vim.api.nvim_set_keymap('n', '<C-l>', ':wincmd l<CR>', { noremap = true, silent=true})
---resize window
+
 vim.api.nvim_set_keymap('n', '<C-S-Up>', ':resize +2<CR>', { noremap = true, silent=true})
 vim.api.nvim_set_keymap('n', '<C-S-Down>', ':resize -2<CR>', { noremap = true, silent=true})
 vim.api.nvim_set_keymap('n', '<C-S-Right>', ':vertical resize +2<CR>', { noremap = true, silent=true})
 vim.api.nvim_set_keymap('n', '<C-S-Left>', ':vertical resize -2<CR>', { noremap = true, silent=true})
---vsplit&hsplit
+
 vim.api.nvim_set_keymap("n","<leader>vs",":vs<CR>", {noremap=true, silent=true})
 vim.api.nvim_set_keymap("n","<leader>vh",":sp<CR>", {noremap=true, silent=true})
 --center screen after scroll or search
@@ -31,8 +26,12 @@ vim.api.nvim_set_keymap('n', '<C-d>', '<C-d>M', { noremap = true })
 vim.api.nvim_set_keymap('n', '<C-u>', '<C-u>M', { noremap = true })
 vim.api.nvim_set_keymap('v', '<C-d>', '<C-d>M', { noremap = true })
 vim.api.nvim_set_keymap('v', '<C-u>', '<C-u>M', { noremap = true })
-
+--navigate/delete buffer, navigate/close tab
+vim.api.nvim_set_keymap('n', '<leader>1', ':bprevious<CR>:lua print("b: " ..vim.api.nvim_get_current_buf())<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>2', ':bnext<CR>:lua print("b: " ..vim.api.nvim_get_current_buf())<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>bd', ':bd<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>tt', ':tabnew<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>td', ':tabclose<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', 'gy', 'gt', { noremap = true })
 vim.api.nvim_set_keymap('n', 'gY', 'gT', { noremap = true })
 

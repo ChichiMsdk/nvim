@@ -47,19 +47,6 @@ vim.api.nvim_create_autocmd("BufEnter", {
     callback = restore_win_view
 })
 
---prevent netrw to use ctrl l
-function netrw_mapping()
-  vim.api.nvim_buf_set_keymap(0, 'n', '<c-l>', ':wincmd l<CR>', { noremap = true, silent = true })
-end
-
-vim.cmd( [[
-augroup netrw_mapping
-  autocmd!
-  autocmd FileType netrw lua netrw_mapping()
-augroup END
-]])
-
-
 --vim.cmd [[
 --augroup remember_folds
 --  autocmd!

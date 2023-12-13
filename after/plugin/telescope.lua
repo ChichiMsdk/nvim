@@ -1,7 +1,7 @@
 local builtin = require('telescope.builtin')
 local actions = require'telescope.actions'
-vim.keymap.set('n', '<leader>fs', builtin.find_files, {})
 vim.keymap.set('n', '<leader>gf', builtin.git_files, {})
+vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
 vim.keymap.set('n', '<leader>gg', builtin.live_grep, {})
 vim.keymap.set('n', '<leader>gs', builtin.grep_string, {})
 vim.keymap.set('n', '<leader>bb',builtin.buffers, {})
@@ -14,7 +14,26 @@ require('telescope').setup{
 		file_previewer = require'telescope.previewers'.vim_buffer_cat.new,
 		grep_previewer = require'telescope.previewers'.vim_buffer_vimgrep.new,
 		qflist_previewer = require'telescope.previewers'.vim_buffer_qflist.new,
-		layout_strategy = 'flex',
+		picker_anchor = 'NW', 
+		layout_strategy = 'vertical',
+		layout_config = {
+			prompt_position = 'bottom',
+			horizontal = {
+				mirror = true,
+				preview_cutoff = 100,
+				preview_width = 0.8,
+			},
+			vertical = {
+				mirror = false,
+				preview_cutoff = 0,
+				preview_height = 0.8,
+			},
+			flex = {
+				flip_columns = 110,
+			},
+			height = 0.99,
+			width = 90,
+		},
 	}
 }
 require('telescope').setup{
