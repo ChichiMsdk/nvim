@@ -14,7 +14,7 @@ return require('packer').startup(function(use)
 		-- or                            , branch = '0.1.x',
 		requires = { {'nvim-lua/plenary.nvim'} }
 	}
-
+	use("lewis6991/gitsigns.nvim")
 	use("christoomey/vim-tmux-navigator")
 	use({
     "kylechui/nvim-surround",
