@@ -23,29 +23,16 @@ vim.cmd[[set undolevels=10000]]
 vim.cmd[[set undodir=/mnt/a/nvim/undodir]]
 vim.cmd('command! QA :mksession! ./session.vim | qa')
 
-local saved_views = {}
 
-local function save_win_view()
-    local current_buf = vim.api.nvim_get_current_buf()
-    saved_views[current_buf] = vim.fn.winsaveview()
-end
+--vim.api.nvim_create_autocmd("BufLeave", {
+--    pattern = '*',
+--    callback = save_win_view
+--})
 
-local function restore_win_view()
-    local current_buf = vim.api.nvim_get_current_buf()
-    if saved_views[current_buf] then
-        vim.fn.winrestview(saved_views[current_buf])
-    end
-end
-
-vim.api.nvim_create_autocmd("BufLeave", {
-    pattern = '*',
-    callback = save_win_view
-})
-
-vim.api.nvim_create_autocmd("BufEnter", {
-    pattern = '*',
-    callback = restore_win_view
-})
+--vim.api.nvim_create_autocmd("BufEnter", {
+--    pattern = '*',
+--    callback = restore_win_view
+--})
 
 --vim.cmd [[
 --augroup remember_folds

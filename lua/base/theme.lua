@@ -45,10 +45,20 @@ require("catppuccin").setup({
         nvimtree = true,
         treesitter = true,
         notify = false,
-        mini = false,
+        mini = true,
         -- For more plugins integrations please scroll down (https://github.com/catppuccin/nvim#integrations)
     },
 })
+
+-- setup must be called before loading
+vim.cmd.colorscheme "catppuccin"
+--vim.cmd.colorscheme "kanagawa"
+vim.cmd[[hi @function.builtin guifg=#7497d2]]
+--vim.cmd[[hi LineNr guifg=#f77d31]]
+vim.cmd[[hi LineNr guifg=#999999]]
+vim.cmd[[hi StatusLine guifg=#FFee96 guibg=#11111a]]
+--vim.cmd[[hi StatusLine guifg=#998999 guibg=#11111a]]
+
 
 require('kanagawa').setup({
     compile = false,             -- enable compiling the colorscheme
@@ -74,11 +84,3 @@ require('kanagawa').setup({
         light = "lotus"
     },
 })
--- setup must be called before loading
-vim.cmd.colorscheme "catppuccin"
---vim.cmd.colorscheme "kanagawa"
-vim.cmd[[hi @function.builtin guifg=#7497d2]]
---vim.cmd[[hi LineNr guifg=#f77d31]]
-vim.cmd[[hi LineNr guifg=#999999]]
-vim.cmd[[hi StatusLine guifg=#FFee96 guibg=#11111a]]
---vim.cmd[[hi StatusLine guifg=#998999 guibg=#11111a]]

@@ -41,11 +41,9 @@ end)
 
 lsp.configure('clangd', {
   on_attach = function(client, bufnr)
-	  vim.kemap.set("n", "<leader>x", "<cmd>lua vim.cmd.ClangdSwitchSourceHeader", {buffer = bufnr, silent = true})
 	  cmd = {
 		  "clangd",
 		  "--offset-encoding=UTF-8",
-		  
 	  }
   end
 })

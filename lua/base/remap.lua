@@ -2,6 +2,11 @@ vim.g.mapleader = " "
 
 --vim.api.nvim_set_keymap("n","<leader>vv",":Ex<CR>", {noremap=true, silent=true})
 vim.api.nvim_set_keymap("n","<leader>vv",":Oil<CR>", {noremap=true, silent=true})
+--vim.api.nvim_set_keymap("n","<leader>vv",":Oil --float <CR>", {noremap=true, silent=true})
+--comment line
+vim.api.nvim_set_keymap("n","<leader>/","0i// <ESC>", {noremap=true, silent=true})
+vim.api.nvim_set_keymap("v","<leader>/","0<S-i>// <ESC>", {noremap=true, silent=true})
+
 --copy to clipboard
 vim.api.nvim_set_keymap('n', '<C-c>', '"+yy', { noremap = true })
 vim.api.nvim_set_keymap('v', '<C-c>', '"+y', { noremap = true })
@@ -28,7 +33,9 @@ vim.api.nvim_set_keymap('v', '<C-d>', '<C-d>M', { noremap = true })
 vim.api.nvim_set_keymap('v', '<C-u>', '<C-u>M', { noremap = true })
 --navigate/delete buffer, navigate/close tab
 vim.api.nvim_set_keymap('n', '<leader>1', ':bprevious<CR>:lua print("b: " ..vim.api.nvim_get_current_buf())<CR>', { noremap = true, silent = true })
+
 vim.api.nvim_set_keymap('n', '<leader>2', ':bnext<CR>:lua print("b: " ..vim.api.nvim_get_current_buf())<CR>', { noremap = true, silent = true })
+
 vim.api.nvim_set_keymap('n', '<leader>bd', ':bd<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>tt', ':tabnew<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>td', ':tabclose<CR>', { noremap = true, silent = true })
@@ -56,6 +63,20 @@ end
 vim.api.nvim_set_keymap('n', '<leader>dd', [[:lua ToggleDiagnostics()<CR>]], {noremap = true, silent = true})
 vim.api.nvim_set_keymap('n', '<F5>', [[<Cmd>lua add_to_header_file()<CR>]], { noremap = true, silent = true })
 
+local saved_views = {}
+
+local function save_win_view()
+    local current_buf = vim.api.nvim_get_current_buf()
+    saved_views[current_buf] = vim.fn.winsaveview()
+end
+
+local function restore_win_view()
+    local current_buf = vim.api.nvim_get_current_buf()
+    if saved_views[current_buf] then
+        vim.fn.winrestview(saved_views[current_buf])
+    end
+end
+
 function add_to_header_file()
   local line = vim.fn.getline('.')
   local prototype = line .. ";"
@@ -67,12 +88,14 @@ function add_to_header_file()
   else
 	print("Found header file(s): " .. result)
   end
+  save_win_view()
   vim.api.nvim_command('edit ' .. result)
   vim.api.nvim_command('normal G')
   vim.api.nvim_command('normal k')
   vim.api.nvim_put({prototype}, 'l', true, true)
   vim.api.nvim_command('write')
   vim.api.nvim_command('b#')
+  restore_win_view()
 end
 
 --  local h_file = io.open("example.h", "a")

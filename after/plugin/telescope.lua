@@ -4,8 +4,8 @@ vim.keymap.set('n', '<leader>gf', builtin.git_files, {})
 vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
 vim.keymap.set('n', '<leader>gg', builtin.live_grep, {})
 vim.keymap.set('n', '<leader>gs', builtin.grep_string, {})
-vim.keymap.set('n', '<leader>bb',builtin.buffers, {})
-vim.keymap.set('n', '<leader>s',builtin.lsp_references, {})
+vim.keymap.set('n', '<leader>bb', builtin.buffers, {})
+vim.keymap.set('n', '<leader>s', builtin.lsp_references, {})
 
 
 require('telescope').setup{
@@ -14,27 +14,29 @@ require('telescope').setup{
 		file_previewer = require'telescope.previewers'.vim_buffer_cat.new,
 		grep_previewer = require'telescope.previewers'.vim_buffer_vimgrep.new,
 		qflist_previewer = require'telescope.previewers'.vim_buffer_qflist.new,
-		picker_anchor = 'NW', 
+--		picker_anchor = 'NW', 
 		layout_strategy = 'vertical',
 		layout_config = {
-			prompt_position = 'bottom',
+--			prompt_position = 'bottom',
 			horizontal = {
-				mirror = true,
-				preview_cutoff = 100,
-				preview_width = 0.8,
+				mirror = false,
+				preview_cutoff = 0,
+				preview_width = 90,
+				--preview_width = 0.80,
 			},
 			vertical = {
 				mirror = false,
 				preview_cutoff = 0,
-				preview_height = 0.8,
+				preview_width = 90,
+				preview_height = 0.7,
 			},
 			flex = {
 				flip_columns = 110,
 			},
-			height = 0.99,
-			width = 90,
+			height = 0.90,
+			width = 100,
 		},
-	}
+	},
 }
 require('telescope').setup{
   defaults = {
