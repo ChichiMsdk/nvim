@@ -52,6 +52,15 @@ return require('packer').startup(function(use)
 	use ('theHamsta/nvim-dap-virtual-text')
 	use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"} }
 	use ('ldelossa/nvim-dap-projects')
+--	use {
+--		"ggandor/leap.nvim",
+--		config = function()
+--			require("leap").add_default_mappings()
+--		end,
+--		requires = {
+--			"tpope/vim-repeat",
+--		},
+--	}
 	use {
 		"zbirenbaum/copilot.lua",
 		cmd = "Copilot",
@@ -100,6 +109,7 @@ return require('packer').startup(function(use)
 				},
 				copilot_node_command = 'node', -- Node.js version must be > 16.x
 				server_opts_overrides = {},
+				offsetEncoding = "utf-8", -- The encoding written to offset files
 			})
 		end,
 	}
@@ -122,5 +132,4 @@ return require('packer').startup(function(use)
 			{'L3MON4D3/LuaSnip'}, -- Required
 		}
 	}
-	use "ggandor/leap.nvim"
 end)

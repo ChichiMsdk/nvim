@@ -39,13 +39,22 @@ lsp.on_attach(function (client, bufnr)
 	vim.keymap.set("n", "<leader>dn", function() vim.diagnostic.open_float() end, opts)
 end)
 
+--require('lspconfig').clangd.setup({lsp.on_attach(function(client, bufnr)print("clangd attached")end),{
+--	cmd = {
+--		"clangd",
+--		"--offset_encoding=utf-16",
+--	}
+--}
+--})
+
 lsp.configure('clangd', {
-  on_attach = function(client, bufnr)
-	  cmd = {
+	function()
+	print("clangd attached")
+	 cmd = {
 		  "clangd",
-		  "--offset-encoding=UTF-8",
+		  "--offset_encoding=utf-8",
 	  }
-  end
+	end
 })
 
 
