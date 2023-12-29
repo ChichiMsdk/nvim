@@ -122,4 +122,5 @@ return require('packer').startup(function(use)
 			{'L3MON4D3/LuaSnip'}, -- Required
 		}
 	}
+	use "ggandor/leap.nvim"
 end)

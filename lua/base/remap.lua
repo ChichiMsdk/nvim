@@ -1,5 +1,8 @@
 vim.g.mapleader = " "
 
+--copilot toggle
+vim.api.nvim_set_keymap("n","<F30>",":lua copilot_toggle()<CR>", {noremap=true, silent=true})
+
 --vim.api.nvim_set_keymap("n","<leader>vv",":Ex<CR>", {noremap=true, silent=true})
 vim.api.nvim_set_keymap("n","<leader>vv",":Oil<CR>", {noremap=true, silent=true})
 --vim.api.nvim_set_keymap("n","<leader>vv",":Oil --float <CR>", {noremap=true, silent=true})
@@ -33,7 +36,6 @@ vim.api.nvim_set_keymap('v', '<C-d>', '<C-d>M', { noremap = true })
 vim.api.nvim_set_keymap('v', '<C-u>', '<C-u>M', { noremap = true })
 --navigate/delete buffer, navigate/close tab
 vim.api.nvim_set_keymap('n', '<leader>1', ':bprevious<CR>:lua print("b: " ..vim.api.nvim_get_current_buf())<CR>', { noremap = true, silent = true })
-
 vim.api.nvim_set_keymap('n', '<leader>2', ':bnext<CR>:lua print("b: " ..vim.api.nvim_get_current_buf())<CR>', { noremap = true, silent = true })
 
 vim.api.nvim_set_keymap('n', '<leader>bd', ':bd<CR>', { noremap = true, silent = true })
@@ -96,6 +98,19 @@ function add_to_header_file()
   vim.api.nvim_command('write')
   vim.api.nvim_command('b#')
   restore_win_view()
+end
+
+-- toggle for copilot
+-- this is the command : Copilot disable and Copilot enable
+local toggle = true
+function copilot_toggle()
+	toggle = not toggle
+	if toggle == true then
+		vim.api.nvim_command('Copilot disable')
+		vim.api.nvim_command('Copilot status')
+	else
+		vim.api.nvim_command('Copilot enable')
+	end
 end
 
 --  local h_file = io.open("example.h", "a")
