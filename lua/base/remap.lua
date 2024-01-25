@@ -1,25 +1,34 @@
 vim.g.mapleader = " "
 
+--go to new tab then open the man page 
+
+--copilot toggle
+vim.api.nvim_set_keymap("n","<F30>",":lua copilot_toggle()<CR>", {noremap=true, silent=true})
+
 --vim.api.nvim_set_keymap("n","<leader>vv",":Ex<CR>", {noremap=true, silent=true})
 vim.api.nvim_set_keymap("n","<leader>vv",":Oil<CR>", {noremap=true, silent=true})
+--vim.api.nvim_set_keymap("n","<leader>vv",":Oil --float <CR>", {noremap=true, silent=true})
+--comment line
+vim.api.nvim_set_keymap("n","<leader>/","0i// <ESC>", {noremap=true, silent=true})
+vim.api.nvim_set_keymap("v","<leader>/","0<S-i>// <ESC>", {noremap=true, silent=true})
+
 --copy to clipboard
-vim.api.nvim_set_keymap('n', 'y', '"+y', { noremap = true })
-vim.api.nvim_set_keymap('v', 'y', '"+y', { noremap = true })
-vim.api.nvim_set_keymap('v', 'p', '"+p', { noremap = true })
-vim.api.nvim_set_keymap('n', 'p', '"+p', { noremap = true })
-vim.api.nvim_set_keymap('v', 'd', '"+d', { noremap = true })
-vim.api.nvim_set_keymap('n', 'd', '"+d', { noremap = true })
---window navigation
+vim.api.nvim_set_keymap('n', '<C-c>', '"+yy', { noremap = true })
+vim.api.nvim_set_keymap('v', '<C-c>', '"+y', { noremap = true })
+
+vim.api.nvim_set_keymap('n', '<S-del>', '"_dd', { noremap = true })
+vim.api.nvim_set_keymap('v', '<S-del>', '"_d', { noremap = true })
+
 vim.api.nvim_set_keymap('n', '<C-k>', ':wincmd k<CR>', { noremap = true, silent=true })
 vim.api.nvim_set_keymap('n', '<C-j>', ':wincmd j<CR>', { noremap = true, silent=true })
 vim.api.nvim_set_keymap('n', '<C-h>', ':wincmd h<CR>', { noremap = true, silent=true })
 vim.api.nvim_set_keymap('n', '<C-l>', ':wincmd l<CR>', { noremap = true, silent=true})
---resize window
+
 vim.api.nvim_set_keymap('n', '<C-S-Up>', ':resize +2<CR>', { noremap = true, silent=true})
 vim.api.nvim_set_keymap('n', '<C-S-Down>', ':resize -2<CR>', { noremap = true, silent=true})
 vim.api.nvim_set_keymap('n', '<C-S-Right>', ':vertical resize +2<CR>', { noremap = true, silent=true})
 vim.api.nvim_set_keymap('n', '<C-S-Left>', ':vertical resize -2<CR>', { noremap = true, silent=true})
---vsplit&hsplit
+
 vim.api.nvim_set_keymap("n","<leader>vs",":vs<CR>", {noremap=true, silent=true})
 vim.api.nvim_set_keymap("n","<leader>vh",":sp<CR>", {noremap=true, silent=true})
 --center screen after scroll or search
@@ -27,8 +36,13 @@ vim.api.nvim_set_keymap('n', '<C-d>', '<C-d>M', { noremap = true })
 vim.api.nvim_set_keymap('n', '<C-u>', '<C-u>M', { noremap = true })
 vim.api.nvim_set_keymap('v', '<C-d>', '<C-d>M', { noremap = true })
 vim.api.nvim_set_keymap('v', '<C-u>', '<C-u>M', { noremap = true })
+--navigate/delete buffer, navigate/close tab
+vim.api.nvim_set_keymap('n', '<leader>1', ':bprevious<CR>:lua print("b: " ..vim.api.nvim_get_current_buf())<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>2', ':bnext<CR>:lua print("b: " ..vim.api.nvim_get_current_buf())<CR>', { noremap = true, silent = true })
 
 vim.api.nvim_set_keymap('n', '<leader>bd', ':bd<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>tt', ':tabnew<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>td', ':tabclose<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', 'gy', 'gt', { noremap = true })
 vim.api.nvim_set_keymap('n', 'gY', 'gT', { noremap = true })
 
@@ -53,6 +67,20 @@ end
 vim.api.nvim_set_keymap('n', '<leader>dd', [[:lua ToggleDiagnostics()<CR>]], {noremap = true, silent = true})
 vim.api.nvim_set_keymap('n', '<F5>', [[<Cmd>lua add_to_header_file()<CR>]], { noremap = true, silent = true })
 
+local saved_views = {}
+
+local function save_win_view()
+    local current_buf = vim.api.nvim_get_current_buf()
+    saved_views[current_buf] = vim.fn.winsaveview()
+end
+
+local function restore_win_view()
+    local current_buf = vim.api.nvim_get_current_buf()
+    if saved_views[current_buf] then
+        vim.fn.winrestview(saved_views[current_buf])
+    end
+end
+
 function add_to_header_file()
   local line = vim.fn.getline('.')
   local prototype = line .. ";"
@@ -64,12 +92,27 @@ function add_to_header_file()
   else
 	print("Found header file(s): " .. result)
   end
+  save_win_view()
   vim.api.nvim_command('edit ' .. result)
   vim.api.nvim_command('normal G')
   vim.api.nvim_command('normal k')
   vim.api.nvim_put({prototype}, 'l', true, true)
   vim.api.nvim_command('write')
   vim.api.nvim_command('b#')
+  restore_win_view()
+end
+
+-- toggle for copilot
+-- this is the command : Copilot disable and Copilot enable
+local toggle = true
+function copilot_toggle()
+	toggle = not toggle
+	if toggle == true then
+		vim.api.nvim_command('Copilot disable')
+		vim.api.nvim_command('Copilot status')
+	else
+		vim.api.nvim_command('Copilot enable')
+	end
 end
 
 --  local h_file = io.open("example.h", "a")
@@ -81,4 +124,31 @@ end
 --        print("Could not open header file.")
 --  end
 
+vim.api.nvim_set_keymap("n", "<leader>m", [[:lua ManUnderCursor()<CR>]], { noremap = true, silent = true })
 
+function tab_exists(tab_number)
+    local total_tabs = vim.fn.tabpagenr('$')
+	print(total_tabs)
+	if tab_number <= total_tabs then
+		return true
+	else
+		return false
+	end
+end
+
+function ManUnderCursor()
+    -- Copy the word under cursor
+    local word_under_cursor = vim.fn.expand("<cword>")
+	local target_tab = 2
+
+	if tab_exists(target_tab) == true then
+		vim.cmd("tabnext " .. target_tab)
+	else
+		vim.cmd("tabnew")
+		vim.cmd("tabnext " .. target_tab)
+	end
+    vim.cmd(":Man " .. word_under_cursor)
+
+    -- Maximize the current window
+    vim.cmd("wincmd _")
+end

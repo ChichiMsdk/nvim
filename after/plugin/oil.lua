@@ -1,3 +1,5 @@
+local oil = require("oil")
+
 require("oil").setup({
   -- Oil will take over directory buffers (e.g. `vim .` or `:e src/`)
   -- Set to false if you still want to use netrw.
@@ -18,7 +20,7 @@ require("oil").setup({
   -- Window-local options to use for oil buffers
   win_options = {
     wrap = false,
-    signcolumn = "no",
+    signcolumn = "yes",
     cursorcolumn = false,
     foldcolumn = "0",
     spell = false,
@@ -49,7 +51,7 @@ require("oil").setup({
     ["<C-h>"] = "actions.select_split",
     ["<C-t>"] = "actions.select_tab",
     ["<C-p>"] = "actions.preview",
-    ["<C-c>"] = "actions.close",
+    ["<ESC>"] = "actions.close",
     ["<C-l>"] = "actions.refresh",
     ["-"] = "actions.parent",
     ["_"] = "actions.open_cwd",
@@ -64,7 +66,7 @@ require("oil").setup({
   use_default_keymaps = true,
   view_options = {
     -- Show files and directories that start with "."
-    show_hidden = false,
+    show_hidden = true,
     -- This function defines what is considered a "hidden" file
     is_hidden_file = function(name, bufnr)
       return vim.startswith(name, ".")
@@ -84,8 +86,8 @@ require("oil").setup({
   float = {
     -- Padding around the floating window
     padding = 2,
-    max_width = 0,
-    max_height = 0,
+    max_width = 80,
+    max_height = 20,
     border = "rounded",
     win_options = {
       winblend = 0,

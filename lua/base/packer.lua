@@ -1,111 +1,79 @@
--- This file can be loaded by calling `lua require('plugins')` from your init.vim
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- latest stable release
+    lazypath,
+  })
+end
 
--- Only required if you have packer configured as `opt`
---vim.cmd [[packadd packer.nvim]]
+vim.opt.rtp:prepend(lazypath)
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
 
-return require('packer').startup(function(use)
-	--	-- Packer can manage itself
---	use 'cacharle/c_formatter_42.vim'
-	use 'rebelot/kanagawa.nvim'
-	use 'wbthomason/packer.nvim'
-
-	use {
+require('lazy').setup({
+	'cacharle/c_formatter_42.vim',
+	'rebelot/kanagawa.nvim',
+	'lewis6991/gitsigns.nvim',
+	'christoomey/vim-tmux-navigator',
+	'nvim-tree/nvim-web-devicons',
+	'folke/neodev.nvim',
+	"nvim-lua/plenary.nvim",
+	'nvim-treesitter/nvim-treesitter-context',
+	'nvim-treesitter/playground',
+	'mbbill/undotree',
+	'tpope/vim-fugitive',
+	'neovim/nvim-lspconfig',
+	'williamboman/mason.nvim',
+	'williamboman/mason-lspconfig.nvim',
+	'hrsh7th/nvim-cmp',
+	'hrsh7th/cmp-nvim-lsp',
+	"Diogo-ss/42-header.nvim",
+	'mfussenegger/nvim-dap',
+	'nvim-telescope/telescope-dap.nvim',
+	'theHamsta/nvim-dap-virtual-text',
+	'ldelossa/nvim-dap-projects',
+	{
+		'folke/todo-comments.nvim',
+		dependencies = { {'nvim-lua/plenary.nvim' } },
+		opts = {}
+	},
+	{
 		'nvim-telescope/telescope.nvim', tag = '0.1.2',
 		-- or                            , branch = '0.1.x',
-		requires = { {'nvim-lua/plenary.nvim'} }
-	}
-
-	use("christoomey/vim-tmux-navigator")
-	use({
-    "kylechui/nvim-surround",
-    tag = "*", -- Use for stability; omit to use `main` branch for the latest features
-    config = function()
-        require("nvim-surround").setup({
-            -- Configuration here, or leave empty to use defaults
-        })
-    end
-	})
---	use "preservim/nerdtree"
-  	use({"stevearc/oil.nvim",config = function() require("oil").setup()end,})
-	use 'nvim-tree/nvim-web-devicons'
-	use "folke/neodev.nvim"
-	use "nvim-lua/plenary.nvim"
-	use ('nvim-treesitter/nvim-treesitter', {run = ':TSUpdate'})
-	use ('nvim-treesitter/playground')
-	use ('theprimeagen/harpoon')
-	use ('mbbill/undotree')
-	use ('tpope/vim-fugitive')
-	use ('neovim/nvim-lspconfig')
-	use ('williamboman/mason.nvim')
-	use ('williamboman/mason-lspconfig.nvim')
-	use ('hrsh7th/nvim-cmp')
-	use { "catppuccin/nvim", as = "catppuccin" }
-	use ('hrsh7th/cmp-nvim-lsp')
-	use {"Diogo-ss/42-header.nvim"}
-	use ('mfussenegger/nvim-dap')
-	use	('nvim-telescope/telescope-dap.nvim')
-	use ('theHamsta/nvim-dap-virtual-text')
-	use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"} }
-	use ('ldelossa/nvim-dap-projects')
-	use {
-		"zbirenbaum/copilot.lua",
-		cmd = "Copilot",
-		event = "InsertEnter",
+		dependencies = { {'nvim-lua/plenary.nvim'} }
+	},
+	{
+		'kylechui/nvim-surround',
+		version = "*", -- Use for stability; omit to use `main` branch for the latest features
 		config = function()
-			require('copilot').setup({
-				panel = {
-					enabled = false,
-					auto_refresh = false,
-					keymap = {
-						jump_prev = "[[",
-						jump_next = "]]",
-						accept = "<CR>",
-						refresh = "gr",
-						open = "<M-0>"
-					},
-					layout = {
-						position = "bottom", -- | top | left | right
-						ratio = 0.4
-					},
-				},
-				suggestion = {
-					enabled = true,
-					auto_trigger = true,
-					debounce = 75,
-					keymap = {
-						accept = "<M-l>",
-						accept_word = false,
-						accept_line = false,
-						next = "<M-]>",
-						prev = "<M-[>",
-						dismiss = "<C-]>",
-					},
-				},
-				filetypes = {
-					yaml = false,
-					markdown = false,
-					help = false,
-					gitcommit = false,
-					gitrebase = false,
-					hgcommit = false,
-					svn = false,
-					cvs = false,
-					["."] = false,
-					lua = true,
-				},
-				copilot_node_command = 'node', -- Node.js version must be > 16.x
-				server_opts_overrides = {},
-			})
+		require("nvim-surround").setup({})
+		end
+	},
+  	{ 'stevearc/oil.nvim', config = function() require("oil").setup()end},
+	{ 'nvim-treesitter/nvim-treesitter',
+		build = function()
+			pcall(require('nvim-treesitter.install').update { with_sync = true })
 		end,
-	}
-	use {
-		"windwp/nvim-autopairs",
+	},
+	{ 'rcarriga/nvim-dap-ui', dependencies = {'mfussenegger/nvim-dap'} },
+	{ 'catppuccin/nvim', as = "catppuccin" },
+	{
+		'Theprimeagen/harpoon',
+		branch = "harpoon2",
+		dependencies = { { 'nvim-lua/plenary.nvim' } }
+	},
+	{
+		'windwp/nvim-autopairs',
 		config = function() require("nvim-autopairs").setup ({}) end
-	}
-	use {
+	},
+	{
 		'VonHeikemen/lsp-zero.nvim',
 		branch = 'v2.x',
-		requires = {
+		dependencies = {
 			-- LSP Support
 			{'neovim/nvim-lspconfig'},             -- Required
 			{'williamboman/mason.nvim'},           -- Optional
@@ -116,5 +84,5 @@ return require('packer').startup(function(use)
 			{'hrsh7th/cmp-nvim-lsp'}, -- Required
 			{'L3MON4D3/LuaSnip'}, -- Required
 		}
-	}
-end)
+	},
+	})
