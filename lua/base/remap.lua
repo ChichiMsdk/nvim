@@ -1,5 +1,7 @@
 vim.g.mapleader = " "
 
+--go to new tab then open the man page 
+
 --copilot toggle
 vim.api.nvim_set_keymap("n","<F30>",":lua copilot_toggle()<CR>", {noremap=true, silent=true})
 
@@ -122,4 +124,31 @@ end
 --        print("Could not open header file.")
 --  end
 
+vim.api.nvim_set_keymap("n", "<leader>m", [[:lua ManUnderCursor()<CR>]], { noremap = true, silent = true })
 
+function tab_exists(tab_number)
+    local total_tabs = vim.fn.tabpagenr('$')
+	print(total_tabs)
+	if tab_number <= total_tabs then
+		return true
+	else
+		return false
+	end
+end
+
+function ManUnderCursor()
+    -- Copy the word under cursor
+    local word_under_cursor = vim.fn.expand("<cword>")
+	local target_tab = 2
+
+	if tab_exists(target_tab) == true then
+		vim.cmd("tabnext " .. target_tab)
+	else
+		vim.cmd("tabnew")
+		vim.cmd("tabnext " .. target_tab)
+	end
+    vim.cmd(":Man " .. word_under_cursor)
+
+    -- Maximize the current window
+    vim.cmd("wincmd _")
+end

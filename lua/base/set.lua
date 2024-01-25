@@ -20,9 +20,7 @@ vim.cmd[[autocmd  InsertEnter * :set nohlsearch]]
 vim.cmd[[set cursorline]]
 vim.cmd[[set undofile]]
 vim.cmd[[set undolevels=10000]]
-vim.cmd[[set undodir=/mnt/a/nvim/undodir]]
-vim.cmd('command! QA :mksession! ./session.vim | qa')
-
+vim.cmd[[set undodir=/Users/chmoussa/.config/nvim/undodir]]
 
 --vim.api.nvim_create_autocmd("BufLeave", {
 --    pattern = '*',
