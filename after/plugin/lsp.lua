@@ -16,8 +16,6 @@ vim.diagnostic.config({
 vim.cmd[[set pumheight=5]]
 --vim.cmd[[set pumblend=60]]
 vim.cmd[[hi PmenuSel blend=0]]
-vim.cmd[[hi PmenuSel blend=0]]
-
 lsp.set_sign_icons({
 	error = " ",
 	warn = " ",
@@ -83,33 +81,44 @@ require("neodev").setup({
 	}
 })
 
-
 lsp.setup()
+
+local enabled_cmp
+
+function ToggleCmp2()
+	if vim.g.cmp_enable == true or vim.g.cmp_enable == false then
+		enabled_cmp = function()
+			local context require 'cmp.config.context'
+			if vim.api.nvim_get_mode().mode == 'c' then
+				return true
+			else
+				return not context.in_treesitter_capture("comment")
+				and not context.in_syntax_group("Comment")
+			end
+		end
+	else
+		enabled_cmp = false
+		return false
+	end
+end
 
 local cmp = require('cmp')
 cmp.setup({
-	enabled = function()
-		-- disable completion in comments
-		local context = require 'cmp.config.context'
-		-- keep command mode completion enabled when cursor is in a comment
-		if vim.api.nvim_get_mode().mode == 'c' then
-			return true
-		else
-			return not context.in_treesitter_capture("comment")
-			and not context.in_syntax_group("Comment")
-		end
-	end,
+	enabled = ToggleCmp2(),
 	window = {
 		completion = cmp.config.window.bordered(),
 		documentation = cmp.config.window.bordered(),
 	},
+	mapping = cmp.mapping.preset.insert({
+		['<Up>'] = cmp.mapping.scroll_docs(-4),
+		['<Down>'] = cmp.mapping.scroll_docs(4),
+	}),
 	formatting = {
 		format = function(entry, vim_item)
 			vim_item.abbr = string.sub(vim_item.abbr, 1, 20)
 			return vim_item
 		end
 	},
-
 })
 
 local cmp_autopairs = require('nvim-autopairs.completion.cmp')

@@ -31,9 +31,11 @@ require("catppuccin").setup({
     color_overrides = {
 		mocha = {
 --			base = "#11111a",
-			base = "#000000",
+--			base = "#141414", --black 
+			base = "#222222", -- gray
 			maroon = "#e7e7cb",
 			lavender = "#c6ba9d",
+			Text = "#ffffff",
 			--base = "#000000",
 			--black
 		},
@@ -49,16 +51,26 @@ require("catppuccin").setup({
         -- For more plugins integrations please scroll down (https://github.com/catppuccin/nvim#integrations)
     },
 })
-
 -- setup must be called before loading
+vim.cmd[[hi FloatBorder guifg=#cdd6f4]]
+vim.cmd[[set guicursor=n-v:block-Cursor,i-ci-ve-c:ver80,r-cr:hor20-Cursor,o:hor50-Cursor]]
 vim.cmd.colorscheme "catppuccin"
 --vim.cmd.colorscheme "kanagawa"
+vim.cmd[[hi String guifg=#98bb6c]]
+vim.cmd[[hi TelescopeSelection guifg=#919090]]
+vim.cmd[[hi TelescopeBorder guifg=#919090]]
+vim.cmd[[hi FloatBorder guifg=#919090]]
+vim.cmd[[hi NormalFloat guibg=#191919]]
 vim.cmd[[hi @function.builtin guifg=#7497d2]]
+--vim.cmd[[hi @function.builtin guifg=#2f2f2f]]
 --vim.cmd[[hi LineNr guifg=#f77d31]]
+vim.cmd[[hi CursorLine guibg=#191919]]
+vim.cmd[[hi Cursor guibg=#979797 guifg=#cdd6f4]]
+vim.cmd[[hi colorcolumn guibg=#191919]]
 vim.cmd[[hi LineNr guifg=#999999]]
-vim.cmd[[hi StatusLine guifg=#FFee96 guibg=#11111a]]
+vim.cmd[[hi StatusLineNC guifg=#000000 guibg=#1a1a1a]]
+vim.cmd[[hi StatusLine guifg=#999999 guibg=#303030]]
 --vim.cmd[[hi StatusLine guifg=#998999 guibg=#11111a]]
-
 
 require('kanagawa').setup({
     compile = false,             -- enable compiling the colorscheme

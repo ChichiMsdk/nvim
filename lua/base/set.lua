@@ -1,5 +1,4 @@
 local o = vim.opt
-o.guicursor= ""
 o.termguicolors = true
 o.nu= true
 o.relativenumber= true
@@ -9,11 +8,12 @@ o.wrap= false
 o.hlsearch=true
 o.incsearch=true
 o.scrolloff= 8
-o.updatetime = 50
+o.updatetime = 400
 o.colorcolumn = "80"
 o.hidden = true
 vim.g.mapleader=" "
 vim.g.NERDTreeWinPos = "right"
+--vim.cmd[[autocmd  InsertLeave * :lua vim.g.cmp_enable = false]]
 vim.cmd[[autocmd  InsertLeave * :set relativenumber]]
 vim.cmd[[autocmd  InsertEnter * :set norelativenumber]]
 vim.cmd[[autocmd  InsertEnter * :set nohlsearch]]

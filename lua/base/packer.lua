@@ -9,6 +9,13 @@ return require('packer').startup(function(use)
 	use 'folke/todo-comments.nvim'
 	use 'rebelot/kanagawa.nvim'
 	use 'wbthomason/packer.nvim'
+	use 'ThePrimeagen/git-worktree.nvim'
+	use({
+	    "kdheepak/lazygit.nvim",
+	    requires = {
+	        "nvim-lua/plenary.nvim",
+	    },
+	})
 
 	use {
 		'nvim-telescope/telescope.nvim', tag = '0.1.2',
