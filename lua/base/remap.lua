@@ -2,8 +2,7 @@ vim.g.mapleader = " "
 vim.g.cmp_enable = false
 
 --copilot toggle
-vim.api.nvim_set_keymap("n","<F30>",":lua copilot_toggle()<CR>", {noremap=true, silent=true})
-vim.api.nvim_set_keymap("n","<F30>",":lua copilot_toggle()<CR>", {noremap=true, silent=true})
+--vim.api.nvim_set_keymap("n","<F30>",":lua copilot_toggle()<CR>", {noremap=true, silent=true})
 --vim.api.nvim_set_keymap("n","<leader>vv",":Ex<CR>", {noremap=true, silent=true})
 vim.api.nvim_set_keymap("n","<leader>vv",":Oil<CR>", {noremap=true, silent=true})
 --vim.api.nvim_set_keymap("n","<leader>vv",":Oil --float <CR>", {noremap=true, silent=true})
@@ -54,15 +53,6 @@ vim.api.nvim_set_keymap('n', '<leader>rr', ':set norelativenumber!<CR>', { norem
 vim.api.nvim_set_keymap ('n', '<F7>', ':make<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap ('n', '<F41>', ':make && ./cub3d<CR>', { noremap = true, silent = true })
 
-function ToggleCmp()
-	if vim.g.cmp_enable == false then
-		vim.g.cmp_enable = true
-		return
-	else
-		print("cmp is enabled")
-		vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-n>", true, true, true), "x!", true)
-	end
-end
 local diagnostic_state = true
 
 function ToggleDiagnostics()

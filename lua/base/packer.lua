@@ -37,6 +37,15 @@ require('lazy').setup({
 	'nvim-telescope/telescope-dap.nvim',
 	'theHamsta/nvim-dap-virtual-text',
 	'ldelossa/nvim-dap-projects',
+	'hrsh7th/cmp-nvim-lsp-signature-help',
+	--[[
+	{
+	  "ray-x/lsp_signature.nvim",
+	  event = "VeryLazy",
+	  opts = {},
+	  config = function(_, opts) require'lsp_signature'.setup(opts) end
+	},
+	--]]
 	{
 		'folke/todo-comments.nvim',
 		dependencies = { {'nvim-lua/plenary.nvim' } },
@@ -80,6 +89,7 @@ require('lazy').setup({
 			{'hrsh7th/nvim-cmp'},     -- Required
 			{'hrsh7th/cmp-nvim-lsp'}, -- Required
 			{'L3MON4D3/LuaSnip'}, -- Required
+			{'saadparwaiz1/cmp_luasnip'},
 		}
 	},
 })

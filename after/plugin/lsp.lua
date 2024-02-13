@@ -1,8 +1,26 @@
+--[[
+local cfg = {
+	floating_window = false,
+	doc_lines   = 0,
+	hint_enable = true,
+	hint_prefix = " ",
+	hint_scheme = "String",
+	hint_inline = function() return false end,
+}  -- add your config here
+require "lsp_signature".setup(cfg)
+--]]
 local vim = vim
 local lsp = require('lsp-zero').preset({
 	documentation_window = {
 		enable = true,
-	}
+	},
+	manage_nvim_cmp = {
+		set_basic_mappings = true,
+		set_extra_mappings = true,
+		set_format = true,
+		use_luasnip = true,
+		set_sources = 'recommended',
+	},
 })
 
 vim.opt.signcolumn = 'yes'
@@ -72,38 +90,26 @@ require("neodev").setup({
 	  pathStrict = true,
 	}
 })
-
 lsp.setup()
-
-local enabled_cmp
-
-function ToggleCmp2()
-	if vim.g.cmp_enable == true or vim.g.cmp_enable == false then
-		enabled_cmp = function()
-			local context require 'cmp.config.context'
-			if vim.api.nvim_get_mode().mode == 'c' then
-				return true
-			else
-				return not context.in_treesitter_capture("comment")
-				and not context.in_syntax_group("Comment")
-			end
-		end
-	else
-		enabled_cmp = false
-		return false
-	end
-end
 
 local cmp = require('cmp')
 cmp.setup({
-	enabled = false,
+	enabled = true,
+	completion = {
+		autocomplete = false,
+	},
 	window = {
 		completion = cmp.config.window.bordered(),
 		documentation = cmp.config.window.bordered(),
 	},
 	mapping = cmp.mapping.preset.insert({
-		['<Up>'] = cmp.mapping.scroll_docs(-4),
-		['<Down>'] = cmp.mapping.scroll_docs(4),
+--		['<Up>'] = cmp.mapping.scroll_docs(-4),
+--		['<Down>'] = cmp.mapping.scroll_docs(4),
+--		['<ESC>'] = cmp.mapping.close(),
+		['<c-y>'] = cmp.mapping.confirm {
+			behavior = cmp.ConfirmBehavior.Insert,
+			select = true,
+		},
 	}),
 	formatting = {
 		format = function(entry, vim_item)
