@@ -37,14 +37,6 @@ lsp.on_attach(function (client, bufnr)
 	vim.keymap.set("n", "<leader>dn", function() vim.diagnostic.open_float() end, opts)
 end)
 
---require('lspconfig').clangd.setup({lsp.on_attach(function(client, bufnr)print("clangd attached")end),{
---	cmd = {
---		"clangd",
---		"--offset_encoding=utf-16",
---	}
---}
---})
-
 lsp.configure('clangd', {
 	function()
 	print("clangd attached")
@@ -104,7 +96,7 @@ end
 
 local cmp = require('cmp')
 cmp.setup({
-	enabled = ToggleCmp2(),
+	enabled = false,
 	window = {
 		completion = cmp.config.window.bordered(),
 		documentation = cmp.config.window.bordered(),
