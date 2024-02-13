@@ -14,6 +14,10 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
 require('lazy').setup({
+	{
+		'zbirenbaum/copilot.lua',
+		cmd = "Copilot",
+	},
 	'nvim-pack/nvim-spectre',
 	'ThePrimeagen/git-worktree.nvim',
 	'cacharle/c_formatter_42.vim',
