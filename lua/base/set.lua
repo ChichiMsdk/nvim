@@ -10,7 +10,7 @@ o.wrap= false
 o.hlsearch=true
 o.incsearch=true
 o.scrolloff= 8
-o.updatetime = 50
+o.updatetime = 400
 o.colorcolumn = "80"
 o.hidden = true
 vim.g.mapleader=" "
@@ -21,7 +21,7 @@ vim.cmd[[autocmd  InsertEnter * :set nohlsearch]]
 vim.cmd[[set cursorline]]
 vim.cmd[[set undofile]]
 vim.cmd[[set undolevels=10000]]
-vim.cmd[[set undodir=/Users/chmoussa/.config/nvim/undodir]]
+vim.cmd[[set undodir=~/.config/nvim/undodir]]
 
 --vim.api.nvim_create_autocmd("BufLeave", {
 --    pattern = '*',
