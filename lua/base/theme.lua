@@ -54,7 +54,7 @@ require("catppuccin").setup({
 })
 -- setup must be called before loading
 vim.cmd[[hi FloatBorder guifg=#cdd6f4]]
-vim.cmd[[set guicursor=n-v:block-Cursor,i-ci-ve-c:ver80,r-cr:hor20-Cursor,o:hor50-Cursor]]
+-- vim.cmd[[set guicursor=n-v:block-Cursor,i-ci-ve-c:ver80,r-cr:hor20-Cursor,o:hor50-Cursor]]
 vim.cmd.colorscheme "catppuccin"
 --vim.cmd.colorscheme "kanagawa"
 vim.cmd[[hi String guifg=#98bb6c]]

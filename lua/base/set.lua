@@ -1,6 +1,6 @@
 local vim = vim
 local o = vim.opt
-o.guicursor= ""
+o.guicursor= "n-v:block-Cursor,i-ci-ve-c:ver80,r-cr:hor20-Cursor,o:hor50-Cursor"
 o.termguicolors = true
 o.nu= true
 o.relativenumber= true
@@ -18,6 +18,7 @@ vim.g.NERDTreeWinPos = "right"
 vim.cmd[[autocmd  InsertLeave * :set relativenumber]]
 vim.cmd[[autocmd  InsertEnter * :set norelativenumber]]
 vim.cmd[[autocmd  InsertEnter * :set nohlsearch]]
+vim.cmd[[autocmd VimLeave * set guicursor=""]]
 vim.cmd[[set cursorline]]
 vim.cmd[[set undofile]]
 vim.cmd[[set undolevels=10000]]
