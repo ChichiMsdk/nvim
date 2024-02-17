@@ -1,25 +1,31 @@
 local dap, dapui = require("dap"), require("dapui")
-dap.adapters.cppdbg = {
-  id = 'cppdbg',
-  type = 'executable',
-  command = '/home/chichi/Downloads/extension/debugAdapters/bin/OpenDebugAD7',
-}
+
+--dap.adapters.codelldb = {
+--  type = 'server',
+--  port = "13000",
+--  executable = {
+--    command = '/Users/chmoussa/Downloads/dap/extension/adapter/codelldb',
+--    args = {"--port", "13000"},
+--  }
+--}
+
 vim.fn.sign_define('DapBreakpoint', {text='🛑', texthl='', linehl='', numhl=''})
 vim.fn.sign_define('DapStopped', {text='🍄', texthl='', linehl='', numhl=''})
+
 dap.configurations.c = {
   {
     name = "Launch file",
-    type = "cppdbg",
+    type = "codelldb",
     request = "launch",
     program = function()
       return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
 	 -- return vim.fn.getcwd() .. '/a.out'
     end,
 	args = function()
-      return vim.split(vim.fn.input('Enter arguments: '), " ")
+      return vim.split(vim.fn.input('Enter arguments: '), "")
     end,
     cwd = '${workspaceFolder}',
-    stopAtEntry = true,
+    stopOnEntry = true,
   },
 }
 

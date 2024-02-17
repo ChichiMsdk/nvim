@@ -51,7 +51,7 @@ require("catppuccin").setup({
         -- For more plugins integrations please scroll down (https://github.com/catppuccin/nvim#integrations)
     },
 })
-
+vim.cmd[[set guicursor=n-v:block-Cursor,i-ci-ve-c:ver80,r-cr:hor20-Cursor,o:hor50-Cursor]]
 -- setup must be called before loading
 vim.cmd.colorscheme "catppuccin"
 vim.cmd[[hi @function.builtin guifg=#7497d2]]
