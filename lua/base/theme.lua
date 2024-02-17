@@ -31,11 +31,12 @@ require("catppuccin").setup({
     color_overrides = {
 		mocha = {
 --			base = "#11111a",
---			base = "#151515",
-			base = "#171717",
-			--base = "#000000",
+--			base = "#141414", --black 
+--			base = "#222222", -- gray
+			base = "#333333", -- gray
 			maroon = "#e7e7cb",
 			lavender = "#c6ba9d",
+			Text = "#ffffff",
 			--base = "#000000",
 			--black
 		},
@@ -51,11 +52,53 @@ require("catppuccin").setup({
         -- For more plugins integrations please scroll down (https://github.com/catppuccin/nvim#integrations)
     },
 })
-vim.cmd[[set guicursor=n-v:block-Cursor,i-ci-ve-c:ver80,r-cr:hor20-Cursor,o:hor50-Cursor]]
 -- setup must be called before loading
+vim.cmd[[hi FloatBorder guifg=#cdd6f4]]
+-- vim.cmd[[set guicursor=n-v:block-Cursor,i-ci-ve-c:ver80,r-cr:hor20-Cursor,o:hor50-Cursor]]
 vim.cmd.colorscheme "catppuccin"
-vim.cmd[[hi @function.builtin guifg=#7497d2]]
+--vim.cmd.colorscheme "kanagawa"
+vim.cmd[[hi String guifg=#98bb6c]]
+vim.cmd[[hi TelescopeSelection guifg=#919090]]
+vim.cmd[[hi TelescopeSelection guibg=#272626]]
+vim.cmd[[hi TelescopeBorder guifg=#919090]]
+vim.cmd[[hi FloatBorder guifg=#919090]]
+vim.cmd[[hi NormalFloat guibg=#262626]]
+--vim.cmd[[hi @function.builtin guifg=#7497d2]]
+vim.cmd[[hi @function.builtin guifg=#70bbff]]
+vim.cmd[[hi Function guifg=#71a4e5]]
+vim.cmd[[hi Number guifg=#eba48d]]
+--vim.cmd[[hi @function.builtin guifg=#2f2f2f]]
 --vim.cmd[[hi LineNr guifg=#f77d31]]
+vim.cmd[[hi CursorLine guibg=262626]]
+vim.cmd[[hi Cursor guibg=#979797 guifg=#cdd6f4]]
+vim.cmd[[hi colorcolumn guibg=#262626]]
 vim.cmd[[hi LineNr guifg=#999999]]
-vim.cmd[[hi StatusLine guifg=#FFee96 guibg=#151515]]
+vim.cmd[[hi StatusLineNC guifg=#6f6f6f guibg=#2f2f2f]]
+vim.cmd[[hi StatusLine guifg=#ababab guibg=#262626]]
+vim.cmd[[hi Visual guibg=#00505e]]
 --vim.cmd[[hi StatusLine guifg=#998999 guibg=#11111a]]
+
+require('kanagawa').setup({
+    compile = false,             -- enable compiling the colorscheme
+    undercurl = true,            -- enable undercurls
+    commentStyle = { italic = false },
+    functionStyle = {},
+    keywordStyle = { italic = false},
+    statementStyle = { bold = false },
+    typeStyle = {},
+    transparent = true,         -- do not set background color
+    dimInactive = false,         -- dim inactive window `:h hl-NormalNC`
+    terminalColors = true,       -- define vim.g.terminal_color_{0,17}
+    colors = {                   -- add/modify theme and palette colors
+        palette = {},
+        theme = { wave = {}, lotus = {}, dragon = {}, all = {} },
+    },
+    overrides = function(colors) -- add/modify highlights
+        return {}
+    end,
+    theme = "lotus",              -- Load "wave" theme when 'background' option is not set
+    background = {               -- map the value of 'background' option to a theme
+        dark = "wave",           -- try "dragon" !
+        light = "lotus"
+    },
+})

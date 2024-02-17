@@ -6,7 +6,8 @@ vim.keymap.set('n', '<leader>gg', builtin.live_grep, {})
 vim.keymap.set('n', '<leader>gs', builtin.grep_string, {})
 vim.keymap.set('n', '<leader>bb', builtin.buffers, {})
 vim.keymap.set('n', '<leader>s', builtin.lsp_references, {})
-
+vim.keymap.set('n', '<leader>gb', builtin.git_branches, {})
+vim.cmd "autocmd User TelescopePreviewerLoaded setlocal number"
 
 require('telescope').setup{
 	defaults = {
@@ -28,7 +29,7 @@ require('telescope').setup{
 				mirror = false,
 				preview_cutoff = 0,
 				preview_width = 90,
-				preview_height = 0.7,
+				preview_height = 0.6,
 			},
 			flex = {
 				flip_columns = 110,
