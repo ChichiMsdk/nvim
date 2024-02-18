@@ -1,3 +1,6 @@
 undodir**
 undodir/**
+undodir
+lazy-lock.json
+undodir/*
 *.vim

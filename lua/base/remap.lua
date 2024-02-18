@@ -1,7 +1,7 @@
 vim.g.mapleader = " "
 
 --go to new tab then open the man page 
-
+vim.api.nvim_set_keymap('t', '<Esc>', '<C-\\><C-N>', {noremap=true, silent=true})
 --copilot toggle
 vim.api.nvim_set_keymap("n","<F30>",":lua copilot_toggle()<CR>", {noremap=true, silent=true})
 
