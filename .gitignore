@@ -1,0 +1,7 @@
+after/plugin/leap.lua
+after/plugin/lualine.lua
+session.vim
+plugin/packer_compiled.lua
+lazy-lock.json
+lua/plugin
+temp

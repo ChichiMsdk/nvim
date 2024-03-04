@@ -1,14 +1,14 @@
 local vim = vim
 local ts = require'nvim-treesitter.configs'.setup {
 	-- A list of parser names, or "all" (the five listed parsers should always be installed)
-	ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "python", "rust", "javascript" },
+	ensure_installed = { "c", "lua", "vim", "vimdoc", "query"},
 
 	-- Install parsers synchronously (only applied to `ensure_installed`)
 	sync_install = false,
 
 	-- Automatically install missing parsers when entering buffer
 	-- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
-	auto_install = true,
+	auto_install = false,
 
 
 	---- If you need to change the installation directory of the parsers (see -> Advanced Setup)
@@ -23,4 +23,16 @@ local ts = require'nvim-treesitter.configs'.setup {
 		-- Instead of true it can also be a list of languages
 		additional_vim_regex_highlighting = false,
 	},
+}
+require'treesitter-context'.setup{
+	enable = true,
+	max_lines = 1,
+	min_window_height = 0,
+	line_numbers = true,
+	mutliline_threshold = 20,
+	trim_scope = 'outer',
+	mode = 'cursor',
+	separator = nil,
+	zindex = 20,
+	on_attach = nil,
 }
