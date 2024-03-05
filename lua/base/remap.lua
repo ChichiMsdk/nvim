@@ -2,7 +2,7 @@ vim.g.mapleader = " "
 vim.g.cmp_enable = false
 
 --copilot toggle
-vim.api.nvim_set_keymap("n","<F30>",":Copilot toggle<CR>", {noremap=true, silent=true})
+vim.api.nvim_set_keymap("n","<F30>",":lua copilot_toggle()<CR>", {noremap=true, silent=true})
 --vim.api.nvim_set_keymap("n","<leader>vv",":Ex<CR>", {noremap=true, silent=true})
 vim.api.nvim_set_keymap("n","<leader>vv",":Oil<CR>", {noremap=true, silent=true})
 --vim.api.nvim_set_keymap("n","<leader>vv",":Oil --float <CR>", {noremap=true, silent=true})
@@ -105,15 +105,16 @@ end
 
 -- toggle for copilot
 -- this is the command : Copilot disable and Copilot enable
-local toggle = true
+vim.g.toggle_copilot = true
 function copilot_toggle()
-	toggle = not toggle
-	if toggle == true then
-		vim.api.nvim_command('Copilot disable')
-		vim.api.nvim_command('Copilot status')
+	if vim.g.toggle_copilot == true then
+		require("copilot.suggestion").toggle_auto_trigger()
+		print("Copilot enabled")
 	else
-		vim.api.nvim_command('Copilot enable')
+		require("copilot.suggestion").toggle_auto_trigger()
+		print("Copilot disabled")
 	end
+	vim.g.toggle_copilot = not vim.g.toggle_copilot
 end
 
 --  local h_file = io.open("example.h", "a")

@@ -24,6 +24,7 @@ local lsp = require('lsp-zero').preset({
 })
 
 vim.opt.signcolumn = 'yes'
+
 vim.diagnostic.config({
 	virtual_text = true,
 	signs = true,
@@ -31,8 +32,8 @@ vim.diagnostic.config({
 	underline = true,
 	severity_sort = true,
 })
+
 vim.cmd[[set pumheight=5]]
---vim.cmd[[set pumblend=60]]
 vim.cmd[[hi PmenuSel blend=0]]
 lsp.set_sign_icons({
 	error = " ",
@@ -54,6 +55,39 @@ lsp.on_attach(function (client, bufnr)
 --	vim.keymap.set("n", "K", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
 	vim.keymap.set("n", "<leader>dn", function() vim.diagnostic.open_float() end, opts)
 end)
+
+--require('mason').setup({})
+--require('mason-lspconfig').setup({
+--  ensure_installed = {'clangd', 'rust_analyzer'},
+--  handlers = {
+--    lsp.default_setup,
+--  }
+--})
+
+require('lspconfig').rust_analyzer.setup({
+  single_file_support = false,
+  on_attach = on_attach,
+  capabilities = capabilities,
+  filetypes = {"rust"},
+  settings = {
+	  ['rust-analyzer'] = {
+		  cargo = {
+			  allFeatures = true,
+		  },
+	  },
+  },
+})
+
+--
+--require('lspconfig').clangd.setup({
+--  single_file_support = false,
+--  on_attach = function(client, bufnr)
+--	cmd = {
+--		"clangd",
+--		"--offset_encoding=utf-8",
+--	}
+--  end
+--})
 
 lsp.configure('clangd', {
 	function()
