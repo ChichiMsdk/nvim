@@ -15,7 +15,40 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
 require('lazy').setup({
-	'cacharle/c_formatter_42.vim',
+	{
+		"willothy/flatten.nvim",
+		config = true,
+		-- or pass configuration with
+		-- opts = {  }
+		-- Ensure that it runs first to minimize delay when opening file from terminal
+		lazy = false,
+		priority = 1001,
+  	},
+	{
+		"blazkowolf/gruber-darker.nvim",
+		opts = {
+		  bold = false,
+		  invert = {
+			signs = false,
+			tabline = false,
+			visual = false,
+		  },
+		  italic = {
+			strings = false,
+			comments = false,
+			operators = false,
+			folds = true,
+		  },
+		  undercurl = true,
+		  underline = true,
+		},
+	},
+	{
+		"folke/trouble.nvim",
+	 	dependencies = { "nvim-tree/nvim-web-devicons" },
+	},
+	 "loctvl842/monokai-pro.nvim",
+--	'cacharle/c_formatter_42.vim',
 	'rebelot/kanagawa.nvim',
 	'lewis6991/gitsigns.nvim',
 	'christoomey/vim-tmux-navigator',
