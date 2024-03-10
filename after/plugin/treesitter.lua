@@ -1,6 +1,9 @@
 local vim = vim
 local ts = require'nvim-treesitter.configs'.setup {
 	-- A list of parser names, or "all" (the five listed parsers should always be installed)
+	indent = {
+		enable = true
+	},
 	ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "python", "rust", "javascript" },
 
 	-- Install parsers synchronously (only applied to `ensure_installed`)

@@ -6,13 +6,17 @@ local lsp = require('lsp-zero').preset({
 })
 
 vim.opt.signcolumn = 'yes'
+
 vim.diagnostic.config({
-	virtual_text = true,
+	virtual_text = false,
 	signs = true,
 	update_in_insert = false,
-	underline = true,
+	underline = false,
 	severity_sort = true,
 })
+
+--vim.diagnostic.disable()
+
 vim.cmd[[set pumheight=5]]
 --vim.cmd[[set pumblend=60]]
 vim.cmd[[hi PmenuSel blend=0]]
@@ -57,11 +61,13 @@ lsp.configure('clangd', {
 	end
 })
 
-
 lsp.setup()
 
 local cmp = require('cmp')
 cmp.setup({
+	completion = {
+		autocomplete = false
+	},
 	enabled = function()
 		-- disable completion in comments
 		local context = require 'cmp.config.context'

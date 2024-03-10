@@ -1,4 +1,6 @@
 vim.g.mapleader = " "
+--cmp
+vim.api.nvim_set_keymap('i', '<C-S-f>', '<C-\\><C-N>', {noremap=true, silent=true})
 
 --go to new tab then open the man page 
 vim.api.nvim_set_keymap('t', '<Esc>', '<C-\\><C-N>', {noremap=true, silent=true})

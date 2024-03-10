@@ -47,8 +47,8 @@ require('lazy').setup({
 		"folke/trouble.nvim",
 	 	dependencies = { "nvim-tree/nvim-web-devicons" },
 	},
-	 "loctvl842/monokai-pro.nvim",
---	'cacharle/c_formatter_42.vim',
+	"seblj/nvim-lsp-extras",
+	"loctvl842/monokai-pro.nvim",
 	'rebelot/kanagawa.nvim',
 	'lewis6991/gitsigns.nvim',
 	'christoomey/vim-tmux-navigator',
@@ -118,4 +118,11 @@ require('lazy').setup({
 			{'L3MON4D3/LuaSnip'}, -- Required
 		}
 	},
+--	{
+--	  "ray-x/lsp_signature.nvim",
+--	  event = "VeryLazy",
+--	  opts = {},
+--	  config = function(_, opts) require("lsp_signature").setup(opts) end
+--	},
+--	'cacharle/c_formatter_42.vim',
 	})

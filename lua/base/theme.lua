@@ -103,3 +103,4 @@
 --    },
 --})
 vim.cmd.colorscheme "gruber-darker"
+vim.cmd[[hi LspSignatureActiveParameter guifg=#ffdd33 guibg=#453d41]]
