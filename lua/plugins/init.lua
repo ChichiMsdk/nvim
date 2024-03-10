@@ -1,14 +1,15 @@
 return {
-	{
-		'zbirenbaum/copilot.lua',
-		cmd = "Copilot",
-		event = "InsertEnter",
-		config = function()
-			require("copilot").setup({})
-		end,
-	},
+--	{
+--		'zbirenbaum/copilot.lua',
+--		cmd = "Copilot",
+--		event = "InsertEnter",
+--		config = function()
+--			require("copilot").setup({})
+--		end,
+--	},
 --	'gennaro-tedesco/nvim-peekup',
 --	'junegunn/vim-peekaboo',
+	'nvim-treesitter/nvim-treesitter-textobjects',
 	'nvim-pack/nvim-spectre',
 	'ThePrimeagen/git-worktree.nvim',
 	'cacharle/c_formatter_42.vim',
@@ -33,14 +34,25 @@ return {
 	'theHamsta/nvim-dap-virtual-text',
 	'ldelossa/nvim-dap-projects',
 	'hrsh7th/cmp-nvim-lsp-signature-help',
-	--[[
 	{
-	  "ray-x/lsp_signature.nvim",
-	  event = "VeryLazy",
-	  opts = {},
-	  config = function(_, opts) require'lsp_signature'.setup(opts) end
+		"blazkowolf/gruber-darker.nvim",
+		opts = {
+			  bold = true,
+			  invert = {
+				signs = false,
+				tabline = false,
+				visual = false,
+			  },
+			  italic = {
+				strings = false,
+				comments = false,
+				operators = false,
+				folds = true,
+			  },
+			  undercurl = true,
+			  underline = true,
+		}
 	},
-	--]]
 	{
 		'folke/todo-comments.nvim',
 		dependencies = { {'nvim-lua/plenary.nvim' } },
@@ -87,6 +99,14 @@ return {
 			{'saadparwaiz1/cmp_luasnip'},
 		}
 	},
+	--[[
+	{
+	  "ray-x/lsp_signature.nvim",
+	  event = "VeryLazy",
+	  opts = {},
+	  config = function(_, opts) require'lsp_signature'.setup(opts) end
+	},
+	--]]
 	--[[
 	{
 	"tversteeg/registers.nvim",

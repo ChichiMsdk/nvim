@@ -15,8 +15,6 @@ local lsp = require('lsp-zero').preset({
 		enable = true,
 	},
 	manage_nvim_cmp = {
-		set_basic_mappings = true,
-		set_extra_mappings = true,
 		set_format = true,
 		use_luasnip = true,
 		set_sources = 'recommended',
@@ -26,10 +24,10 @@ local lsp = require('lsp-zero').preset({
 vim.opt.signcolumn = 'yes'
 
 vim.diagnostic.config({
-	virtual_text = true,
+	virtual_text = false,
 	signs = true,
 	update_in_insert = false,
-	underline = true,
+	underline = false,
 	severity_sort = true,
 })
 
@@ -55,39 +53,6 @@ lsp.on_attach(function (client, bufnr)
 --	vim.keymap.set("n", "K", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
 	vim.keymap.set("n", "<leader>dn", function() vim.diagnostic.open_float() end, opts)
 end)
-
---require('mason').setup({})
---require('mason-lspconfig').setup({
---  ensure_installed = {'clangd', 'rust_analyzer'},
---  handlers = {
---    lsp.default_setup,
---  }
---})
-
-require('lspconfig').rust_analyzer.setup({
-  single_file_support = false,
-  on_attach = on_attach,
-  capabilities = capabilities,
-  filetypes = {"rust"},
-  settings = {
-	  ['rust-analyzer'] = {
-		  cargo = {
-			  allFeatures = true,
-		  },
-	  },
-  },
-})
-
---
---require('lspconfig').clangd.setup({
---  single_file_support = false,
---  on_attach = function(client, bufnr)
---	cmd = {
---		"clangd",
---		"--offset_encoding=utf-8",
---	}
---  end
---})
 
 lsp.configure('clangd', {
 	function()
@@ -128,7 +93,17 @@ lsp.setup()
 
 local cmp = require('cmp')
 cmp.setup({
-	enabled = true,
+	enabled = function()
+		-- disable completion in comments
+		local context = require 'cmp.config.context'
+		-- keep command mode completion enabled when cursor is in a comment
+		if vim.api.nvim_get_mode().mode == 'c' then
+			return true
+		else
+			return not context.in_treesitter_capture("comment")
+			and not context.in_syntax_group("Comment")
+		end
+	end,
 	completion = {
 		autocomplete = false,
 	},
@@ -136,15 +111,6 @@ cmp.setup({
 		completion = cmp.config.window.bordered(),
 		documentation = cmp.config.window.bordered(),
 	},
-	mapping = cmp.mapping.preset.insert({
---		['<Up>'] = cmp.mapping.scroll_docs(-4),
---		['<Down>'] = cmp.mapping.scroll_docs(4),
---		['<ESC>'] = cmp.mapping.close(),
-		['<c-y>'] = cmp.mapping.confirm {
-			behavior = cmp.ConfirmBehavior.Insert,
-			select = true,
-		},
-	}),
 	formatting = {
 		format = function(entry, vim_item)
 			vim_item.abbr = string.sub(vim_item.abbr, 1, 20)
@@ -152,12 +118,13 @@ cmp.setup({
 		end
 	},
 })
-cmp.event:on("menu_opened", function()
-  vim.b.copilot_suggestion_hidden = true
-end)
-cmp.event:on("menu_closed", function()
-  vim.b.copilot_suggestion_hidden = false
-end)
+
+--cmp.event:on("menu_opened", function()
+--  vim.b.copilot_suggestion_hidden = true
+--end)
+--cmp.event:on("menu_closed", function()
+--  vim.b.copilot_suggestion_hidden = false
+--end)
 
 local cmp_autopairs = require('nvim-autopairs.completion.cmp')
 cmp.event:on(

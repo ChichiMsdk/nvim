@@ -1,5 +1,4 @@
 vim.g.mapleader = " "
-vim.g.cmp_enable = false
 
 --copilot toggle
 vim.api.nvim_set_keymap("n","<F30>",":lua copilot_toggle()<CR>", {noremap=true, silent=true})
@@ -37,11 +36,12 @@ vim.api.nvim_set_keymap('v', '<C-u>', '<C-u>M', { noremap = true })
 --navigate/delete buffer, navigate/close tab
 vim.api.nvim_set_keymap('n', '<leader>1', ':bprevious<CR>:lua print("b: " ..vim.api.nvim_get_current_buf())<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>2', ':bnext<CR>:lua print("b: " ..vim.api.nvim_get_current_buf())<CR>', { noremap = true, silent = true })
-
 vim.api.nvim_set_keymap('n', '<leader>bd', ':bd<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>tt', ':tabnew<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>td', ':tabclose<CR>', { noremap = true, silent = true })
+
+--vim.api.nvim_set_keymap('n', '<leader>tt', ':tabnew<CR>', { noremap = true, silent = true })
+--vim.api.nvim_set_keymap('n', '<leader>td', ':tabclose<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', 'gy', 'gt', { noremap = true })
+vim.api.nvim_set_keymap('n', '<leader>t', ':Trouble<CR>', { noremap = true, silent = true})
 vim.api.nvim_set_keymap('n', 'gY', 'gT', { noremap = true })
 
 vim.api.nvim_set_keymap('n', '<leader>w', ':wa<CR>', { noremap = true, silent = true })
