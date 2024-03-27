@@ -1,5 +1,52 @@
 vim.g.mapleader = " "
 
+if vim.g.neovide then
+
+	vim.g.neovide_scale_factor = 1.0
+	vim.api.nvim_set_keymap("n", "<C-=>", ":lua change_scale_factor(1.25)<CR>", {noremap = true})
+	vim.api.nvim_set_keymap("n", "<C-->", ":lua change_scale_factor(1/1.25)<CR>", {noremap = true})
+	function change_scale_factor(delta)
+		  vim.g.neovide_scale_factor = vim.g.neovide_scale_factor * delta
+	  end
+	vim.g.neovide_scroll_animation_length = 0.2
+ 	vim.g.neovide_scroll_animation_far_lines = 0
+	vim.o.termguicolors = true
+	vim.o.termpastefilter = "BS,HT,ESC,DEL,C0,C1"
+	vim.g.neovide_input_use_logo = true
+	vim.o.guifont = "JetBrainsMonoNL Nerd Font Mono:h13"
+--	vim.o.guifont = "GeistMono Nerd Font Mono:h16:#e-subpixelantialias:#h-none"
+	vim.g.neovide_scale_factor = 1
+	vim.opt.linespace = 2
+	vim.g.neovide_hide_mouse_when_typing = true
+	vim.g.neovide_cursor_vfx_mode = ""
+	vim.g.neovide_remember_window_size = true
+	vim.g.neovide_no_idle = false
+	vim.g.neovide_confirm_quit = false
+	vim.g.neovide_cursor_animate_command_line = false
+	vim.g.neovide_cursor_animate_in_insert_mode = true
+	vim.g.neovide_cursor_antialiasing = true
+	vim.g.neovide_refresh_rate = 144
+	vim.g.neovide_cursor_animation_length = 0.05
+	vim.g.neovide_cursor_trail_size = 0.3
+	vim.g.neovide_refresh_rate_idle = 5
+	vim.g.neovide_fullscreen = false
+
+	vim.cmd[[set shell=pwsh.exe]]
+	vim.cmd[[set shellxquote=]]
+	vim.cmd[[let &shellcmdflag = '-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command ']]
+	vim.cmd[[let &shellquote   = '']]
+	vim.cmd[[let &shellpipe    = '| Out-File -Encoding UTF8 %s']]
+	vim.cmd[[let &shellredir   = '| Out-File -Encoding UTF8 %s']]
+
+	vim.api.nvim_set_keymap('n', '<C-F5>', ':!.\\build-all.bat<CR>', { noremap = true, silent = true })
+	vim.keymap.set("n", "<C-F6>", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
+	vim.api.nvim_set_keymap('v', '<C-c>', '"+y', {noremap = true}) -- Copy
+	vim.api.nvim_set_keymap('n', '<C-v>', '"+P', {noremap = true}) -- Paste normal mode
+	vim.api.nvim_set_keymap('v', '<C-v>', '"+P', {noremap = true}) -- Paste visual mode
+	vim.api.nvim_set_keymap('c', '<C-v>', '<C-R>+', {noremap = true}) -- Paste command mode
+	vim.api.nvim_set_keymap('i', '<C-v>', '<C-R>+', {noremap = true}) -- Paste insert mode
+end
+
 --copilot toggle
 vim.api.nvim_set_keymap("n","<F30>",":lua copilot_toggle()<CR>", {noremap=true, silent=true})
 --vim.api.nvim_set_keymap("n","<leader>vv",":Ex<CR>", {noremap=true, silent=true})
@@ -36,12 +83,13 @@ vim.api.nvim_set_keymap('v', '<C-u>', '<C-u>M', { noremap = true })
 --navigate/delete buffer, navigate/close tab
 vim.api.nvim_set_keymap('n', '<leader>1', ':bprevious<CR>:lua print("b: " ..vim.api.nvim_get_current_buf())<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>2', ':bnext<CR>:lua print("b: " ..vim.api.nvim_get_current_buf())<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>bd', ':bd<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>bd', ':bn<bar>bd #<CR>', { noremap = true, silent = true })
 
 --vim.api.nvim_set_keymap('n', '<leader>tt', ':tabnew<CR>', { noremap = true, silent = true })
 --vim.api.nvim_set_keymap('n', '<leader>td', ':tabclose<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>t', ':vs|:wincmd l|:te<CR>', { noremap = true, silent = true})
+vim.api.nvim_set_keymap('n', '<leader>l', ':TroubleToggle<CR>', { noremap = true, silent = true})
 vim.api.nvim_set_keymap('n', 'gy', 'gt', { noremap = true })
-vim.api.nvim_set_keymap('n', '<leader>t', ':Trouble<CR>', { noremap = true, silent = true})
 vim.api.nvim_set_keymap('n', 'gY', 'gT', { noremap = true })
 
 vim.api.nvim_set_keymap('n', '<leader>w', ':wa<CR>', { noremap = true, silent = true })

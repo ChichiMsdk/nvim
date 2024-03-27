@@ -13,16 +13,15 @@ o.colorcolumn = "80"
 o.hidden = true
 vim.g.mapleader=" "
 vim.g.NERDTreeWinPos = "right"
---vim.cmd[[autocmd  InsertLeave * :lua vim.g.cmp_enable = false]]
 vim.cmd[[autocmd  InsertLeave * :set relativenumber]]
 vim.cmd[[autocmd  InsertEnter * :set norelativenumber]]
 vim.cmd[[autocmd  InsertEnter * :set nohlsearch]]
+vim.cmd[[set nuw=1]]
 vim.cmd[[set cursorline]]
 vim.cmd[[set undofile]]
 vim.cmd[[set undolevels=10000]]
 vim.cmd[[set undodir=/mnt/a/nvim/undodir]]
 vim.cmd('command! QA :mksession! ./session.vim | qa')
-
 
 --vim.api.nvim_create_autocmd("BufLeave", {
 --    pattern = '*',

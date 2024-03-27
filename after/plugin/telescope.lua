@@ -1,5 +1,8 @@
-local builtin = require('telescope.builtin')
+local builtin = require'telescope.builtin'
+local sorters = require'telescope.sorters'
+local finders = require'telescope.finders'
 local actions = require'telescope.actions'
+
 vim.keymap.set('n', '<leader>gf', builtin.git_files, {})
 vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
 vim.keymap.set('n', '<leader>gg', builtin.live_grep, {})
@@ -52,8 +55,6 @@ require('telescope').setup{
 --local action_state = require 'telescope.actions.state'
 --local previewers = require 'telescope.previewers'
 --local pickers = require 'telescope.pickers'
---local sorters = require 'telescope.sorters'
---local finders = require 'telescope.finders'
 --local themes = require 'telescope.themes'
 --local conf = require('telescope.config').values
 --

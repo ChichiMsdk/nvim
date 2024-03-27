@@ -97,5 +97,8 @@
 --    },
 --})
 vim.cmd.colorscheme "gruber-darker"
+vim.cmd[[hi @lsp.type.comment guifg=#cc8c3c]]
 vim.cmd[[hi LspSignatureActiveParameter guifg=#ffdd33 guibg=#453d41]]
 vim.cmd[[hi Cursor guifg=Black guibg=#9e95c7]]
+vim.cmd[[hi link @lsp.type.class GruberDarkerQuartz]]
+vim.cmd[[hi link @lsp.type.type GruberDarkerQuartz]]

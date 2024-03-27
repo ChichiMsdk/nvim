@@ -18,3 +18,4 @@ vim.g.clipboard = {
          },
          cache_enabled= 0,
       }
+vim.api.nvim_exec ('language en_US', true)
