@@ -10,6 +10,8 @@ return {
 --	'gennaro-tedesco/nvim-peekup',
 --	'junegunn/vim-peekaboo',
 --	'cacharle/c_formatter_42.vim',
+	-- 'tpope/vim-commentary',
+	'tomtom/tcomment_vim',
 	'tpope/vim-dispatch',
 	'nvim-treesitter/nvim-treesitter-textobjects',
 	'nvim-pack/nvim-spectre',
@@ -30,11 +32,12 @@ return {
 	'hrsh7th/nvim-cmp',
 	'hrsh7th/cmp-nvim-lsp',
 	"Diogo-ss/42-header.nvim",
-	'mfussenegger/nvim-dap',
-	'nvim-telescope/telescope-dap.nvim',
-	'theHamsta/nvim-dap-virtual-text',
-	'ldelossa/nvim-dap-projects',
 	'hrsh7th/cmp-nvim-lsp-signature-help',
+  	{ 'stevearc/oil.nvim', config = function() require("oil").setup()end},
+	{ 'nvim-treesitter/nvim-treesitter'},
+	{ 'catppuccin/nvim', as = "catppuccin" },
+  	{'akinsho/toggleterm.nvim', version = "*", config = true},
+
 	{
 		"blazkowolf/gruber-darker.nvim",
 		opts = {
@@ -71,10 +74,6 @@ return {
 		require("nvim-surround").setup()
 		end
 	},
-  	{ 'stevearc/oil.nvim', config = function() require("oil").setup()end},
-	{ 'nvim-treesitter/nvim-treesitter'},
-	{ 'rcarriga/nvim-dap-ui', dependencies = {'mfussenegger/nvim-dap'} },
-	{ 'catppuccin/nvim', as = "catppuccin" },
 	{
 		'Theprimeagen/harpoon',
 		branch = "harpoon2",

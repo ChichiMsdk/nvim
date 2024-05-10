@@ -17,11 +17,15 @@ vim.cmd[[autocmd  InsertLeave * :set relativenumber]]
 vim.cmd[[autocmd  InsertEnter * :set norelativenumber]]
 vim.cmd[[autocmd  InsertEnter * :set nohlsearch]]
 vim.cmd[[set nuw=1]]
+vim.cmd[[set autoindent]]
+vim.cmd[[set cindent]]
 vim.cmd[[set cursorline]]
 vim.cmd[[set undofile]]
 vim.cmd[[set undolevels=10000]]
 vim.cmd[[set undodir=/mnt/a/nvim/undodir]]
 vim.cmd('command! QA :mksession! ./session.vim | qa')
+vim.cmd([[autocmd FileType *c* set formatoptions-=ro]])
+vim.cmd([[autocmd FileType *lua set formatoptions-=ro]])
 
 --vim.api.nvim_create_autocmd("BufLeave", {
 --    pattern = '*',

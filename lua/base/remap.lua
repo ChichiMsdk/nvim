@@ -1,4 +1,5 @@
 vim.g.mapleader = " "
+vim.g.term_open = false
 
 if vim.g.neovide then
 
@@ -31,14 +32,27 @@ if vim.g.neovide then
 	vim.g.neovide_refresh_rate_idle = 5
 	vim.g.neovide_fullscreen = false
 
+--	if (vim.fn.has "win32") == 1 then
+--		local_vim.opt.shell = "pwsh"
+--		local_vim.opt.shellcmdflag =
+--		  "-NoProfile -NoLogo -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.UTF8Encoding]::new();$PSDefaultParameterValues['Out-File:Encoding']='utf8';$PSStyle.OutputRendering = [System.Management.Automation.OutputRendering]::PlainText;"
+--		local_vim.opt.shellredir = '2>&1 | %%{ "$_" } | Out-File %s; exit $LastExitCode'
+--		local_vim.opt.shellpipe = '2>&1 | %%{ "$_" } | Tee-Object %s; exit $LastExitCode'
+--		local_vim.opt.shellquote = ""
+--		local_vim.opt.shellxquote = ""
+--	end
+
 	vim.cmd[[set shell=pwsh.exe]]
 	vim.cmd[[set shellxquote=]]
-	vim.cmd[[let &shellcmdflag = '-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command ']]
+	vim.cmd[[let &shellcmdflag = "-NoProfile -NoLogo -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.UTF8Encoding]::new();$PSDefaultParameterValues['Out-File:Encoding']='utf8';$PSStyle.OutputRendering = [System.Management.Automation.OutputRendering]::PlainText;"]]
+-- 	vim.cmd[[let &shellcmdflag = '-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command ']]
 	vim.cmd[[let &shellquote   = '']]
 	vim.cmd[[let &shellpipe    = '| Out-File -Encoding UTF8 %s']]
 	vim.cmd[[let &shellredir   = '| Out-File -Encoding UTF8 %s']]
+	vim.cmd[[let &shellquote = "" ]]
+	vim.cmd[[let &shellxquote = "" ]]
 
-	vim.api.nvim_set_keymap('n', '<C-F5>', ':!.\\build-all.bat<CR>', { noremap = true, silent = true })
+-- 	vim.api.nvim_set_keymap('n', '<C-F5>', ':!.\\build-all.bat<CR>', { noremap = true, silent = true })
 	vim.keymap.set("n", "<C-F6>", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
 	vim.api.nvim_set_keymap('v', '<C-c>', '"+y', {noremap = true}) -- Copy
 	vim.api.nvim_set_keymap('n', '<C-v>', '"+P', {noremap = true}) -- Paste normal mode
@@ -47,11 +61,15 @@ if vim.g.neovide then
 	vim.api.nvim_set_keymap('i', '<C-v>', '<C-R>+', {noremap = true}) -- Paste insert mode
 end
 
---copilot toggle
-vim.api.nvim_set_keymap("n","<F30>",":lua copilot_toggle()<CR>", {noremap=true, silent=true})
+--build
+vim.api.nvim_set_keymap('n', '<C-F5>', ':1TermExec cmd="make run"<CR>', { noremap = true, silent = true })
+--vim.api.nvim_set_keymap('n', '<leader>t', ':ToggleTerm size=68 direction=vertical<CR> <ESC>:wincmd 1x<CR>', { noremap = true, silent = true})
+vim.api.nvim_set_keymap("n", "<leader>t", "<cmd>lua _wincmd1x_toggle()<CR>", {noremap = true, silent = true})
+
 --vim.api.nvim_set_keymap("n","<leader>vv",":Ex<CR>", {noremap=true, silent=true})
 vim.api.nvim_set_keymap("n","<leader>vv",":Oil<CR>", {noremap=true, silent=true})
 --vim.api.nvim_set_keymap("n","<leader>vv",":Oil --float <CR>", {noremap=true, silent=true})
+
 --comment line
 vim.api.nvim_set_keymap("n","<leader>/","0i// <ESC>", {noremap=true, silent=true})
 vim.api.nvim_set_keymap("v","<leader>/","0<S-i>// <ESC>", {noremap=true, silent=true})
@@ -60,34 +78,37 @@ vim.api.nvim_set_keymap("v","<leader>/","0<S-i>// <ESC>", {noremap=true, silent=
 vim.api.nvim_set_keymap('n', '<C-c>', '"+yy', { noremap = true })
 vim.api.nvim_set_keymap('v', '<C-c>', '"+y', { noremap = true })
 
+--delete to blackhole buffer
 vim.api.nvim_set_keymap('n', '<S-del>', '"_dd', { noremap = true })
 vim.api.nvim_set_keymap('v', '<S-del>', '"_d', { noremap = true })
 
+--move between windows
 vim.api.nvim_set_keymap('n', '<C-k>', ':wincmd k<CR>', { noremap = true, silent=true })
 vim.api.nvim_set_keymap('n', '<C-j>', ':wincmd j<CR>', { noremap = true, silent=true })
 vim.api.nvim_set_keymap('n', '<C-h>', ':wincmd h<CR>', { noremap = true, silent=true })
 vim.api.nvim_set_keymap('n', '<C-l>', ':wincmd l<CR>', { noremap = true, silent=true})
 
-vim.api.nvim_set_keymap('n', '<C-S-Up>', ':resize +2<CR>', { noremap = true, silent=true})
-vim.api.nvim_set_keymap('n', '<C-S-Down>', ':resize -2<CR>', { noremap = true, silent=true})
-vim.api.nvim_set_keymap('n', '<C-S-Right>', ':vertical resize +2<CR>', { noremap = true, silent=true})
-vim.api.nvim_set_keymap('n', '<C-S-Left>', ':vertical resize -2<CR>', { noremap = true, silent=true})
+--resize
+vim.api.nvim_set_keymap('n', '<C-S-Up>', ':resize +1<CR>', { noremap = true, silent=true})
+vim.api.nvim_set_keymap('n', '<C-S-Down>', ':resize -1<CR>', { noremap = true, silent=true})
+vim.api.nvim_set_keymap('n', '<C-S-Right>', ':vertical resize +1<CR>', { noremap = true, silent=true})
+vim.api.nvim_set_keymap('n', '<C-S-Left>', ':vertical resize -1<CR>', { noremap = true, silent=true})
 
+--split windows
 vim.api.nvim_set_keymap("n","<leader>vs",":vs<CR>", {noremap=true, silent=true})
 vim.api.nvim_set_keymap("n","<leader>vh",":sp<CR>", {noremap=true, silent=true})
+
 --center screen after scroll or search
 vim.api.nvim_set_keymap('n', '<C-d>', '<C-d>M', { noremap = true })
 vim.api.nvim_set_keymap('n', '<C-u>', '<C-u>M', { noremap = true })
 vim.api.nvim_set_keymap('v', '<C-d>', '<C-d>M', { noremap = true })
 vim.api.nvim_set_keymap('v', '<C-u>', '<C-u>M', { noremap = true })
+
 --navigate/delete buffer, navigate/close tab
 vim.api.nvim_set_keymap('n', '<leader>1', ':bprevious<CR>:lua print("b: " ..vim.api.nvim_get_current_buf())<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>2', ':bnext<CR>:lua print("b: " ..vim.api.nvim_get_current_buf())<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>bd', ':bn<bar>bd #<CR>', { noremap = true, silent = true })
 
---vim.api.nvim_set_keymap('n', '<leader>tt', ':tabnew<CR>', { noremap = true, silent = true })
---vim.api.nvim_set_keymap('n', '<leader>td', ':tabclose<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>t', ':vs|:wincmd l|:te<CR>', { noremap = true, silent = true})
 vim.api.nvim_set_keymap('n', '<leader>l', ':TroubleToggle<CR>', { noremap = true, silent = true})
 vim.api.nvim_set_keymap('n', 'gy', 'gt', { noremap = true })
 vim.api.nvim_set_keymap('n', 'gY', 'gT', { noremap = true })
@@ -98,8 +119,17 @@ vim.api.nvim_set_keymap('n', '<leader>a', ':q<CR>', { noremap = true, silent = t
 vim.api.nvim_set_keymap('n', '<leader>x', ':xa<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>rr', ':set norelativenumber!<CR>', { noremap = true, silent = true })
 
-vim.api.nvim_set_keymap ('n', '<F7>', ':make<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap ('n', '<F41>', ':make && ./cub3d<CR>', { noremap = true, silent = true })
+--old
+--vim.api.nvim_set_keymap ('n', '<F7>', ':make<CR>', { noremap = true, silent = true })
+--vim.api.nvim_set_keymap ('n', '<F41>', ':make && ./cub3d<CR>', { noremap = true, silent = true })
+
+
+
+
+-- commands for terminal
+
+
+
 
 local diagnostic_state = true
 
