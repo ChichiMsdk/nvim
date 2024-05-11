@@ -61,6 +61,8 @@ if vim.g.neovide then
 	vim.api.nvim_set_keymap('i', '<C-v>', '<C-R>+', {noremap = true}) -- Paste insert mode
 end
 
+-- toggle line nr
+vim.api.nvim_set_keymap('n', '<leader>rr', ':lua numbers()<CR>', { noremap = true, silent = true })
 --build
 vim.api.nvim_set_keymap('n', '<C-F5>', ':1TermExec cmd="make run"<CR>', { noremap = true, silent = true })
 --vim.api.nvim_set_keymap('n', '<leader>t', ':ToggleTerm size=68 direction=vertical<CR> <ESC>:wincmd 1x<CR>', { noremap = true, silent = true})
@@ -88,6 +90,9 @@ vim.api.nvim_set_keymap('n', '<C-j>', ':wincmd j<CR>', { noremap = true, silent=
 vim.api.nvim_set_keymap('n', '<C-h>', ':wincmd h<CR>', { noremap = true, silent=true })
 vim.api.nvim_set_keymap('n', '<C-l>', ':wincmd l<CR>', { noremap = true, silent=true})
 
+--cd in current buffer directory
+vim.api.nvim_set_keymap('n', '<leader>c', ':lua mycd()<CR>', { noremap = true, silent=true})
+
 --resize
 vim.api.nvim_set_keymap('n', '<C-S-Up>', ':resize +1<CR>', { noremap = true, silent=true})
 vim.api.nvim_set_keymap('n', '<C-S-Down>', ':resize -1<CR>', { noremap = true, silent=true})
@@ -105,9 +110,12 @@ vim.api.nvim_set_keymap('v', '<C-d>', '<C-d>M', { noremap = true })
 vim.api.nvim_set_keymap('v', '<C-u>', '<C-u>M', { noremap = true })
 
 --navigate/delete buffer, navigate/close tab
-vim.api.nvim_set_keymap('n', '<leader>1', ':bprevious<CR>:lua print("b: " ..vim.api.nvim_get_current_buf())<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>2', ':bnext<CR>:lua print("b: " ..vim.api.nvim_get_current_buf())<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader><M-1>', ':bprevious<CR>:lua print("b: " ..vim.api.nvim_get_current_buf())<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader><M-2>', ':bnext<CR>:lua print("b: " ..vim.api.nvim_get_current_buf())<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>bd', ':bn<bar>bd #<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>bp', ':bn<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>bn', ':bp<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>j', ':Telescope jumplist<CR>', { noremap = true, silent = true })
 
 vim.api.nvim_set_keymap('n', '<leader>l', ':TroubleToggle<CR>', { noremap = true, silent = true})
 vim.api.nvim_set_keymap('n', 'gy', 'gt', { noremap = true })
@@ -117,7 +125,6 @@ vim.api.nvim_set_keymap('n', '<leader>w', ':wa<CR>', { noremap = true, silent = 
 vim.api.nvim_set_keymap('n', '<leader>qq', ':QA<CR>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<leader>a', ':q<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>x', ':xa<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>rr', ':set norelativenumber!<CR>', { noremap = true, silent = true })
 
 --old
 --vim.api.nvim_set_keymap ('n', '<F7>', ':make<CR>', { noremap = true, silent = true })
@@ -126,10 +133,12 @@ vim.api.nvim_set_keymap('n', '<leader>rr', ':set norelativenumber!<CR>', { norem
 
 
 
--- commands for terminal
+-- functions
 
-
-
+function mycd()
+	local current_d = vim.fn.expand('%:p:h')
+	vim.cmd('cd ' .. current_d)
+end
 
 local diagnostic_state = true
 

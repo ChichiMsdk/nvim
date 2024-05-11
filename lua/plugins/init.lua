@@ -11,11 +11,11 @@ return {
 --	'junegunn/vim-peekaboo',
 --	'cacharle/c_formatter_42.vim',
 	-- 'tpope/vim-commentary',
+	-- 'ThePrimeagen/git-worktree.nvim',
 	'tomtom/tcomment_vim',
 	'tpope/vim-dispatch',
 	'nvim-treesitter/nvim-treesitter-textobjects',
 	'nvim-pack/nvim-spectre',
-	'ThePrimeagen/git-worktree.nvim',
 	'rebelot/kanagawa.nvim',
 	'lewis6991/gitsigns.nvim',
 	'christoomey/vim-tmux-navigator',
@@ -77,6 +77,7 @@ return {
 	{
 		'Theprimeagen/harpoon',
 		branch = "harpoon2",
+		commit = "e76cb03",
 		dependencies = { { 'nvim-lua/plenary.nvim' } }
 	},
 	{
