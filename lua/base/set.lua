@@ -21,7 +21,6 @@ vim.g.numbers=false
 -- vim.api.nvim_buf_set_var(0, 'vim.g.numbers', false)
 -- vim.cmd[[autocmd InsertEnter * set nohlsearch]]
 -- vim.cmd[[autocmd InsertLeave * :set hlsearch]]
-vim.cmd[[set textwidth=80]]
 vim.cmd[[set foldmethod=indent]]
 vim.cmd[[set foldlevel=1100]]
 vim.cmd[[set title]]
@@ -77,14 +76,14 @@ end
 local function set_color_column()
     local colorcolumn_enabled = false
     for i = 1, vim.api.nvim_buf_line_count(0) do
-        if #vim.api.nvim_buf_get_lines(0, i - 1, i, false)[1] >= 80 then
+        if #vim.api.nvim_buf_get_lines(0, i - 1, i, false)[1] > 80 then
             colorcolumn_enabled = true
             break
         end
     end
 
     if colorcolumn_enabled then
-        vim.wo.colorcolumn = "80"
+        vim.wo.colorcolumn = "81"
     else
         vim.wo.colorcolumn = ""
     end
