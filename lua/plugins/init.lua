@@ -37,7 +37,6 @@ return {
 	{ 'nvim-treesitter/nvim-treesitter'},
 	{ 'catppuccin/nvim', as = "catppuccin" },
   	{'akinsho/toggleterm.nvim', version = "*", config = true},
-
 	{
 		"blazkowolf/gruber-darker.nvim",
 		opts = {
@@ -45,7 +44,7 @@ return {
 			  invert = {
 				signs = false,
 				tabline = true,
-				visual = true,
+				visual = false,
 			  },
 			  italic = {
 				strings = false,

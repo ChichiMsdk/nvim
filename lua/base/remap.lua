@@ -1,11 +1,12 @@
+-- :redir @* | set guifont | redir END
 vim.g.mapleader = " "
 vim.g.term_open = false
 
 if vim.g.neovide then
 
 	vim.g.neovide_scale_factor = 1.0
-	vim.api.nvim_set_keymap("n", "<C-=>", ":lua change_scale_factor(1.25)<CR>", {noremap = true})
-	vim.api.nvim_set_keymap("n", "<C-->", ":lua change_scale_factor(1/1.25)<CR>", {noremap = true})
+	vim.api.nvim_set_keymap("n", "<C-=>", ":lua change_scale_factor(1.05)<CR>", {noremap = true})
+	vim.api.nvim_set_keymap("n", "<C-->", ":lua change_scale_factor(1/1.05)<CR>", {noremap = true})
 	function change_scale_factor(delta)
 		  vim.g.neovide_scale_factor = vim.g.neovide_scale_factor * delta
 	  end
@@ -54,7 +55,6 @@ if vim.g.neovide then
 
 -- 	vim.api.nvim_set_keymap('n', '<C-F5>', ':!.\\build-all.bat<CR>', { noremap = true, silent = true })
 	vim.keymap.set("n", "<C-F6>", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
-	vim.api.nvim_set_keymap('v', '<C-c>', '"+y', {noremap = true}) -- Copy
 	vim.api.nvim_set_keymap('n', '<C-v>', '"+P', {noremap = true}) -- Paste normal mode
 	vim.api.nvim_set_keymap('v', '<C-v>', '"+P', {noremap = true}) -- Paste visual mode
 	vim.api.nvim_set_keymap('c', '<C-v>', '<C-R>+', {noremap = true}) -- Paste command mode
@@ -68,6 +68,7 @@ vim.api.nvim_set_keymap('n', '<C-F5>', ':1TermExec cmd="make run"<CR>', { norema
 --vim.api.nvim_set_keymap('n', '<leader>t', ':ToggleTerm size=68 direction=vertical<CR> <ESC>:wincmd 1x<CR>', { noremap = true, silent = true})
 vim.api.nvim_set_keymap("n", "<leader>t", "<cmd>lua _wincmd1x_toggle()<CR>", {noremap = true, silent = true})
 
+vim.api.nvim_set_keymap("n", "<ESC>", ":noh<CR>", {noremap=true, silent=true})
 --vim.api.nvim_set_keymap("n","<leader>vv",":Ex<CR>", {noremap=true, silent=true})
 vim.api.nvim_set_keymap("n","<leader>vv",":Oil<CR>", {noremap=true, silent=true})
 --vim.api.nvim_set_keymap("n","<leader>vv",":Oil --float <CR>", {noremap=true, silent=true})
