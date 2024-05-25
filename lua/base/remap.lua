@@ -61,21 +61,23 @@ if vim.g.neovide then
 	vim.api.nvim_set_keymap('i', '<C-v>', '<C-R>+', {noremap = true}) -- Paste insert mode
 end
 
+--cmdline
+vim.api.nvim_set_keymap('n', '<leader>;', ':', { noremap = true})
+
 -- toggle line nr
 vim.api.nvim_set_keymap('n', '<leader>rr', ':lua numbers()<CR>', { noremap = true, silent = true })
 
---build
+--BUILD
 vim.api.nvim_set_keymap('n', '<C-F5>', ':1TermExec cmd="make run"<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<leader>t", "<cmd>lua _wincmd1x_toggle()<CR>", {noremap = true, silent = true})
-	--vim.api.nvim_set_keymap('n', '<leader>t', ':ToggleTerm size=68 direction=vertical<CR> <ESC>:wincmd 1x<CR>', { noremap = true, silent = true})
 
 vim.api.nvim_set_keymap("n", "<ESC>", ":noh<CR>", {noremap=true, silent=true})
-vim.api.nvim_set_keymap("n","<leader>vv",":Oil<CR>", {noremap=true, silent=true})
-vim.api.nvim_set_keymap("n","<leader>vo",":Oil --float <CR>", {noremap=true, silent=true})
+vim.api.nvim_set_keymap("n","<leader>vv", ":Oil<CR>", {noremap=true, silent=true})
+vim.api.nvim_set_keymap("n","<leader>vo", ":Oil --float <CR>", {noremap=true, silent=true})
 
 --comment line
-vim.api.nvim_set_keymap("n","<leader>/","0i// <ESC>", {noremap=true, silent=true})
-vim.api.nvim_set_keymap("v","<leader>/","0<S-i>// <ESC>", {noremap=true, silent=true})
+vim.api.nvim_set_keymap("n","<leader>/", ":TComment<CR>", {noremap=true, silent=true})
+vim.api.nvim_set_keymap("v","<leader>/", ":TCommentBlock<CR>", {noremap=true, silent=true})
 
 --copy to clipboard
 vim.api.nvim_set_keymap('n', '<C-c>', '"+yy', { noremap = true })
