@@ -3,10 +3,10 @@ local sorters = require'telescope.sorters'
 local finders = require'telescope.finders'
 local actions = require'telescope.actions'
 
-vim.keymap.set('n', '<leader>gf', builtin.git_files, {})
-vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
-vim.keymap.set('n', '<leader>gg', builtin.live_grep, {})
-vim.keymap.set('n', '<leader>gs', builtin.grep_string, {})
+-- vim.keymap.set('n', '<leader>gf', builtin.git_files, {})
+-- vim.keymap.set('n', '<leader>gs', builtin.grep_string, {})
+vim.keymap.set('n', '<leader>f', builtin.find_files, {})
+vim.keymap.set('n', '<leader>j', builtin.live_grep, {})
 vim.keymap.set('n', '<leader>bb', builtin.buffers, {})
 vim.keymap.set('n', '<leader>s', builtin.lsp_references, {})
 

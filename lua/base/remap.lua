@@ -16,7 +16,7 @@ if vim.g.neovide then
 	vim.o.termpastefilter = "BS,HT,ESC,DEL,C0,C1"
 	vim.g.neovide_input_use_logo = true
 	vim.o.guifont = "JetBrainsMonoNL Nerd Font Mono:h13"
---	vim.o.guifont = "GeistMono Nerd Font Mono:h16:#e-subpixelantialias:#h-none"
+	-- vim.o.guifont = "GeistMono Nerd Font Mono:h16:#e-subpixelantialias:#h-none"
 	vim.g.neovide_scale_factor = 1
 	vim.opt.linespace = 2
 	vim.g.neovide_hide_mouse_when_typing = true
@@ -54,7 +54,7 @@ if vim.g.neovide then
 	vim.cmd[[let &shellxquote = "" ]]
 
 -- 	vim.api.nvim_set_keymap('n', '<C-F5>', ':!.\\build-all.bat<CR>', { noremap = true, silent = true })
-	vim.keymap.set("n", "<C-F6>", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
+	-- vim.keymap.set("n", "<C-F6>", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
 	vim.api.nvim_set_keymap('n', '<C-v>', '"+P', {noremap = true}) -- Paste normal mode
 	vim.api.nvim_set_keymap('v', '<C-v>', '"+P', {noremap = true}) -- Paste visual mode
 	vim.api.nvim_set_keymap('c', '<C-v>', '<C-R>+', {noremap = true}) -- Paste command mode
@@ -63,15 +63,15 @@ end
 
 -- toggle line nr
 vim.api.nvim_set_keymap('n', '<leader>rr', ':lua numbers()<CR>', { noremap = true, silent = true })
+
 --build
 vim.api.nvim_set_keymap('n', '<C-F5>', ':1TermExec cmd="make run"<CR>', { noremap = true, silent = true })
---vim.api.nvim_set_keymap('n', '<leader>t', ':ToggleTerm size=68 direction=vertical<CR> <ESC>:wincmd 1x<CR>', { noremap = true, silent = true})
 vim.api.nvim_set_keymap("n", "<leader>t", "<cmd>lua _wincmd1x_toggle()<CR>", {noremap = true, silent = true})
+	--vim.api.nvim_set_keymap('n', '<leader>t', ':ToggleTerm size=68 direction=vertical<CR> <ESC>:wincmd 1x<CR>', { noremap = true, silent = true})
 
 vim.api.nvim_set_keymap("n", "<ESC>", ":noh<CR>", {noremap=true, silent=true})
---vim.api.nvim_set_keymap("n","<leader>vv",":Ex<CR>", {noremap=true, silent=true})
 vim.api.nvim_set_keymap("n","<leader>vv",":Oil<CR>", {noremap=true, silent=true})
---vim.api.nvim_set_keymap("n","<leader>vv",":Oil --float <CR>", {noremap=true, silent=true})
+vim.api.nvim_set_keymap("n","<leader>vo",":Oil --float <CR>", {noremap=true, silent=true})
 
 --comment line
 vim.api.nvim_set_keymap("n","<leader>/","0i// <ESC>", {noremap=true, silent=true})
@@ -105,18 +105,20 @@ vim.api.nvim_set_keymap("n","<leader>vs",":vs<CR>", {noremap=true, silent=true})
 vim.api.nvim_set_keymap("n","<leader>vh",":sp<CR>", {noremap=true, silent=true})
 
 --center screen after scroll or search
-vim.api.nvim_set_keymap('n', '<C-d>', '<C-d>M', { noremap = true })
-vim.api.nvim_set_keymap('n', '<C-u>', '<C-u>M', { noremap = true })
-vim.api.nvim_set_keymap('v', '<C-d>', '<C-d>M', { noremap = true })
-vim.api.nvim_set_keymap('v', '<C-u>', '<C-u>M', { noremap = true })
+vim.api.nvim_set_keymap('n', '<C-d>', '<C-d>zz', { noremap = true })
+vim.api.nvim_set_keymap('n', '<C-u>', '<C-u>zz', { noremap = true })
+vim.api.nvim_set_keymap('v', '<C-d>', '<C-d>zz', { noremap = true })
+vim.api.nvim_set_keymap('v', '<C-u>', '<C-u>zz', { noremap = true })
+vim.api.nvim_set_keymap('n', '{', '{zz', { noremap = true })
+vim.api.nvim_set_keymap('n', '}', '}zz', { noremap = true })
+vim.api.nvim_set_keymap('n', 'n', 'nzz', { noremap = true })
+vim.api.nvim_set_keymap('n', 'N', 'Nzz', { noremap = true })
 
 --navigate/delete buffer, navigate/close tab
-vim.api.nvim_set_keymap('n', '<leader><M-1>', ':bprevious<CR>:lua print("b: " ..vim.api.nvim_get_current_buf())<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader><M-2>', ':bnext<CR>:lua print("b: " ..vim.api.nvim_get_current_buf())<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>bd', ':bn<bar>bd #<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>bp', ':bn<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>bn', ':bp<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>j', ':Telescope jumplist<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>bn', ':bn<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>bm', ':bp<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>k', ':Telescope jumplist<CR>', { noremap = true, silent = true })
 
 vim.api.nvim_set_keymap('n', '<leader>l', ':TroubleToggle<CR>', { noremap = true, silent = true})
 vim.api.nvim_set_keymap('n', 'gy', 'gt', { noremap = true })
@@ -125,16 +127,13 @@ vim.api.nvim_set_keymap('n', 'gY', 'gT', { noremap = true })
 vim.api.nvim_set_keymap('n', '<leader>w', ':wa<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>qq', ':QA<CR>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<leader>a', ':q<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>x', ':xa<CR>', { noremap = true, silent = true })
 
---old
---vim.api.nvim_set_keymap ('n', '<F7>', ':make<CR>', { noremap = true, silent = true })
---vim.api.nvim_set_keymap ('n', '<F41>', ':make && ./cub3d<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>dd', [[:lua ToggleDiagnostics()<CR>]], {noremap = true, silent = true})
+vim.api.nvim_set_keymap('n', '<F5>', [[<Cmd>lua add_to_header_file()<CR>]], { noremap = true, silent = true })
 
 
 
-
--- functions
+----------------------- functions
 
 function mycd()
 	local current_d = vim.fn.expand('%:p:h')
@@ -152,9 +151,6 @@ function ToggleDiagnostics()
     end
     diagnostic_state = not diagnostic_state
 end
-
-vim.api.nvim_set_keymap('n', '<leader>dd', [[:lua ToggleDiagnostics()<CR>]], {noremap = true, silent = true})
-vim.api.nvim_set_keymap('n', '<F5>', [[<Cmd>lua add_to_header_file()<CR>]], { noremap = true, silent = true })
 
 local saved_views = {}
 
@@ -191,20 +187,6 @@ function add_to_header_file()
   restore_win_view()
 end
 
--- toggle for copilot
--- this is the command : Copilot disable and Copilot enable
-vim.g.toggle_copilot = true
-function copilot_toggle()
-	if vim.g.toggle_copilot == true then
-		require("copilot.suggestion").toggle_auto_trigger()
-		print("Copilot enabled")
-	else
-		require("copilot.suggestion").toggle_auto_trigger()
-		print("Copilot disabled")
-	end
-	vim.g.toggle_copilot = not vim.g.toggle_copilot
-end
-
 --  local h_file = io.open("example.h", "a")
 --      if h_file then  -- Check if file is opened successfully
 --		print("Adding prototype to" result )
@@ -213,5 +195,3 @@ end
 --      else
 --        print("Could not open header file.")
 --  end
-
-
