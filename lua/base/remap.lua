@@ -68,7 +68,7 @@ vim.api.nvim_set_keymap('n', '<leader>;', ':', { noremap = true})
 vim.api.nvim_set_keymap('n', '<leader>rr', ':lua numbers()<CR>', { noremap = true, silent = true })
 
 --BUILD
-vim.api.nvim_set_keymap('n', '<C-F5>', ':1TermExec cmd="make run"<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<C-F5>', ':1TermExec cmd="make"<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<leader>t", "<cmd>lua _wincmd1x_toggle()<CR>", {noremap = true, silent = true})
 
 vim.api.nvim_set_keymap("n", "<ESC>", ":noh<CR>", {noremap=true, silent=true})
@@ -135,12 +135,43 @@ vim.api.nvim_set_keymap('n', '<F5>', [[<Cmd>lua add_to_header_file()<CR>]], { no
 
 
 
------------------------ functions
 
+
+---------------------------------- functions -----------------------------------
+
+-- Function to get the string from the cmd.txt file.
+function get_cmd_project()
+	local cwd = vim.fn.getcwd()
+	local file_path = cwd .. '/cmd.txt'
+	local file = io.open(file_path, "r")
+	if not file then return nil end
+	local command = file:read("*all")
+	file:close()
+	return '"' .. command:gsub("\n", "") .. '"'
+end
+
+-- Function to be called
+function intermediate()
+	local command = get_cmd_project()
+	if command then
+		vim.cmd("1TermExec cmd=" .. command)
+		print("1TermExec cmd=" .. command)
+	else
+		print("Command file not found or empty")
+	end
+end
+
+-- Set the mapping ^^^^^
+vim.api.nvim_set_keymap('n', '<C-F6>', ':lua intermediate()<CR>', { noremap = true, silent = true })
+
+-- CD function
 function mycd()
 	local current_d = vim.fn.expand('%:p:h')
 	vim.cmd('cd ' .. current_d)
 end
+
+
+-- Diagnostics
 
 local diagnostic_state = true
 
@@ -153,6 +184,8 @@ function ToggleDiagnostics()
     end
     diagnostic_state = not diagnostic_state
 end
+
+-- Saving view
 
 local saved_views = {}
 
@@ -167,6 +200,8 @@ local function restore_win_view()
         vim.fn.winrestview(saved_views[current_buf])
     end
 end
+
+-- header !
 
 function add_to_header_file()
   local line = vim.fn.getline('.')
