@@ -1,90 +1,63 @@
 return {
---	{
---		'zbirenbaum/copilot.lua',
---		cmd = "Copilot",
---		event = "InsertEnter",
---		config = function()
---			require("copilot").setup({})
---		end,
---	},
---	'gennaro-tedesco/nvim-peekup',
---	'junegunn/vim-peekaboo',
---	'cacharle/c_formatter_42.vim',
+	-- 'cacharle/c_formatter_42.vim',
 	-- 'tpope/vim-commentary',
-	-- 'ThePrimeagen/git-worktree.nvim',
-	'tpope/vim-dadbod',
+	-- 'tpope/vim-dadbod',
+	'chentoast/marks.nvim',
 	'tpope/vim-dispatch',
 	'tpope/vim-eunuch',
 	'tomtom/tcomment_vim',
+
+	'nvim-treesitter/nvim-treesitter',
 	'nvim-treesitter/nvim-treesitter-textobjects',
+	'nvim-treesitter/nvim-treesitter-context',
+	'nvim-treesitter/playground',
+	"nvim-lua/plenary.nvim",
+
 	'nvim-pack/nvim-spectre',
-	'rebelot/kanagawa.nvim',
-	'lewis6991/gitsigns.nvim',
 	'christoomey/vim-tmux-navigator',
 	'nvim-tree/nvim-web-devicons',
 	'folke/neodev.nvim',
-	"nvim-lua/plenary.nvim",
-	'nvim-treesitter/nvim-treesitter-context',
-	'nvim-treesitter/playground',
 	'mbbill/undotree',
 	'tpope/vim-fugitive',
+	'lewis6991/gitsigns.nvim',
+
+	'windwp/nvim-autopairs',
 	'neovim/nvim-lspconfig',
 	'williamboman/mason.nvim',
 	'williamboman/mason-lspconfig.nvim',
 	'hrsh7th/nvim-cmp',
 	'hrsh7th/cmp-nvim-lsp',
-	"Diogo-ss/42-header.nvim",
-	'hrsh7th/cmp-nvim-lsp-signature-help',
+	-- 'hrsh7th/cmp-nvim-lsp-signature-help',
+	{"AckslD/nvim-neoclip.lua", dependencies = {{'nvim-telescope/telescope.nvim'} }, config = function() require('neoclip').setup()end},
   	{ 'stevearc/oil.nvim', config = function() require("oil").setup()end},
-	{ 'nvim-treesitter/nvim-treesitter'},
-	{ 'catppuccin/nvim', as = "catppuccin" },
   	{'akinsho/toggleterm.nvim', version = "*", config = true},
-	{
-		"blazkowolf/gruber-darker.nvim",
+	"Diogo-ss/42-header.nvim",
+
+	-- { 'echasnovski/mini.completion', version = '*' },
+
+	-- 'rebelot/kanagawa.nvim',
+	-- { 'catppuccin/nvim', as = "catppuccin" },
+	{ "blazkowolf/gruber-darker.nvim",
 		opts = {
 			  bold = false,
-			  invert = {
-				signs = false,
-				tabline = true,
-				visual = false,
-			  },
-			  italic = {
-				strings = false,
-				comments = false,
-				operators = false,
-				folds = true,
-			  },
+			  invert = { signs = false, tabline = true, visual = false, },
+			  italic = { strings = false, comments = false, operators = false, folds = true, },
 			  undercurl = true,
 			  underline = true,
 		}
 	},
-	{
-		'folke/todo-comments.nvim',
-		dependencies = { {'nvim-lua/plenary.nvim' } },
-		opts = {}
-	},
-	{
-		'nvim-telescope/telescope.nvim', tag = '0.1.2',
-		-- or                            , branch = '0.1.x',
-		dependencies = { {'nvim-lua/plenary.nvim'} }
-	},
-	{
-		'kylechui/nvim-surround',
-		version = "*", -- Use for stability; omit to use `main` branch for the latest features
-		config = function()
-		require("nvim-surround").setup()
-		end
-	},
+
+	{ 'folke/todo-comments.nvim', dependencies = { {'nvim-lua/plenary.nvim' } }, opts = {} },
+	{ 'nvim-telescope/telescope.nvim', tag = '0.1.2', dependencies = { {'nvim-lua/plenary.nvim'} } },
+	{ 'kylechui/nvim-surround', version = "*", config = function() require("nvim-surround").setup() end },
+
 	{
 		'Theprimeagen/harpoon',
 		branch = "harpoon2",
 		commit = "e76cb03",
 		dependencies = { { 'nvim-lua/plenary.nvim' } }
 	},
-	{
-		'windwp/nvim-autopairs',
---		config = function() require("nvim-autopairs").setup ({}) end
-	},
+
 	{
 		'VonHeikemen/lsp-zero.nvim',
 		branch = 'v2.x',
@@ -101,24 +74,4 @@ return {
 			{'saadparwaiz1/cmp_luasnip'},
 		}
 	},
-	--[[
-	{
-	  "ray-x/lsp_signature.nvim",
-	  event = "VeryLazy",
-	  opts = {},
-	  config = function(_, opts) require'lsp_signature'.setup(opts) end
-	},
-	--]]
-	--[[
-	{
-	"tversteeg/registers.nvim",
-		cmd = "Registers",
-		config = true,
-		keys = {
-				{ "\"",    mode = { "n", "v" } },
-				{ "<C-R>", mode = "i" }
-		},
-		name = "registers",
-	},
-	--]]
 }

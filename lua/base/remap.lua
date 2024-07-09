@@ -65,11 +65,12 @@ end
 vim.api.nvim_set_keymap('n', '<leader>;', ':', { noremap = true})
 
 -- toggle line nr
-vim.api.nvim_set_keymap('n', '<leader>rr', ':lua numbers()<CR>', { noremap = true, silent = true })
+-- vim.api.nvim_set_keymap('n', '<leader>rr', ':set rnu! | set nu!<CR>', { noremap = true, silent = true })
 
 --BUILD
 vim.api.nvim_set_keymap('n', '<C-F5>', ':1TermExec cmd="make"<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<leader>t", "<cmd>lua _wincmd1x_toggle()<CR>", {noremap = true, silent = true})
+vim.api.nvim_set_keymap("n", "<leader>tt", "<cmd>lua _wincmd1x_toggle()<CR>", {noremap = true, silent = true})
+vim.api.nvim_set_keymap("n", "<leader>ti", "<cmd>lua _wincmd2x_toggle()<CR>", {noremap = true, silent = true})
 
 vim.api.nvim_set_keymap("n", "<ESC>", ":noh<CR>", {noremap=true, silent=true})
 vim.api.nvim_set_keymap("n","<leader>vv", ":Oil<CR>", {noremap=true, silent=true})
@@ -122,7 +123,7 @@ vim.api.nvim_set_keymap('n', '<leader>bn', ':bn<CR>', { noremap = true, silent =
 vim.api.nvim_set_keymap('n', '<leader>bm', ':bp<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>k', ':Telescope jumplist<CR>', { noremap = true, silent = true })
 
-vim.api.nvim_set_keymap('n', '<leader>l', ':TroubleToggle<CR>', { noremap = true, silent = true})
+vim.api.nvim_set_keymap('n', '<leader>l', ':Trouble diagnostics toggle<CR>', { noremap = true, silent = true})
 vim.api.nvim_set_keymap('n', 'gy', 'gt', { noremap = true })
 vim.api.nvim_set_keymap('n', 'gY', 'gT', { noremap = true })
 

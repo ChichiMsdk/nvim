@@ -1,69 +1,3 @@
---[[
-local cfg = {
-	floating_window = false,
-	doc_lines   = 0,
-	hint_enable = true,
-	hint_prefix = " ",
-	hint_scheme = "String",
-	hint_inline = function() return false end,
-}  -- add your config here
-require "lsp_signature".setup(cfg)
---]]
-local vim = vim
-local lsp = require('lsp-zero').preset({
-	documentation_window = {
-		enable = true,
-	},
-	manage_nvim_cmp = {
-		set_format = true,
-		use_luasnip = true,
-		set_sources = 'recommended',
-	},
-})
-
-vim.opt.signcolumn = 'yes'
-
-vim.diagnostic.config({
-	virtual_text = false,
-	signs = true,
-	update_in_insert = false,
-	underline = false,
-	severity_sort = true,
-})
-
-vim.cmd[[set pumheight=5]]
-vim.cmd[[hi PmenuSel blend=0]]
-lsp.set_sign_icons({
-	error = " ",
-	warn = " ",
-	hint = " ",
-	info = " ",
-})
-
-lsp.on_attach(function (client, bufnr)
-	local opts = {buffer = bufnr, silent = true}
-	vim.keymap.set("n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
---	vim.keymap.set("n", "<leader>rn", "<cmd>lua vim.lsp.util.rename()<CR>", opts)
---	vim.keymap.set("n", "<leader>rn", "<cmd>lua vim.lsp.buf.references.rename()<CR>", opts)
---	vim.keymap.set("n", "<leader>rf", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
-	vim.keymap.set("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
-	vim.keymap.set("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
-	vim.keymap.set("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
-	vim.keymap.set("n", "<F29>", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
---	vim.keymap.set("n", "K", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
-	vim.keymap.set("n", "<leader>dn", function() vim.diagnostic.open_float() end, opts)
-end)
-
-lsp.configure('clangd', {
-	function()
-	print("clangd attached")
-	 cmd = {
-		  "clangd",
-		  "--offset_encoding=utf-8",
-	  }
-	end
-})
-
 require("neodev").setup({
 	{
 	  library = {
@@ -89,9 +23,68 @@ require("neodev").setup({
 	  pathStrict = true,
 	}
 })
+
+local vim = vim
+local lsp = require('lsp-zero').preset({
+	documentation_window = {
+		enable = true,
+	},
+	manage_nvim_cmp = {
+		set_format = true,
+		use_luasnip = true,
+		set_sources = 'recommended',
+	},
+})
+
+vim.cmd[[set pumheight=5]]
+vim.cmd[[hi PmenuSel blend=0]]
+
+vim.diagnostic.config({
+	virtual_text = false,
+	signs = true,
+	update_in_insert = false,
+	underline = false,
+	severity_sort = true,
+})
+
+vim.opt.signcolumn = 'yes'
+lsp.set_sign_icons({
+	error = " ",
+	warn = " ",
+	hint = " ",
+	info = " ",
+})
+
+lsp.on_attach(function (client, bufnr)
+	local opts = {buffer = bufnr, silent = true}
+	vim.keymap.set("n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
+	vim.keymap.set("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
+	vim.keymap.set("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
+	vim.keymap.set("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
+	vim.keymap.set("n", "<F29>", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
+	vim.keymap.set("n", "<leader>dn", function() vim.diagnostic.open_float() end, opts)
+end)
+
+require('lspconfig').clangd.setup({
+	 cmd = {
+		  "clangd",
+		  "--header-insertion=never",
+		  "--limit-references=0",
+		  "--background-index"
+	  },
+})
+
 lsp.setup()
 
 local cmp = require('cmp')
+local function next_itm()
+	if cmp.visible() then
+		cmp.select_next_item()
+	else
+		cmp.complete()
+	end
+end
+
 cmp.setup({
 	enabled = function()
 		-- disable completion in comments
@@ -104,6 +97,11 @@ cmp.setup({
 			and not context.in_syntax_group("Comment")
 		end
 	end,
+	mapping = {
+		['<C-n>'] = cmp.mapping(next_itm),
+		['<C-p>'] = cmp.mapping.select_prev_item(),
+		['<C-Space>'] = cmp.mapping.close(),
+	},
 	completion = {
 		autocomplete = false,
 	},
@@ -113,21 +111,16 @@ cmp.setup({
 	},
 	formatting = {
 		format = function(entry, vim_item)
-			vim_item.abbr = string.sub(vim_item.abbr, 1, 20)
+			vim_item.abbr = string.sub(vim_item.abbr, 1, 30)
 			return vim_item
 		end
 	},
 })
 
---cmp.event:on("menu_opened", function()
---  vim.b.copilot_suggestion_hidden = true
---end)
---cmp.event:on("menu_closed", function()
---  vim.b.copilot_suggestion_hidden = false
---end)
 
 local cmp_autopairs = require('nvim-autopairs.completion.cmp')
 cmp.event:on(
   'confirm_done',
   cmp_autopairs.on_confirm_done()
 )
+

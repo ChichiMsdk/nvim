@@ -2,8 +2,6 @@ require("base")
 --vim.g.loaded_netrwPlugin = 1
 -- set clipboard= using luascript
 --vim.cmd("set clipboard=")
-vim.g.peakaboo_window = 'horizontal botleft 30new'
-vim.g.peekaboo_compact = 1
 vim.cmd("tnoremap <Esc> <C-\\><C-n>")
 
 vim.g.clipboard = {
@@ -18,4 +16,4 @@ vim.g.clipboard = {
          },
          cache_enabled= 0,
       }
-vim.api.nvim_exec ('language en_US', true)
+vim.api.nvim_exec('language en_US', true)

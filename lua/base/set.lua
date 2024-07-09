@@ -1,7 +1,7 @@
 local o = vim.opt
 o.termguicolors = true
-o.nu= false
-o.relativenumber= false
+o.nu= true
+o.rnu= true
 o.tabstop= 4
 o.shiftwidth= 4
 o.wrap= false
@@ -15,12 +15,13 @@ vim.g.mapleader=" "
 vim.g.NERDTreeWinPos = "right"
 vim.g.numbers=false
 
-
-
-
 -- vim.api.nvim_buf_set_var(0, 'vim.g.numbers', false)
 -- vim.cmd[[autocmd InsertEnter * set nohlsearch]]
 -- vim.cmd[[autocmd InsertLeave * :set hlsearch]]
+vim.cmd[[set guicursor=n-sm:block,i-c-ci-v-ve:ver25,r-cr-o:hor20,a:blinkwait400-blinkoff500-blinkon500-Cursor/lCursor]]
+vim.cmd[[Gitsigns toggle_signs]]
+vim.cmd[[set shada=!,'100,<50,s10,h,rA:,rB:]]
+vim.cmd[[set fillchars=fold:\ ]]
 vim.cmd[[set foldmethod=indent]]
 vim.cmd[[set foldlevel=1100]]
 vim.cmd[[set title]]
@@ -55,28 +56,28 @@ vim.cmd[[autocmd InsertLeave * :lua nbrLeave()]]
 vim.cmd[[autocmd InsertEnter * :lua nbrEnter()]]
 
 function nbrEnter()
-	if vim.g.numbers == true then
+	-- if vim.g.numbers == true then
 		-- if vim.api.nvim_buf_get_var(0, 'vim.g.numbers') == true then
 		-- if vim.api.nvim_buf_get_var(vim.fn.bufnr('%'), 'vim.g.numbers') == true then
 			vim.cmd[[set norelativenumber]]
 		-- end
-	end
+	-- end
 end
 
 function nbrLeave()
-	if vim.g.numbers == true then
+	-- if vim.g.numbers == true then
 		-- if vim.api.nvim_buf_get_var(0, 'vim.g.numbers') == true then
 		-- if vim.api.nvim_buf_get_var(vim.fn.bufnr('%'), 'vim.g.numbers') == true then
 			vim.cmd[[set relativenumber]]
 		-- end
-	end
+	-- end
 end
 
 -- Function to dynamically set color column
 local function set_color_column()
     local colorcolumn_enabled = false
     for i = 1, vim.api.nvim_buf_line_count(0) do
-        if #vim.api.nvim_buf_get_lines(0, i - 1, i, false)[1] > 80 then
+        if #vim.api.nvim_buf_get_lines(0, i - 1, i, false)[1] > 90 then
             colorcolumn_enabled = true
             break
         end
