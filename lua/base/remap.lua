@@ -68,7 +68,8 @@ vim.api.nvim_set_keymap('n', '<leader>;', ':', { noremap = true})
 -- vim.api.nvim_set_keymap('n', '<leader>rr', ':set rnu! | set nu!<CR>', { noremap = true, silent = true })
 
 --BUILD
-vim.api.nvim_set_keymap('n', '<C-F5>', ':1TermExec cmd="make"<CR>', { noremap = true, silent = true })
+-- vim.api.nvim_set_keymap('n', '<C-F5>', ':1TermExec cmd="make"<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<C-F5>', ':Make<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<leader>tt", "<cmd>lua _wincmd1x_toggle()<CR>", {noremap = true, silent = true})
 vim.api.nvim_set_keymap("n", "<leader>ti", "<cmd>lua _wincmd2x_toggle()<CR>", {noremap = true, silent = true})
 
@@ -131,10 +132,8 @@ vim.api.nvim_set_keymap('n', '<leader>w', ':wa<CR>', { noremap = true, silent = 
 vim.api.nvim_set_keymap('n', '<leader>qq', ':QA<CR>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<leader>a', ':q<CR>', { noremap = true, silent = true })
 
-vim.api.nvim_set_keymap('n', '<leader>dd', [[:lua ToggleDiagnostics()<CR>]], {noremap = true, silent = true})
+vim.api.nvim_set_keymap('n', '<leader>dd', [[:lua vim.diagnostic.enable(not vim.diagnostic.is_enabled())<CR>]], {noremap = true, silent = true})
 vim.api.nvim_set_keymap('n', '<F5>', [[<Cmd>lua add_to_header_file()<CR>]], { noremap = true, silent = true })
-
-
 
 
 
@@ -174,16 +173,8 @@ end
 
 -- Diagnostics
 
-local diagnostic_state = true
-
 function ToggleDiagnostics()
-	local bufnr = vim.api.nvim_get_current_buf()
-	if diagnostic_state then
-		vim.diagnostic.disable(bufnr)
-    else
-        vim.diagnostic.enable(bufnr)
-    end
-    diagnostic_state = not diagnostic_state
+		vim.diagnostic.enable(not vim.diagnostic.is_enabled())
 end
 
 -- Saving view

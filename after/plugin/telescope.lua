@@ -23,13 +23,13 @@ require('telescope').setup{
 --			prompt_position = 'bottom',
 			horizontal = {
 				mirror = false,
-				preview_cutoff = 0,
+				preview_cutoff = 10,
 				preview_width = 90,
 				--preview_width = 0.80,
 			},
 			vertical = {
 				mirror = false,
-				preview_cutoff = 0,
+				preview_cutoff = 10,
 				preview_width = 90,
 				preview_height = 0.7,
 			},

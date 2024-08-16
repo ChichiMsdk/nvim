@@ -40,14 +40,14 @@ vim.cmd[[set pumheight=5]]
 vim.cmd[[hi PmenuSel blend=0]]
 
 vim.diagnostic.config({
-	virtual_text = false,
+	virtual_text = true,
 	signs = true,
 	update_in_insert = false,
-	underline = false,
+	underline = true,
 	severity_sort = true,
 })
 
-vim.opt.signcolumn = 'yes'
+vim.opt.signcolumn = 'no'
 lsp.set_sign_icons({
 	error = " ",
 	warn = " ",

@@ -3,9 +3,10 @@ local Terminal = require('toggleterm.terminal').Terminal
 local wincmd1x = Terminal:new({
 	on_open = function(term)
 		vim.cmd("stopinsert")
-		vim.cmd("startinsert!")
+		-- vim.cmd("startinsert!")
 	end,
-	hidden = true
+	hidden = true,
+	autochdir = true
 })
 
 --[[

@@ -20,6 +20,7 @@ vim.g.numbers=false
 -- vim.cmd[[autocmd InsertLeave * :set hlsearch]]
 vim.cmd[[set guicursor=n-sm:block,i-c-ci-v-ve:ver25,r-cr-o:hor20,a:blinkwait400-blinkoff500-blinkon500-Cursor/lCursor]]
 vim.cmd[[Gitsigns toggle_signs]]
+vim.cmd[[lua vim.diagnostic.enable(false)]]
 vim.cmd[[set shada=!,'100,<50,s10,h,rA:,rB:]]
 vim.cmd[[set fillchars=fold:\ ]]
 vim.cmd[[set foldmethod=indent]]
