@@ -2,6 +2,7 @@ vim.cmd.colorscheme "gruber-darker"
 
 vim.cmd[[hi Folded guibg=none]]
 vim.cmd[[hi Folded guifg=#8a8980]]
+vim.cmd[[hi Comment guifg=#8a8980]]
 vim.cmd[[hi @lsp.type.comment guifg=#8a8980]]
 vim.cmd[[hi LspSignatureActiveParameter guifg=#ffdd33 guibg=#453d41]]
 vim.cmd[[hi Cursor guifg=Black guibg=#9e95c7]]
