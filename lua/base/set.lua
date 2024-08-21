@@ -20,6 +20,7 @@ vim.g.numbers=false
 -- vim.cmd[[autocmd InsertLeave * :set hlsearch]]
 vim.cmd[[set guicursor=n-sm:block,i-c-ci-v-ve:ver25,r-cr-o:hor20,a:blinkwait400-blinkoff500-blinkon500-Cursor/lCursor]]
 vim.cmd[[Gitsigns toggle_signs]]
+vim.cmd[[lua vim.diagnostic.enable(false)]]
 vim.cmd[[set shada=!,'100,<50,s10,h,rA:,rB:]]
 vim.cmd[[set fillchars=fold:\ ]]
 vim.cmd[[set foldmethod=indent]]
@@ -34,7 +35,7 @@ vim.cmd[[set cindent]]
 -- vim.cmd[[set cursorline]]
 vim.cmd[[set undofile]]
 vim.cmd[[set undolevels=10000]]
-vim.cmd[[set undodir=/mnt/a/nvim/undodir]]
+vim.cmd[[set undodir=~/.config/nvim/undodir]]
 vim.cmd([[autocmd FileType *c* set formatoptions-=ro]])
 vim.cmd([[autocmd FileType *lua set formatoptions-=ro]])
 -- vim.cmd([[autocmd BufEnter * if winnr('$') == 1 | file | endif]])
