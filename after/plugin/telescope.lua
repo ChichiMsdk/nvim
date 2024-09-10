@@ -13,6 +13,9 @@ vim.keymap.set('n', '<leader>s', builtin.lsp_references, {})
 
 require('telescope').setup{
 	defaults = {
+		path_display = {
+			"absolute",
+		},
 		previewer = true,
 		file_previewer = require'telescope.previewers'.vim_buffer_cat.new,
 		grep_previewer = require'telescope.previewers'.vim_buffer_vimgrep.new,

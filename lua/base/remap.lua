@@ -15,10 +15,10 @@ if vim.g.neovide then
 	vim.o.termguicolors = true
 	vim.o.termpastefilter = "BS,HT,ESC,DEL,C0,C1"
 	vim.g.neovide_input_use_logo = true
-	vim.o.guifont = "JetBrainsMonoNL Nerd Font Mono:h13"
+	vim.o.guifont = "JetBrainsMonoNL Nerd Font Mono:h12.9"
 	-- vim.o.guifont = "GeistMono Nerd Font Mono:h16:#e-subpixelantialias:#h-none"
 	vim.g.neovide_scale_factor = 1
-	vim.opt.linespace = 2
+	vim.opt.linespace = 0
 	vim.g.neovide_hide_mouse_when_typing = true
 	vim.g.neovide_cursor_vfx_mode = ""
 	vim.g.neovide_remember_window_size = true
@@ -27,26 +27,20 @@ if vim.g.neovide then
 	vim.g.neovide_cursor_animate_command_line = false
 	vim.g.neovide_cursor_animate_in_insert_mode = true
 	vim.g.neovide_cursor_antialiasing = true
-	vim.g.neovide_refresh_rate = 144
+	vim.g.neovide_refresh_rate = 60
 	vim.g.neovide_cursor_animation_length = 0.05
 	vim.g.neovide_cursor_trail_size = 0.3
 	vim.g.neovide_refresh_rate_idle = 5
 	vim.g.neovide_fullscreen = false
 
---	if (vim.fn.has "win32") == 1 then
---		local_vim.opt.shell = "pwsh"
---		local_vim.opt.shellcmdflag =
---		  "-NoProfile -NoLogo -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.UTF8Encoding]::new();$PSDefaultParameterValues['Out-File:Encoding']='utf8';$PSStyle.OutputRendering = [System.Management.Automation.OutputRendering]::PlainText;"
---		local_vim.opt.shellredir = '2>&1 | %%{ "$_" } | Out-File %s; exit $LastExitCode'
---		local_vim.opt.shellpipe = '2>&1 | %%{ "$_" } | Tee-Object %s; exit $LastExitCode'
---		local_vim.opt.shellquote = ""
---		local_vim.opt.shellxquote = ""
---	end
+	vim.g.neovide_padding_top = 0
+	vim.g.neovide_padding_bottom = 0
+	vim.g.neovide_padding_right = 0
+	vim.g.neovide_padding_left = 0
 
 	vim.cmd[[set shell=pwsh.exe]]
 	vim.cmd[[set shellxquote=]]
 	vim.cmd[[let &shellcmdflag = "-NoProfile -NoLogo -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.UTF8Encoding]::new();$PSDefaultParameterValues['Out-File:Encoding']='utf8';$PSStyle.OutputRendering = [System.Management.Automation.OutputRendering]::PlainText;"]]
--- 	vim.cmd[[let &shellcmdflag = '-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command ']]
 	vim.cmd[[let &shellquote   = '']]
 	vim.cmd[[let &shellpipe    = '| Out-File -Encoding UTF8 %s']]
 	vim.cmd[[let &shellredir   = '| Out-File -Encoding UTF8 %s']]
@@ -74,8 +68,8 @@ vim.api.nvim_set_keymap("n", "<leader>tt", "<cmd>lua _wincmd1x_toggle()<CR>", {n
 vim.api.nvim_set_keymap("n", "<leader>ti", "<cmd>lua _wincmd2x_toggle()<CR>", {noremap = true, silent = true})
 
 vim.api.nvim_set_keymap("n", "<ESC>", ":noh<CR>", {noremap=true, silent=true})
-vim.api.nvim_set_keymap("n","<leader>vv", ":Oil<CR>", {noremap=true, silent=true})
-vim.api.nvim_set_keymap("n","<leader>vo", ":Oil --float <CR>", {noremap=true, silent=true})
+vim.api.nvim_set_keymap("n","<leader>vo", ":Oil<CR>", {noremap=true, silent=true})
+vim.api.nvim_set_keymap("n","<leader>vv", ":Oil --float <CR>", {noremap=true, silent=true})
 
 --comment line
 vim.api.nvim_set_keymap("n","<leader>/", ":TComment<CR>", {noremap=true, silent=true})
