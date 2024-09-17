@@ -21,8 +21,8 @@ vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
   }
 )
 
-vim.keymap.set({'i', 'n', 'v'}, '<C-F>', function() luasnip.jump(1) end, {noremap=true, silent=true})
-vim.keymap.set({'i', 'n', 'v'}, '<C-S-F>', function() luasnip.jump(-1) end, {noremap=true, silent=true})
+vim.keymap.set({'i'}, '<C-F>', function() luasnip.jump(1) end, {noremap=true, silent=true})
+vim.keymap.set({'i'}, '<C-S-F>', function() luasnip.jump(-1) end, {noremap=true, silent=true})
 vim.keymap.set({'i', 'n', 'v'}, '<C-s>', function() vim.lsp.buf.signature_help() end, {noremap=true, silent=true})
 
 function close_floating()
