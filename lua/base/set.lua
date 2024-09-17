@@ -1,5 +1,6 @@
 local o = vim.opt
 o.termguicolors = true
+o.spr = true
 o.nu= true
 o.rnu= true
 o.tabstop= 4

@@ -120,7 +120,7 @@ vim.api.nvim_set_keymap('n', 'n', 'nzz', { noremap = true })
 vim.api.nvim_set_keymap('n', 'N', 'Nzz', { noremap = true })
 
 --navigate/delete buffer, navigate/close tab
-vim.api.nvim_set_keymap('n', '<leader>bd', ':bn<bar>bd #<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>bd', ':b#<bar>bd #<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>bn', ':bn<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>bm', ':bp<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>k', ':Telescope jumplist<CR>', { noremap = true, silent = true })
@@ -135,35 +135,14 @@ vim.api.nvim_set_keymap('n', '<leader>a', ':q<CR>', { noremap = true, silent = t
 
 vim.api.nvim_set_keymap('n', '<leader>dd', [[:lua vim.diagnostic.enable(not vim.diagnostic.is_enabled())<CR>]],
 	{ noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<F5>', [[<Cmd>lua add_to_header_file()<CR>]], { noremap = true, silent = true })
+
+-- vim.api.nvim_set_keymap('n', '<F5>', [[<Cmd>lua add_to_header_file()<CR>]], { noremap = true, silent = true })
 
 
 
 ---------------------------------- functions -----------------------------------
 
--- Function to get the string from the cmd.txt file.
-function get_cmd_project()
-	local cwd = vim.fn.getcwd()
-	local file_path = cwd .. '/cmd.txt'
-	local file = io.open(file_path, "r")
-	if not file then return nil end
-	local command = file:read("*all")
-	file:close()
-	return '"' .. command:gsub("\n", "") .. '"'
-end
-
--- Function to be called
-function intermediate()
-	local command = get_cmd_project()
-	if command then
-		vim.cmd("1TermExec cmd=" .. command)
-		print("1TermExec cmd=" .. command)
-	else
-		print("Command file not found or empty")
-	end
-end
-
--- Set the mapping ^^^^^
+-- Set the mapping ^^^^^ toggle_term.lua
 vim.api.nvim_set_keymap('n', '<C-F6>', ':lua intermediate()<CR>', { noremap = true, silent = true })
 
 -- CD function
