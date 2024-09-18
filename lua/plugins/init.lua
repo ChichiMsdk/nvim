@@ -2,6 +2,7 @@ return {
 	-- 'cacharle/c_formatter_42.vim',
 	-- 'tpope/vim-commentary',
 	-- 'tpope/vim-dadbod',
+	'navarasu/onedark.nvim',
 	'chentoast/marks.nvim',
 	'tpope/vim-dispatch',
 	'tpope/vim-eunuch',
@@ -29,8 +30,6 @@ return {
 	'williamboman/mason-lspconfig.nvim',
 	'hrsh7th/nvim-cmp',
 	'hrsh7th/cmp-nvim-lsp',
-	-- 'hrsh7th/cmp-nvim-lsp-signature-help',
-	{"AckslD/nvim-neoclip.lua", dependencies = {{'nvim-telescope/telescope.nvim'} }, config = function() require('neoclip').setup()end},
   	{ 'stevearc/oil.nvim', config = function() require("oil").setup()end},
   	{'akinsho/toggleterm.nvim', version = "*", config = true},
 	"Diogo-ss/42-header.nvim",
@@ -59,6 +58,7 @@ return {
 	},
 
 	{ 'folke/todo-comments.nvim', dependencies = { {'nvim-lua/plenary.nvim' } }, opts = {} },
+	{"AckslD/nvim-neoclip.lua", dependencies = {{'nvim-telescope/telescope.nvim'}}},
 	{ 'nvim-telescope/telescope.nvim', tag = '0.1.2', dependencies = { {'nvim-lua/plenary.nvim'} } },
 	{ 'kylechui/nvim-surround', version = "*", config = function() require("nvim-surround").setup() end },
 

@@ -1,5 +1,6 @@
 local o = vim.opt
 o.termguicolors = true
+o.spr = true
 o.nu= true
 o.rnu= true
 o.tabstop= 4
@@ -18,6 +19,7 @@ vim.g.numbers=false
 -- vim.api.nvim_buf_set_var(0, 'vim.g.numbers', false)
 -- vim.cmd[[autocmd InsertEnter * set nohlsearch]]
 -- vim.cmd[[autocmd InsertLeave * :set hlsearch]]
+vim.cmd[[set statusline=%<%f\ %h%m%r%{FugitiveStatusline()}%=%-14.(%l,%c%V%)\ %P]]
 vim.cmd[[set guicursor=n-sm:block,i-c-ci-v-ve:ver25,r-cr-o:hor20,a:blinkwait400-blinkoff500-blinkon500-Cursor/lCursor]]
 vim.cmd[[Gitsigns toggle_signs]]
 vim.cmd[[lua vim.diagnostic.enable(false)]]
@@ -79,14 +81,14 @@ end
 local function set_color_column()
     local colorcolumn_enabled = false
     for i = 1, vim.api.nvim_buf_line_count(0) do
-        if #vim.api.nvim_buf_get_lines(0, i - 1, i, false)[1] > 90 then
+        if #vim.api.nvim_buf_get_lines(0, i - 1, i, false)[1] > 120 then
             colorcolumn_enabled = true
             break
         end
     end
 
     if colorcolumn_enabled then
-        vim.wo.colorcolumn = "81"
+        vim.wo.colorcolumn = "120"
     else
         vim.wo.colorcolumn = ""
     end

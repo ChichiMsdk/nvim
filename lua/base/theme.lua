@@ -16,16 +16,21 @@ vim.cmd[[hi Cursor guifg=Black guibg=#9e95c7]]
 vim.cmd[[hi link @lsp.type.class GruberDarkerQuartz]]
 vim.cmd[[hi link @lsp.type.type GruberDarkerQuartz]]
 vim.cmd[[hi NormalFloat guibg=GruberDarkerBg0]]
-vim.cmd[[hi TodoBgTODO gui=bold guifg=#989898 guibg=#1434A4]]
-vim.cmd[[hi TodoFgTODO guifg=#6495ED]]
+--vim.cmd[[hi TodoBgTODO gui=bold guifg=#989898 guibg=#1434A4]]
+--vim.cmd[[hi TodoFgTODO guifg=#6495ED]]
 
 --[[
 TodoBgTODO     xxx gui=bold guifg=#181818 guibg=#73d936
 TodoFgTODO     xxx guifg=#73d936
 --]]
+-- used to be guibg=181818
+vim.cmd[[hi Normal guifg=#ffffff]]
+vim.cmd[[hi TodobgTODO gui=bold guifg=black guibg=#6f8faf]]
+vim.cmd[[hi TodofgTODO guifg=#6f8faf]]
 
 vim.cmd[[set laststatus=2]]
 vim.cmd[[set cmdheight=1]]
 -- vim.cmd[[set winbar=%<%f\ %h%m%r]]
 -- vim.cmd[[hi WinBar guibg=#1d1d1d guifg=#ffffff cterm=none gui=none]]
 -- vim.cmd[[hi WinBarNC cterm=none gui=none]]
+

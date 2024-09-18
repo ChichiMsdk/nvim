@@ -12,6 +12,9 @@ vim.keymap.set('n', '<leader>s', builtin.lsp_references, {})
 
 require('telescope').setup {
 	defaults = {
+		path_display = {
+			"absolute",
+		},
 		previewer = true,
 		path_display = {
 			"absolute",
