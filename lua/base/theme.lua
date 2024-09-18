@@ -1,3 +1,10 @@
+
+
+--[[
+vim.cmd[[set background=light]]
+vim.cmd.colorscheme "PaperColor"
+--]]
+vim.cmd[[set background=dark]]
 vim.cmd.colorscheme "gruber-darker"
 
 vim.cmd[[hi Folded guibg=none]]
@@ -9,7 +16,13 @@ vim.cmd[[hi Cursor guifg=Black guibg=#9e95c7]]
 vim.cmd[[hi link @lsp.type.class GruberDarkerQuartz]]
 vim.cmd[[hi link @lsp.type.type GruberDarkerQuartz]]
 vim.cmd[[hi NormalFloat guibg=GruberDarkerBg0]]
--- vim.cmd[[hi TodoBgTODO guibg=#d95d9e]]
+vim.cmd[[hi TodoBgTODO gui=bold guifg=#989898 guibg=#1434A4]]
+vim.cmd[[hi TodoFgTODO guifg=#6495ED]]
+
+--[[
+TodoBgTODO     xxx gui=bold guifg=#181818 guibg=#73d936
+TodoFgTODO     xxx guifg=#73d936
+--]]
 
 vim.cmd[[set laststatus=2]]
 vim.cmd[[set cmdheight=1]]

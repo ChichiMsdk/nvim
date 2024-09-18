@@ -10,10 +10,12 @@ vim.keymap.set('n', '<leader>j', builtin.live_grep, {})
 vim.keymap.set('n', '<leader>bb', builtin.buffers, {})
 vim.keymap.set('n', '<leader>s', builtin.lsp_references, {})
 
-
-require('telescope').setup{
+require('telescope').setup {
 	defaults = {
 		previewer = true,
+		path_display = {
+			"absolute",
+		},
 		file_previewer = require'telescope.previewers'.vim_buffer_cat.new,
 		grep_previewer = require'telescope.previewers'.vim_buffer_vimgrep.new,
 		qflist_previewer = require'telescope.previewers'.vim_buffer_qflist.new,
@@ -41,6 +43,7 @@ require('telescope').setup{
 		},
 	},
 }
+
 require('telescope').setup{
   defaults = {
     mappings = {

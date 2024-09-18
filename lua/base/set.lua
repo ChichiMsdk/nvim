@@ -38,6 +38,7 @@ vim.cmd[[set undolevels=10000]]
 vim.cmd[[set undodir=~/.config/nvim/undodir]]
 vim.cmd([[autocmd FileType *c* set formatoptions-=ro]])
 vim.cmd([[autocmd FileType *lua set formatoptions-=ro]])
+vim.cmd([[autocmd VimLeave * set guicursor=a:ver25-blinkon0]])
 -- vim.cmd([[autocmd BufEnter * if winnr('$') == 1 | file | endif]])
 -- vim.cmd([[autocmd! BufWinEnter * :file]])
 

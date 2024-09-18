@@ -6,6 +6,8 @@ return {
 	'tpope/vim-dispatch',
 	'tpope/vim-eunuch',
 	'tomtom/tcomment_vim',
+	'NLKNguyen/papercolor-theme',
+	'nil70n/floating-help',
 
 	'nvim-treesitter/nvim-treesitter',
 	'nvim-treesitter/nvim-treesitter-textobjects',
@@ -32,6 +34,15 @@ return {
   	{ 'stevearc/oil.nvim', config = function() require("oil").setup()end},
   	{'akinsho/toggleterm.nvim', version = "*", config = true},
 	"Diogo-ss/42-header.nvim",
+    --[[
+	{
+		"otavioschwanck/arrow.nvim",
+		opts = {
+			show_icons = true,
+			leader_key = '<space>', -- Recommended to be a single key
+		}
+	},
+    --]]
 
 	-- { 'echasnovski/mini.completion', version = '*' },
 

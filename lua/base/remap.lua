@@ -52,8 +52,9 @@ vim.api.nvim_set_keymap('n', '<leader>;', ':', { noremap = true})
 if vim.g.neovide then
 	vim.api.nvim_set_keymap('n', '<C-F5>', ':Make<CR>', { noremap = true, silent = true })
 else
-	vim.api.nvim_set_keymap('n', '<C-F29>', ':Make<CR>', { noremap = true, silent = true })
+	vim.api.nvim_set_keymap('n', '<F29>', ':Make<CR>', { noremap = true, silent = true })
 end
+
 vim.api.nvim_set_keymap("n", "<leader>tt", "<cmd>lua _wincmd1x_toggle()<CR>", {noremap = true, silent = true})
 vim.api.nvim_set_keymap("n", "<leader>ti", "<cmd>lua _wincmd2x_toggle()<CR>", {noremap = true, silent = true})
 
@@ -149,7 +150,7 @@ end
 if vim.g.neovide then
 	vim.api.nvim_set_keymap('n', '<C-F6>', ':lua intermediate()<CR>', { noremap = true, silent = true })
 else
-	vim.api.nvim_set_keymap('n', '<C-F30>', ':lua intermediate()<CR>', { noremap = true, silent = true })
+	vim.api.nvim_set_keymap('n', '<F30>', ':lua intermediate()<CR>', { noremap = true, silent = true })
 end
 
 -- CD function
