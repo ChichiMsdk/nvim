@@ -9,6 +9,12 @@ vim.cmd[[hi Cursor guifg=Black guibg=#9e95c7]]
 vim.cmd[[hi link @lsp.type.class GruberDarkerQuartz]]
 vim.cmd[[hi link @lsp.type.type GruberDarkerQuartz]]
 vim.cmd[[hi NormalFloat guibg=GruberDarkerBg0]]
+vim.cmd[[hi QuickFixLine guibg=#212121]]
+vim.cmd[[hi Cursor guifg=Black guibg=#e4e4ef]]
+
+vim.cmd[[hi! link MatchParen Visual]]
+
+vim.cmd[[hi @property guifg=#7a97a6]]
 -- used to be guibg=181818
 vim.cmd[[hi Normal guifg=#ffffff]]
 vim.cmd[[hi TodobgTODO gui=bold guifg=black guibg=#6f8faf]]

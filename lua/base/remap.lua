@@ -10,8 +10,11 @@ if vim.g.neovide then
 		vim.g.neovide_scale_factor = vim.g.neovide_scale_factor * delta
 	end
 
-	vim.g.neovide_scroll_animation_length = 0.2
+	vim.g.neovide_scroll_animation_length = 0.1
 	vim.g.neovide_scroll_animation_far_lines = 0
+	vim.g.neovide_position_animation_length = 0.1
+	-- vim.g.neovide_position_animation_length = 0.15
+
 	vim.o.termguicolors = true
 	vim.o.termpastefilter = "BS,HT,ESC,DEL,C0,C1"
 	vim.g.neovide_input_use_logo = true
@@ -22,14 +25,14 @@ if vim.g.neovide then
 	vim.g.neovide_hide_mouse_when_typing = true
 	vim.g.neovide_cursor_vfx_mode = ""
 	vim.g.neovide_remember_window_size = true
-	vim.g.neovide_no_idle = false
+	vim.g.neovide_no_idle = true
 	vim.g.neovide_confirm_quit = false
 	vim.g.neovide_cursor_animate_command_line = false
 	vim.g.neovide_cursor_animate_in_insert_mode = true
 	vim.g.neovide_cursor_antialiasing = true
 	vim.g.neovide_refresh_rate = 60
-	vim.g.neovide_cursor_animation_length = 0.05
-	vim.g.neovide_cursor_trail_size = 0.3
+	vim.g.neovide_cursor_animation_length = 0.03
+	vim.g.neovide_cursor_trail_size = 0.0
 	vim.g.neovide_refresh_rate_idle = 5
 	vim.g.neovide_fullscreen = false
 
@@ -120,7 +123,8 @@ vim.api.nvim_set_keymap('n', 'n', 'nzz', { noremap = true })
 vim.api.nvim_set_keymap('n', 'N', 'Nzz', { noremap = true })
 
 --navigate/delete buffer, navigate/close tab
-vim.api.nvim_set_keymap('n', '<leader>bd', ':b#<bar>bd #<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>bd', ':bn<bar>bd #<CR>', { noremap = true, silent = true })
+-- vim.api.nvim_set_keymap('n', '<leader>bd', ':b#<bar>bd #<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>bn', ':bn<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>bm', ':bp<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>k', ':Telescope jumplist<CR>', { noremap = true, silent = true })
@@ -133,8 +137,18 @@ vim.api.nvim_set_keymap('n', '<leader>w', ':wa<CR>', { noremap = true, silent = 
 vim.api.nvim_set_keymap('n', '<leader>qq', ':QA<CR>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<leader>a', ':q<CR>', { noremap = true, silent = true })
 
-vim.api.nvim_set_keymap('n', '<leader>dd', [[:lua vim.diagnostic.enable(not vim.diagnostic.is_enabled())<CR>]],
+--vim.api.nvim_set_keymap('n', '<leader>dd', [[:lua vim.diagnostic.enable(not vim.diagnostic.is_enabled())<CR>]], 
+--{ noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>dd', [[:lua diag_toggle()<CR>]],
 	{ noremap = true, silent = true })
+
+function diag_toggle()
+	local is = vim.diagnostic.is_enabled()
+	vim.diagnostic.enable(not is)
+	local color = not is and "String" or "DiagnosticError"
+	local status = not is and "Enabled" or "Disabled"
+    vim.api.nvim_echo({{ "Diagnostics: ", "Normal" }, { status, color }}, true, {})
+end
 
 -- vim.api.nvim_set_keymap('n', '<F5>', [[<Cmd>lua add_to_header_file()<CR>]], { noremap = true, silent = true })
 

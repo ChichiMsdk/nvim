@@ -13,8 +13,21 @@ vim.keymap.set('n', '<leader>s', builtin.lsp_references, {})
 
 require('telescope').setup{
 	defaults = {
+		vimgrep_arguments = {
+			'rg',
+			'--color=never',
+			'--no-heading',
+			'--with-filename',
+			'--line-number',
+			'--column',
+			'--smart-case',
+			'--ignore-file',
+			'.gitignore',
+			'--ignore-file',
+			'.ignore'
+		},
 		path_display = {
-			"absolute",
+			"relative",
 		},
 		previewer = true,
 		file_previewer = require'telescope.previewers'.vim_buffer_cat.new,
@@ -25,7 +38,7 @@ require('telescope').setup{
 		layout_config = {
 --			prompt_position = 'bottom',
 			horizontal = {
-				mirror = false,
+				mirror = true,
 				preview_cutoff = 10,
 				preview_width = 90,
 				--preview_width = 0.80,
@@ -40,7 +53,6 @@ require('telescope').setup{
 				flip_columns = 110,
 			},
 			height = 0.90,
-			width = 100,
 		},
 	},
 }

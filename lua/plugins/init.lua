@@ -2,6 +2,7 @@ return {
 	-- 'cacharle/c_formatter_42.vim',
 	-- 'tpope/vim-commentary',
 	-- 'tpope/vim-dadbod',
+	{"shortcuts/no-neck-pain.nvim", version = "*"},
 	'navarasu/onedark.nvim',
 	'chentoast/marks.nvim',
 	'tpope/vim-dispatch',
