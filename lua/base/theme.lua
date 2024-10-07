@@ -2,7 +2,6 @@
 
 --[[
 vim.cmd[[set background=light]]
-vim.cmd.colorscheme "PaperColor"
 --]]
 vim.cmd[[set background=dark]]
 vim.cmd.colorscheme "gruber-darker"
@@ -16,6 +15,7 @@ vim.cmd[[hi Cursor guifg=Black guibg=#9e95c7]]
 vim.cmd[[hi link @lsp.type.class GruberDarkerQuartz]]
 vim.cmd[[hi link @lsp.type.type GruberDarkerQuartz]]
 vim.cmd[[hi NormalFloat guibg=GruberDarkerBg0]]
+vim.cmd[[hi @property guifg=#6ca9bf]] 
 --vim.cmd[[hi TodoBgTODO gui=bold guifg=#989898 guibg=#1434A4]]
 --vim.cmd[[hi TodoFgTODO guifg=#6495ED]]
 

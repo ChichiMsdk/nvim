@@ -2,13 +2,14 @@ return {
 	-- 'cacharle/c_formatter_42.vim',
 	-- 'tpope/vim-commentary',
 	-- 'tpope/vim-dadbod',
+	'mfussenegger/nvim-dap',
+	{"shortcuts/no-neck-pain.nvim", version = "*"},
 	'navarasu/onedark.nvim',
 	'chentoast/marks.nvim',
 	'tpope/vim-dispatch',
 	'tpope/vim-eunuch',
 	'tomtom/tcomment_vim',
 	'NLKNguyen/papercolor-theme',
-	'nil70n/floating-help',
 
 	'nvim-treesitter/nvim-treesitter',
 	'nvim-treesitter/nvim-treesitter-textobjects',
@@ -59,9 +60,15 @@ return {
 
 	{ 'folke/todo-comments.nvim', dependencies = { {'nvim-lua/plenary.nvim' } }, opts = {} },
 	{"AckslD/nvim-neoclip.lua", dependencies = {{'nvim-telescope/telescope.nvim'}}},
-	{ 'nvim-telescope/telescope.nvim', tag = '0.1.2', dependencies = { {'nvim-lua/plenary.nvim'} } },
 	{ 'kylechui/nvim-surround', version = "*", config = function() require("nvim-surround").setup() end },
-
+	{ 
+		'nvim-telescope/telescope.nvim',
+		tag = '0.1.2',
+		dependencies = {
+			{'nvim-lua/plenary.nvim'},
+			{'nvim-telescope/telescope-live-grep-args.nvim', version = "^1.0.0",},
+		} 
+	},
 	{
 		'Theprimeagen/harpoon',
 		branch = "harpoon2",

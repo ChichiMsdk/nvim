@@ -3,31 +3,12 @@ vim.g.mapleader = " "
 vim.g.term_open = false
 if vim.g.neovide then
 	vim.g.neovide_scale_factor = 1.0
-<<<<<<< HEAD
-	vim.api.nvim_set_keymap("n", "<C-=>", ":lua change_scale_factor(-0.05)<CR>", {noremap = true})
-	vim.api.nvim_set_keymap("n", "<C-->", ":lua change_scale_factor(0.05)<CR>", {noremap = true})
-	function change_scale_factor(delta)
-		  vim.g.neovide_scale_factor = vim.g.neovide_scale_factor + delta
-	  end
-=======
-
-	vim.api.nvim_set_keymap("n", "<C-=>", ":lua change_scale_factor(1.05)<CR>", { noremap = true })
-	vim.api.nvim_set_keymap("n", "<C-->", ":lua change_scale_factor(1/1.05)<CR>", { noremap = true })
-	function change_scale_factor(delta)
-		vim.g.neovide_scale_factor = vim.g.neovide_scale_factor * delta
-	end
-
->>>>>>> 9de56a356b691d5e9fee5f86b67e499821b80353
 	vim.g.neovide_scroll_animation_length = 0.2
 	vim.g.neovide_scroll_animation_far_lines = 0
 	vim.o.termguicolors = true
 	vim.o.termpastefilter = "BS,HT,ESC,DEL,C0,C1"
 	vim.g.neovide_input_use_logo = true
-<<<<<<< HEAD
 	vim.o.guifont = "JetBrainsMonoNL Nerd Font Mono:h12.5"
-=======
-	vim.o.guifont = "JetBrainsMonoNL Nerd Font Mono:h12.9"
->>>>>>> 9de56a356b691d5e9fee5f86b67e499821b80353
 	-- vim.o.guifont = "GeistMono Nerd Font Mono:h16:#e-subpixelantialias:#h-none"
 	vim.g.neovide_scale_factor = 1
 	vim.opt.linespace = 0
@@ -45,16 +26,10 @@ if vim.g.neovide then
 	vim.g.neovide_refresh_rate_idle = 5
 	vim.g.neovide_fullscreen = false
 
-<<<<<<< HEAD
--- 	vim.api.nvim_set_keymap('n', '<C-F5>', ':!.\\build-all.bat<CR>', { noremap = true, silent = true })
-	-- vim.keymap.set("n", "<C-F6>", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
-end
-
-vim.api.nvim_set_keymap('n', '<C-v>', '"+P', {noremap = true}) -- Paste normal mode
-vim.api.nvim_set_keymap('v', '<C-v>', '"+P', {noremap = true}) -- Paste visual mode
-vim.api.nvim_set_keymap('c', '<C-v>', '<C-R>+', {noremap = true}) -- Paste command mode
-vim.api.nvim_set_keymap('i', '<C-v>', '<C-R>+', {noremap = true}) -- Paste insert mode
-=======
+	vim.api.nvim_set_keymap('n', '<C-v>', '"+P', {noremap = true}) -- Paste normal mode
+	vim.api.nvim_set_keymap('v', '<C-v>', '"+P', {noremap = true}) -- Paste visual mode
+	vim.api.nvim_set_keymap('c', '<C-v>', '<C-R>+', {noremap = true}) -- Paste command mode
+	vim.api.nvim_set_keymap('i', '<C-v>', '<C-R>+', {noremap = true}) -- Paste insert mode
 	vim.g.neovide_padding_top = 0
 	vim.g.neovide_padding_bottom = 0
 	vim.g.neovide_padding_right = 0
@@ -77,11 +52,8 @@ vim.api.nvim_set_keymap('i', '<C-v>', '<C-R>+', {noremap = true}) -- Paste inser
 	vim.api.nvim_set_keymap('i', '<C-v>', '<C-R>+', { noremap = true }) -- Paste insert mode
 end
 
-
 -- Clipboard
 vim.api.nvim_set_keymap('n', '<leader>x', ':Telescope neoclip<CR>', { noremap = true, silent = true })
-
->>>>>>> 9de56a356b691d5e9fee5f86b67e499821b80353
 
 --cmdline
 -- vim.api.nvim_set_keymap('n', '<leader>;', ':', { noremap = true})
@@ -90,7 +62,6 @@ vim.api.nvim_set_keymap('n', '<leader>x', ':Telescope neoclip<CR>', { noremap = 
 -- vim.api.nvim_set_keymap('n', '<leader>rr', ':set rnu! | set nu!<CR>', { noremap = true, silent = true })
 
 --BUILD
-<<<<<<< HEAD
 if vim.g.neovide then
 	vim.api.nvim_set_keymap('n', '<C-F5>', ':Make<CR>', { noremap = true, silent = true })
 else
@@ -99,12 +70,6 @@ end
 
 vim.api.nvim_set_keymap("n", "<leader>tt", "<cmd>lua _wincmd1x_toggle()<CR>", {noremap = true, silent = true})
 vim.api.nvim_set_keymap("n", "<leader>ti", "<cmd>lua _wincmd2x_toggle()<CR>", {noremap = true, silent = true})
-=======
--- vim.api.nvim_set_keymap('n', '<C-F5>', ':1TermExec cmd="make"<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<C-F5>', ':Make<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<leader>tt", "<cmd>lua _wincmd1x_toggle()<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<leader>ti", "<cmd>lua _wincmd2x_toggle()<CR>", { noremap = true, silent = true })
->>>>>>> 9de56a356b691d5e9fee5f86b67e499821b80353
 
 vim.api.nvim_set_keymap("n", "<ESC>", ":noh<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<leader>vo", ":Oil<CR>", { noremap = true, silent = true })
@@ -177,7 +142,11 @@ vim.api.nvim_set_keymap('n', '<leader>dd', [[:lua vim.diagnostic.enable(not vim.
 ---------------------------------- functions -----------------------------------
 
 -- Set the mapping ^^^^^ toggle_term.lua
-vim.api.nvim_set_keymap('n', '<C-F6>', ':lua intermediate()<CR>', { noremap = true, silent = true })
+if vim.g.neovide then
+	vim.api.nvim_set_keymap('n', '<C-F6>', ':lua intermediate()<CR>', { noremap = true, silent = true })
+else
+	vim.api.nvim_set_keymap('n', '<F30>', ':lua intermediate()<CR>', { noremap = true, silent = true })
+end
 
 -- CD function
 function mycd()
