@@ -37,7 +37,9 @@ local lsp = require('lsp-zero').preset({
 })
 
 vim.cmd[[set pumheight=5]]
+vim.cmd[[set pumwidth=5]]
 vim.cmd[[hi PmenuSel blend=0]]
+
 
 vim.diagnostic.config({
 	virtual_text = true,
@@ -68,6 +70,7 @@ end)
 require('lspconfig').clangd.setup({
 	 cmd = {
 		  "clangd",
+		  "-j=12",
 		  "--header-insertion=never",
 		  "--limit-references=0",
 		  "--background-index"
@@ -109,11 +112,16 @@ cmp.setup({
 		completion = cmp.config.window.bordered(),
 		documentation = cmp.config.window.bordered(),
 	},
+    --[[
 	formatting = {
 		format = function(entry, vim_item)
 			vim_item.abbr = string.sub(vim_item.abbr, 1, 30)
 			return vim_item
 		end
+	},
+    --]]
+	formatting = {
+		format = format,
 	},
 })
 
@@ -124,3 +132,22 @@ cmp.event:on(
   cmp_autopairs.on_confirm_done()
 )
 
+local ELLIPSIS_CHAR = '…'
+local MAX_LABEL_WIDTH = 25
+local MAX_KIND_WIDTH = 7
+
+local get_ws = function (max, len)
+  return (" "):rep(max - len)
+end
+
+local format = function(_, item)
+  local content = item.abbr
+
+  if #content > MAX_LABEL_WIDTH then
+    item.abbr = vim.fn.strcharpart(content, 0, MAX_LABEL_WIDTH) .. ELLIPSIS_CHAR
+  else
+    item.abbr = content .. get_ws(MAX_LABEL_WIDTH, #content)
+  end
+
+  return item
+end

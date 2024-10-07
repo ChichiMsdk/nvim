@@ -5,8 +5,6 @@ local wincmd1x = Terminal:new({
 		vim.cmd("stopinsert")
 		-- vim.cmd("startinsert!")
 	end,
-	hidden = true,
-	autochdir = true,
 	count = 1
 })
 
@@ -34,10 +32,11 @@ function intermediate()
 	if command then
 		-- vim.cmd("1TermExec cmd=" .. command)
 		if wincmd1x:is_open() then
-			wincmd1x:send(command, true)
+			wincmd1x:send(command, false)
+			-- wincmd1x:toggle(10, "horizontal")
 		else
 			wincmd1x:toggle(10, "horizontal")
-			wincmd1x:send(command, true)
+			wincmd1x:send(command, false)
 		end
 		-- print("1TermExec cmd=" .. command)
 	else
