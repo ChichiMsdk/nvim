@@ -19,6 +19,7 @@ vim.g.numbers=false
 -- vim.api.nvim_buf_set_var(0, 'vim.g.numbers', false)
 -- vim.cmd[[autocmd InsertEnter * set nohlsearch]]
 -- vim.cmd[[autocmd InsertLeave * :set hlsearch]]
+vim.cmd[[set wildoptions=tagfile]]
 vim.cmd[[set statusline=%<%f\ %h%m%r%{FugitiveStatusline()}%=%-14.(%l,%c%V%)\ %P]]
 vim.cmd[[set guicursor=n-sm:block,i-c-ci-v-ve:ver25,r-cr-o:hor20,a:blinkwait400-blinkoff500-blinkon500-Cursor/lCursor]]
 vim.cmd[[Gitsigns toggle_signs]]

@@ -73,6 +73,7 @@ vim.api.nvim_set_keymap('n', '<leader>x', ':Telescope neoclip<CR>', { noremap = 
 -- vim.api.nvim_set_keymap('n', '<C-F5>', ':1TermExec cmd="make"<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<C-F5>', ':Make<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<leader>tt", "<cmd>lua _wincmd1x_toggle()<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<leader>te", "<cmd>Telescope<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<leader>ti", "<cmd>lua _wincmd2x_toggle()<CR>", { noremap = true, silent = true })
 
 vim.api.nvim_set_keymap("n", "<ESC>", ":noh<CR>", { noremap = true, silent = true })
