@@ -27,15 +27,16 @@ function get_cmd_txt()
 end
 
 -- Function to be called
-function intermediate()
-	local command = get_cmd_txt()
+function SendCommandToggleTerm()
+	-- local command = get_cmd_txt()
+	local command = vim.g.CmdLine
 	if command then
 		-- vim.cmd("1TermExec cmd=" .. command)
 		if wincmd1x:is_open() then
 			wincmd1x:send(command, false)
 			-- wincmd1x:toggle(10, "horizontal")
 		else
-			wincmd1x:toggle(10, "horizontal")
+			wincmd1x:toggle(40, "vertical")
 			wincmd1x:send(command, false)
 		end
 		-- print("1TermExec cmd=" .. command)
@@ -47,9 +48,9 @@ end
 function _wincmd1x_toggle()
 	if wincmd1x:is_float() and wincmd1x:is_open() then
 		wincmd1x:close()
-		wincmd1x:open(10, "horizontal")
+		wincmd1x:open(40, "vertical")
 	else
-		wincmd1x:toggle(10, "horizontal")
+		wincmd1x:toggle(40, "vertical")
 	end
 end
 

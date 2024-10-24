@@ -7,3 +7,5 @@ lua/plugin
 temp
 undodir
 cmd.txt
+.cmds
+.make

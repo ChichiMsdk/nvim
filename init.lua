@@ -1,46 +1,47 @@
 require("base")
+vim.g.SelectedLine = nil
+vim.g.MakeLine = nil
 --vim.g.loaded_netrwPlugin = 1
 -- set clipboard= using luascript
 --vim.cmd("set clipboard=")
 vim.cmd("tnoremap <Esc> <C-\\><C-n>")
 -- vim.cmd("packadd termdebug")
 
--- Define a function to execute grep and return the result
-local function Grep(...)
-  local args = table.concat({...}, ' ')
-  return vim.fn.system(vim.o.grepprg .. ' ' .. vim.fn.expandcmd(args))
+local function scratch()
+  vim.ui.input({ prompt = "Command: ", completion = "shellcmd", completion = "command" }, function(input)
+    if input == nil then
+      return
+    elseif input == "scratch" then
+      input = "echo('')"
+    end
+    local cmd = vim.api.nvim_exec(input, { output = true })
+    local output = {}
+    for line in cmd:gmatch("[^\n\r]+") do
+      table.insert(output, line)
+    end
+    local buf = vim.api.nvim_create_buf(true, true)
+    vim.api.nvim_buf_set_lines(buf, 0, -1, false, output)
+    vim.api.nvim_win_set_buf(0, buf)
+  end)
 end
 
--- Create a command for `Grep` to populate the quickfix list
-vim.api.nvim_create_user_command('Grep', function(opts)
-  vim.fn.setqflist({}, 'r', {lines = vim.split(Grep(unpack(opts.fargs)), '\n')})
-  vim.cmd("copen")
-end, {nargs = '+', complete = 'file_in_path'})
+vim.keymap.set("n", "<leader>rr", scratch, { desc = "Command to scratch buffer" })
 
--- Create a command for `LGrep` to populate the location list
-vim.api.nvim_create_user_command('LGrep', function(opts)
-  vim.fn.setloclist(0, {}, 'r', {lines = vim.split(Grep(unpack(opts.fargs)), '\n')})
-  vim.cmd("lopen")
-end, {nargs = '+', complete = 'file_in_path'})
+----------------------STARTUP---------------------------
 
--- Abbreviate `grep` and `lgrep` to their corresponding commands
-vim.cmd([[
-cnoreabbrev <expr> grep  (getcmdtype() ==# ':' && getcmdline() ==# 'grep')  ? 'Grep'  : 'grep'
-cnoreabbrev <expr> lgrep (getcmdtype() ==# ':' && getcmdline() ==# 'lgrep') ? 'LGrep' : 'lgrep'
-]])
-
--- Auto open quickfix or location list window after grep commands
-vim.api.nvim_create_augroup('quickfix', { clear = true })
-
-vim.api.nvim_create_autocmd('QuickFixCmdPost', {
-  group = 'quickfix',
-  pattern = 'cgetexpr',
-  command = 'cwindow'
-})
-
-vim.api.nvim_create_autocmd('QuickFixCmdPost', {
-  group = 'quickfix',
-  pattern = 'lgetexpr',
-  command = 'lwindow'
-})
-
+function GetFavCommand(file_path)
+	local file = io.open(file_path, "r")
+	if not file then return nil end
+	local command = file:read("*L")
+	file:close()
+	if command and string.sub(command, 1, 7) == "[FAV]->" then
+		temp = command:gsub("\n", "")
+		temp = string.sub(temp, 8, string.len(temp))
+		-- print("temp: " .. temp)
+		return temp
+	else
+		return nil
+	end
+end
+vim.cmd(":lua vim.g.SelectedLine = GetFavCommand(vim.fn.getcwd() .. '/.cmds')")
+vim.cmd(":lua vim.g.MakeLine = GetFavCommand(vim.fn.getcwd() .. '/.make')")
