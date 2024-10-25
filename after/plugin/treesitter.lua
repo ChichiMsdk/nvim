@@ -1,7 +1,7 @@
 local vim = vim
 local ts = require'nvim-treesitter.configs'.setup {
 	-- A list of parser names, or "all" (the five listed parsers should always be installed)
-	ensure_installed = { "c", "lua", "vim", "vimdoc", "query"},
+	ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "markdown_inline"},
 
 	-- Install parsers synchronously (only applied to `ensure_installed`)
 	sync_install = false,
@@ -38,7 +38,7 @@ local ts = require'nvim-treesitter.configs'.setup {
 }
 require'treesitter-context'.setup {
 	enable = true,
-	max_lines = 1,
+	max_lines = 2,
 	min_window_height = 0,
 	line_numbers = true,
 	mutliline_threshold = 20,

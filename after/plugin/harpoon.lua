@@ -10,7 +10,7 @@ harpoon:setup({
 }
 )
 vim.keymap.set("n", "<leader>e", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
-vim.keymap.set("n", "<leader>g", function() harpoon:list():add() end)
+vim.keymap.set("n", "<leader><S-e>", function() harpoon:list():add() end)
 --vim.keymap.set("n", "<ESC>", function() harpoon.ui:close_quick_menu() end)
 
 vim.keymap.set("n", "<M-f>", function() harpoon:list():select(1) end)

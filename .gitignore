@@ -6,3 +6,5 @@ lazy-lock.json
 lua/plugin
 temp
 cmd.txt
+.cmds
+.make

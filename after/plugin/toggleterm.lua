@@ -5,14 +5,9 @@ local wincmd1x = Terminal:new({
 		vim.cmd("stopinsert")
 		-- vim.cmd("startinsert!")
 	end,
+	shell = vim.o.shell,
 	count = 1
 })
-
---[[
-function _wincmd1x_toggle()
-	wincmd1x:toggle(10, "horizontal")
-end
---]]
 
 function get_cmd_txt()
 	local cwd = vim.fn.getcwd()
@@ -22,32 +17,29 @@ function get_cmd_txt()
 	local command = file:read("*all")
 	file:close()
 	return command:gsub("\n", "")
-	-- return command
-	-- return '"' .. command:gsub("\n", "") .. '"'
 end
 
 -- Function to be called
-function intermediate()
-	local command = get_cmd_txt()
+function SendCommandToggleTerm()
+	-- local command = get_cmd_txt()
+	local command = vim.g.CmdLine
 	if command then
 		-- vim.cmd("1TermExec cmd=" .. command)
 		if wincmd1x:is_open() then
 			wincmd1x:send(command, false)
-			-- wincmd1x:toggle(10, "horizontal")
 		else
 			wincmd1x:toggle(10, "horizontal")
 			wincmd1x:send(command, false)
 		end
-		-- print("1TermExec cmd=" .. command)
 	else
-		print("Command file not found or empty")
+		print("No command found. Add one in .cmds")
 	end
 end
 
 function _wincmd1x_toggle()
 	if wincmd1x:is_float() and wincmd1x:is_open() then
 		wincmd1x:close()
-		wincmd1x:open(10, "horizontal")
+		wincmd1x:open(10, "vertical")
 	else
 		wincmd1x:toggle(10, "horizontal")
 	end
