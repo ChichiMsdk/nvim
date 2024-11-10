@@ -1,8 +1,6 @@
+require("base.neovide")
 require("base.remap")
-require("base.packer")
+require("base.lazy")
 require("base.set")
 require("base.theme")
-require("base.myplugin")
 require("base.commander.main")
-require("base.neovide")
-

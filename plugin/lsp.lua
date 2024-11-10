@@ -77,6 +77,7 @@ require('lspconfig').clangd.setup({
 	  },
 })
 
+
 lsp.setup()
 
 local cmp = require('cmp')
@@ -85,10 +86,16 @@ local function next_itm()
 		cmp.select_next_item()
 	else
 		cmp.complete()
+		cmp.select_next_item()
 	end
 end
 
 cmp.setup({
+	performance = {
+		debounce = 0,
+		throttle = 0,
+		max_view_entries = 7,
+	},
 	enabled = function()
 		-- disable completion in comments
 		local context = require 'cmp.config.context'
@@ -109,17 +116,17 @@ cmp.setup({
 		autocomplete = false,
 	},
 	window = {
-		completion = cmp.config.window.bordered(),
-		documentation = cmp.config.window.bordered(),
+		completion = cmp.config.window.bordered({border = 'none'}),
+		documentation = cmp.config.window.bordered({border = 'none'}),
 	},
-    --[[
+	--[[
 	formatting = {
 		format = function(entry, vim_item)
 			vim_item.abbr = string.sub(vim_item.abbr, 1, 30)
 			return vim_item
 		end
 	},
-    --]]
+	--]]
 	formatting = {
 		format = format,
 	},

@@ -64,6 +64,8 @@ require('telescope').setup{
       i = {
         ["<ESC>"] = actions.close,
         ["<del>"] = actions.delete_buffer,
+		["<C-q>"] = actions.send_to_qflist + actions.open_qflist,
+		["<C-S-q>"] = actions.add_to_qflist,
       },
     },
   },

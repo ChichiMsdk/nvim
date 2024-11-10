@@ -12,8 +12,13 @@ vim.cmd[[hi QuickFixLine guibg=#212121]]
 vim.cmd[[hi Cursor guifg=Black guibg=#e4e4ef]]
 vim.cmd[[hi TermCursor guifg=Black guibg=#e4e4ef]]
 
-vim.cmd[[hi TodobgTODO guifg=#6f8faf guibg=none]]
-vim.cmd[[hi TodoBgNOTE guibg=none guifg=#9e95c7]]
+vim.cmd[[hi TodobgTODO gui=bold guifg=#6f8faf]]
+vim.cmd[[hi TodoBgNOTE gui=bold guifg=#9e95c7]]
+vim.cmd[[hi TodoBgWARN gui=bold guifg=#ffdd33]]
+vim.cmd[[hi TodoBgFIX gui=bold guifg=#f43841]]
+
+vim.cmd[[hi IncSearch guifg=#000000 guibg=#ffdd33]]
+vim.cmd[[hi Search guifg=none guibg=#333333]]
 
 --[[
 vim.cmd[[hi TodobgTODO gui=bold guifg=black guibg=#6f8faf]]
