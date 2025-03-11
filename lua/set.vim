@@ -1,5 +1,7 @@
 let s:check_build_path = g:myvimrc . '/lua/check_build.vim'
+let s:undodir_path = g:myvimrc . 'undofile'
 execute "source " . s:check_build_path
+execute "set undodir=" . s:undodir_path
 " source C:\Users\chiha\Appdata\Local\nvim\lua\check_build.vim
 filetype plugin on
 
@@ -39,7 +41,6 @@ set undolevels=10000
 set foldmethod=marker
 set wildoptions=tagfile
 set clipboard=unnamedplus
-set undodir=/mnt/a/nvim/undodir
 set statusline=%<%f\ %h%m%r%{FugitiveStatusline()}%=%-14.(%l,%c%V%)\ %P
 
 "set complete+=i,d
@@ -61,29 +62,34 @@ let &guicursor	.='i-c-ci-v-ve:ver15,'
 let &guicursor	.='r-cr-o:hor10,'
 let &guicursor	.='a:blinkwait400-blinkoff500-blinkon500-Cursor/lCursor'
 
-let &tags .=',' . $VULKAN_SDK . '\vulkan_tags'
-let &tags .=',C:\vc_env\um_tags'
-let &tags .=',C:\vc_env\ucrt_tags'
+" Os specific stuff
+if has ('win32')
+    " set undodir=/mnt/a/nvim/undodir
+    let &tags .=',' . $VULKAN_SDK . '\vulkan_tags'
+    let &tags .=',C:\vc_env\um_tags'
+    let &tags .=',C:\vc_env\ucrt_tags'
 
-set grepprg=C:\Users\chiha\Desktop\git\ripgrep\target\debug\rg.exe\ --vimgrep\ -uu
+    set grepprg=C:\Users\chiha\Desktop\git\ripgrep\target\debug\rg.exe\ --vimgrep\ -uu
 
-" let &path=$INCLUDE
-let $VC='C:\vc_env\msvc\'
-let $WINKITS='Windows\ Kits\10\Include\' . $SDK_VERSION
+    " let &path=$INCLUDE
+    let $VC='C:\vc_env\msvc\'
+    let $WINKITS='Windows\ Kits\10\Include\' . $SDK_VERSION
 
-let &path   .='.,;,'
-let &path   .=',C:/Lib/Everything/include'
-let &path   .=',' . $MSVC_ROOT . '\include'
-let &path   .=',' . $VC . $WINKITS . '\um'
-let &path   .=',' . $VC . $WINKITS . '\shared'
-let &path   .=',' . $VC . $WINKITS . '\ucrt'
-let &path   .=',' . $VC . $WINKITS . '\winrt'
-let &path   .=',' . $VC . $WINKITS . '\cppwinrt'
+    let &path   .='.,;,'
+    let &path   .=',C:/Lib/Everything/include'
+    let &path   .=',' . $MSVC_ROOT . '\include'
+    let &path   .=',' . $VC . $WINKITS . '\um'
+    let &path   .=',' . $VC . $WINKITS . '\shared'
+    let &path   .=',' . $VC . $WINKITS . '\ucrt'
+    let &path   .=',' . $VC . $WINKITS . '\winrt'
+    let &path   .=',' . $VC . $WINKITS . '\cppwinrt'
 
-set path+=C:\clang\lib\clang\19\include
-set path+=C:\include
+    set path+=C:\clang\lib\clang\19\include
+    set path+=C:\include
 
-let &shell ="cmd.exe"
+    let &shell ="cmd.exe"
+endif
+
 if &shell == "pwsh.exe"
     let &shellpipe	="2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode"
     let &shellredir	="-RedirectStandardOutput %s -NoNewWindow -Wait"
