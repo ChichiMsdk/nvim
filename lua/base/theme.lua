@@ -4,6 +4,7 @@ vim.cmd('source ' .. theme_path)
 
 -- Make the prompt readable --
 
+--[[
 vim.g.terminal_color_0 = "#7f7f8c"  -- Black
 vim.g.terminal_color_1 = "#cd5c5c"  -- DarkBlue
 vim.g.terminal_color_2 = "#9acd32"  -- DarkGreen
@@ -13,6 +14,7 @@ vim.g.terminal_color_9 = "#ff0000"  -- Blue, LightBlue
 vim.g.terminal_color_10 = "#89fb98" -- Green, LightGreen
 vim.g.terminal_color_15 = "#ffffff" -- White
 
+--]]
 -- vim.cmd[[hi Visual guibg=#1c4449]]
 
 -- vim.cmd[[hi TodobgTODO gui=bold guifg=#6f8faf]]

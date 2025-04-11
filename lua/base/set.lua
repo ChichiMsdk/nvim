@@ -1,13 +1,5 @@
 vim.g.mapleader=" "
 
-function nbrEnter()
-    vim.cmd[[set norelativenumber]]
-end
-
-function nbrLeave()
-    vim.cmd[[set relativenumber]]
-end
-
 -- Function to dynamically set color column
 local function set_color_column()
     local colorcolumn_enabled = false

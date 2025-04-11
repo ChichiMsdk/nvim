@@ -9,10 +9,11 @@ return {
 	-- { "danymat/neogen", config = true, version = "*", enabled = false},
 	-- {'lewis6991/gitsigns.nvim', enabled = false},
 
+	{'godlygeek/tabular'},
 	{'tikhomirov/vim-glsl'},
 	{'tpope/vim-dispatch'},
 	{'tpope/vim-eunuch'},
-	-- {'tpope/vim-obsession'},
+	{'tpope/vim-obsession'},
 	{'tomtom/tcomment_vim'},
 
 	{'nvim-lua/plenary.nvim'},

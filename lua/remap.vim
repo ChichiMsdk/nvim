@@ -5,7 +5,7 @@ tnoremap <Esc> <C-\><C-n>
 nmap <F1> :silent !firefox.exe "https://www.google.com/search?q=<cword>&btnI"<CR>
 
 " Open output in buffer
-nnoremap <silent><leader>rr :lua Scratch()<CR>
+nnoremap <silent><leader>r :lua Scratch()<CR>
 
 " Build the mapping is in toggle_term.lua
 " nnoremap <silent><C-F5> :lua MakeCommand()<CR>
@@ -40,7 +40,7 @@ vnoremap <silent><leader>/ :TCommentBlock<CR>
 
 " Registers
 nnoremap <silent><leader>cl :Telescope registers<CR>
-nnoremap <silent><leader>z :<C-u>registers<CR>:normal! "p<Left>
+" nnoremap <silent><leader>z :<C-u>registers<CR>:normal! "p<Left>
 
 "paste
 nnoremap <silent><C-v> "+p
@@ -52,8 +52,8 @@ inoremap <silent><C-v> <C-r>+
 "copy to os
 nnoremap <silent><C-c> "+yy
 vnoremap <silent><C-c> "+y
-nnoremap <silent>yy "+yy
-vnoremap <silent>y "+y
+" nnoremap <silent>yy "+yy
+" vnoremap <silent>y "+y
 
 " Delete to blackhole buffer
 nnoremap <S-del> "_dd
@@ -80,13 +80,13 @@ nnoremap <C-S-Left> :vertical resize -1<CR>
 nnoremap <silent><leader>vs :vs<CR>
 nnoremap <silent><leader>vh :sp<CR>
 
-" Center screen after scroll or search
-nnoremap <C-d> <C-d>zz
-nnoremap <C-u> <C-u>zz
-vnoremap <C-d> <C-d>zz
-vnoremap <C-u> <C-u>zz
-nnoremap { {zz
-nnoremap } }zz
+" Center screen and set jump after scroll
+nnoremap <C-d> m'<C-d>zz
+nnoremap <C-u> m'<C-u>zz
+vnoremap <C-d> m'<C-d>zz
+vnoremap <C-u> m'<C-u>zz
+" nnoremap { {zz
+" nnoremap } }zz
 
 " Navigate / Delete buffer
 nnoremap <silent><leader>o :bn<bar>bd #<CR>
@@ -109,5 +109,5 @@ nnoremap <silent><leader>a :q<CR>
 " Completion convenience
 inoremap <C-]> <C-X><C-]>
 inoremap <C-F> <C-X><C-F>
-inoremap <C-D> <C-X><C-D>
+" inoremap <C-D> <C-X><C-D>
 inoremap <C-L> <C-X><C-L>

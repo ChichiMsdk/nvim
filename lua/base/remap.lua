@@ -36,7 +36,7 @@ function MakeCommand()-- {{{
     end
 end-- }}}
 
-function ExecCommand(key)-- {{{
+function ExecCommand(key)
     local temp = vim.g[key]
     temp = GetFavCommand(vim.fn.getcwd() .. '/.make')
     if temp then
@@ -45,13 +45,15 @@ function ExecCommand(key)-- {{{
     else
 	print("No cmd command found. Add one in .make or .cmd")
     end
-end-- }}}
+end
 
 -- 'cd' utility function
-function Mycd(cmd)-- {{{
+function Mycd(cmd)
     local current_d = vim.fn.expand('%:p:h')
-    vim.cmd(cmd .. ' ' .. current_d)
-end-- }}}
+    if current_d then
+      vim.cmd(cmd .. ' ' .. current_d)
+    end
+end
 
 function SendCommandToggleTerm()-- {{{
     -- local command = Get_cmd_txt()
@@ -75,12 +77,12 @@ function _Wincmd1x_toggle()-- {{{
     if Wincmd1x:is_float() and Wincmd1x:is_open() then
 	Wincmd1x:close()
 	Wincmd1x:open(120, "vertical")
-	vim.cmd[[wincmd H]]
+	-- vim.cmd[[wincmd H]]
     elseif Wincmd1x:is_open() then
 	Wincmd1x:close()
     else
 	Wincmd1x:open(120, "vertical")
-	vim.cmd[[wincmd H]]
+	-- vim.cmd[[wincmd H]]
     end
 end-- }}}
 

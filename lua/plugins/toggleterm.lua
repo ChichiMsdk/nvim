@@ -12,7 +12,7 @@ return {
 		Wincmd1x = Terminal:new({
 			on_open = function()
 				-- vim.cmd("stopinsert")
-				vim.cmd("startinsert!")
+				vim.cmd("startinsert")
 			end,
 			shell = vim.o.shell,
 			count = 1,
