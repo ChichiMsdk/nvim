@@ -2,7 +2,7 @@ let s:check_build_path = g:myvimrc . '/lua/functions.vim'
 let s:undodir_path = g:myvimrc . 'undofile'
 execute "source " . s:check_build_path
 execute "set undodir=" . s:undodir_path
-" source C:\Users\chiha\Appdata\Local\nvim\lua\check_build.vim
+
 filetype on
 filetype plugin on
 filetype indent on
@@ -53,10 +53,6 @@ set complete-=t
 set formatoptions+=p
 set completeopt=menuone,preview,popup
 
-" autocmd BufEnter C:\include\* set readonly
-" autocmd BufEnter C:\msvc\*\Include\* set readonly
-" autocmd BufEnter C:\msvc\*\include\* set readonly
-
 autocmd CompleteDone * pclose
 autocmd FileType *c* set nolist
 autocmd FileType *c* set cino+=t0
@@ -77,68 +73,66 @@ let &guicursor	.='a:blinkwait400-blinkoff500-blinkon500-Cursor/lCursor'
 
 " Os specific stuff
 if has ('win32')
-    " set undodir=/mnt/a/nvim/undodir
-    " let &tags .=',' . $VULKAN_SDK . '\vulkan_tags'
-    " let &tags .=',C:\vc_env\um_tags'
-    " let &tags .=',C:\vc_env\ucrt_tags'
-    let &tags .=',C:\vc_env\useful_tags\tags'
+        " let &tags .=',' . $VULKAN_SDK . '\vulkan_tags'
+        for f in glob('C:\vc_env\useful_tags\*tags', 1, 1)
+                let &tags .= ','.f
+        endfor
+        set grepprg=C:\Users\chiha\Desktop\git\ripgrep\target\debug\rg.exe\ --vimgrep\ -uu
 
-    set grepprg=C:\Users\chiha\Desktop\git\ripgrep\target\debug\rg.exe\ --vimgrep\ -uu
+        " let &path=$INCLUDE
+        let $VC='C:\vc_env\msvc\'
+        let $WINKITS='Windows\ Kits\10\Include\' . $SDK_VERSION
+        let s:vulkan_sdk = 'C:\vulkan'
 
-    " let &path=$INCLUDE
-    let $VC='C:\vc_env\msvc\'
-    let $WINKITS='Windows\ Kits\10\Include\' . $SDK_VERSION
-    let s:vulkan_sdk = 'C:\vulkan'
+        let &path   .='.,;,'
+        let &path   .=',C:/Lib/Everything/include'
+        let &path   .=',' . $MSVC_ROOT . '\include'
+        let &path   .=',' . $VC . $WINKITS . '\um'
+        let &path   .=',' . $VC . $WINKITS . '\shared'
+        let &path   .=',' . $VC . $WINKITS . '\ucrt'
+        let &path   .=',' . $VC . $WINKITS . '\winrt'
+        let &path   .=',' . $VC . $WINKITS . '\cppwinrt'
+        let &path   .=',' . s:vulkan_sdk . '\include'
+        let &path   .=',' . s:vulkan_sdk . '\include\vulkan'
 
-    let &path   .='.,;,'
-    let &path   .=',C:/Lib/Everything/include'
-    let &path   .=',' . $MSVC_ROOT . '\include'
-    let &path   .=',' . $VC . $WINKITS . '\um'
-    let &path   .=',' . $VC . $WINKITS . '\shared'
-    let &path   .=',' . $VC . $WINKITS . '\ucrt'
-    let &path   .=',' . $VC . $WINKITS . '\winrt'
-    let &path   .=',' . $VC . $WINKITS . '\cppwinrt'
-    let &path   .=',' . s:vulkan_sdk . '\include'
-    let &path   .=',' . s:vulkan_sdk . '\include\vulkan'
+        set path+=C:\clang\lib\clang\19\include
+        set path+=C:\include
 
-    set path+=C:\clang\lib\clang\19\include
-    set path+=C:\include
+        let &shell ="cmd.exe"
 
-    let &shell ="cmd.exe"
+        let s:vulkan = 'C:/vulkan/include'
+        let s:vc='C:/vc_env/msvc/'
+        let s:msvc_root = s:vc . 'VC/Tools/MSVC/' . $MSVC_VERSION
+        let s:winkits = 'Windows\ Kits/10/Include/' . $SDK_VERSION
+        let s:msvcRoot_include = s:msvc_root . '/include/*'
+        let s:vc_winkits_um = s:vc . s:winkits . '/um/*'
+        let s:vc_winkits_shared = s:vc . s:winkits . '/shared/*'
+        let s:vc_winkits_ucrt = s:vc . s:winkits . '/ucrt/*'
+        let s:vc_winkits_winrt = s:vc . s:winkits . '/winrt/*'
+        let s:vc_winkits_cppwinrt = s:vc . s:winkits . '/cppwinrt/*' 
+        let s:clang_19_include = 'C:/clang/lib/clang/19/include/*'
 
-let s:vulkan = 'C:/vulkan/include'
-let s:vc='C:/vc_env/msvc/'
-let s:msvc_root = s:vc . 'VC/Tools/MSVC/' . $MSVC_VERSION
-let s:winkits = 'Windows\ Kits/10/Include/' . $SDK_VERSION
-let s:msvcRoot_include = s:msvc_root . '/include/*'
-let s:vc_winkits_um = s:vc . s:winkits . '/um/*'
-let s:vc_winkits_shared = s:vc . s:winkits . '/shared/*'
-let s:vc_winkits_ucrt = s:vc . s:winkits . '/ucrt/*'
-let s:vc_winkits_winrt = s:vc . s:winkits . '/winrt/*'
-let s:vc_winkits_cppwinrt = s:vc . s:winkits . '/cppwinrt/*' 
-let s:clang_19_include = 'C:/clang/lib/clang/19/include/*'
-
-execute 'autocmd BufEnter ' . 'C:/Lib/Everything/include' . ' set readonly'
-execute 'autocmd BufEnter ' . s:msvcRoot_include . ' set readonly'
-execute 'autocmd BufEnter ' . s:vc_winkits_um . ' set readonly'
-execute 'autocmd BufEnter ' . s:vc_winkits_shared . ' set readonly'
-execute 'autocmd BufEnter ' . s:vc_winkits_ucrt . ' set readonly'
-execute 'autocmd BufEnter ' . s:vc_winkits_winrt . ' set readonly'
-execute 'autocmd BufEnter ' . s:vc_winkits_cppwinrt . ' set readonly'
-execute 'autocmd BufEnter ' . s:clang_19_include . ' set readonly'
-execute 'autocmd BufEnter ' . s:vulkan . '/*' . 'set readonly'
-execute 'autocmd BufEnter ' . s:vulkan . '/vulkan/*' . ' set readonly'
-execute 'autocmd BufEnter ' . 'C:\include\*' . ' set readonly'
+        execute 'autocmd BufEnter ' . 'C:/Lib/Everything/include' . ' set readonly'
+        execute 'autocmd BufEnter ' . s:msvcRoot_include . ' set readonly'
+        execute 'autocmd BufEnter ' . s:vc_winkits_um . ' set readonly'
+        execute 'autocmd BufEnter ' . s:vc_winkits_shared . ' set readonly'
+        execute 'autocmd BufEnter ' . s:vc_winkits_ucrt . ' set readonly'
+        execute 'autocmd BufEnter ' . s:vc_winkits_winrt . ' set readonly'
+        execute 'autocmd BufEnter ' . s:vc_winkits_cppwinrt . ' set readonly'
+        execute 'autocmd BufEnter ' . s:clang_19_include . ' set readonly'
+        execute 'autocmd BufEnter ' . s:vulkan . '/*' . 'set readonly'
+        execute 'autocmd BufEnter ' . s:vulkan . '/vulkan/*' . ' set readonly'
+        execute 'autocmd BufEnter ' . 'C:\include\*' . ' set readonly'
 
 endif
 
 if &shell == "pwsh.exe"
-    let &shellpipe	="2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode"
-    let &shellredir	="-RedirectStandardOutput %s -NoNewWindow -Wait"
-    let &shellquote	=""
-    let &shellxquote    =""
+        let &shellpipe	="2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode"
+        let &shellredir	="-RedirectStandardOutput %s -NoNewWindow -Wait"
+        let &shellquote	=""
+        let &shellxquote    =""
 
-    let &shellcmdflag   ="-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command "
-    let &shellcmdflag   .="[Console]::InputEncoding=[Console]"
-    let &shellcmdflag   .="::OutputEncoding=[System.Text.Encoding]::UTF8;"
+        let &shellcmdflag   ="-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command "
+        let &shellcmdflag   .="[Console]::InputEncoding=[Console]"
+        let &shellcmdflag   .="::OutputEncoding=[System.Text.Encoding]::UTF8;"
 endif

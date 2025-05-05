@@ -1,16 +1,16 @@
 return {
-    {
-	'windwp/nvim-autopairs', 
-	enabled = true,
-	config = function()
+  {
+    'windwp/nvim-autopairs', 
+    enabled = true,
+    config = function()
 
-	    local npairs = require("nvim-autopairs")
-	    local Rule = require('nvim-autopairs.rule')
-	    local cond = require('nvim-autopairs.conds')
+      local npairs = require("nvim-autopairs")
+      local Rule = require('nvim-autopairs.rule')
+      local cond = require('nvim-autopairs.conds')
 
-	    npairs.setup({
-		fast_wrap = {},
-	    })
-	end, 
-    },
+      npairs.setup({
+        fast_wrap = {},
+      })
+    end, 
+  },
 }

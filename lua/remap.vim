@@ -1,5 +1,8 @@
 " ESC to normal mode in terminal
+nnoremap <silent><leader>t <cmd>lua _Wincmd1x_toggle()<CR>
+" nnoremap <silent><leader>ti <cmd>lua _Wincmd2x_toggle()<CR>
 tnoremap <Esc> <C-\><C-n>
+nnoremap <silent><ESC> :noh<CR>
 
 " Firefox open msdn
 nmap <F1> :silent !firefox.exe "https://www.google.com/search?q=<cword>&btnI"<CR>
@@ -8,26 +11,21 @@ nmap <F1> :silent !firefox.exe "https://www.google.com/search?q=<cword>&btnI"<CR
 nnoremap <silent><leader>r :lua Scratch()<CR>
 
 " Build the mapping is in toggle_term.lua
-" nnoremap <silent><C-F5> :lua MakeCommand()<CR>
 nnoremap <silent><leader>cm :lua show_file_lines(vim.g.makeFile)<CR>
 nnoremap <silent><leader>cc :lua show_file_lines(vim.g.cmdFile)<CR>
 nnoremap <silent><C-/> :lua SendCommandToggleTerm()<CR>
 
+" Undotree
+nnoremap <silent><leader>u :UndotreeToggle<CR>:UndotreeFocus<CR>
+
 " Telescope
-" nnoremap <silent><leader>te :Telescope<CR>
 nnoremap <silent><leader>f :Telescope find_files<CR>
 nnoremap <silent><leader>b :Telescope buffers<CR>
-" nnoremap <silent><leader>gl :Telescope live_grep<CR>
 nnoremap <silent><leader>gl :lua require("telescope").extensions.live_grep_args.live_grep_args()<CR>
 nnoremap <silent><leader>gs :Telescope grep_string<CR>
 nnoremap <silent><leader>gt :Telescope tags<CR>
 nnoremap <silent><leader>kk :Telescope jumplist<CR>
-
-"Terminal
-nnoremap <silent><leader>t <cmd>lua _Wincmd1x_toggle()<CR>
-" nnoremap <silent><leader>ti <cmd>lua _Wincmd2x_toggle()<CR>
-
-nnoremap <silent><ESC> :noh<CR>
+" nnoremap <silent><leader>te :Telescope<CR>
 
 " Oil / FileExplorer
 nnoremap <silent><leader>vo :Oil<CR>
