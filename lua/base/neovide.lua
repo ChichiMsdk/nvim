@@ -18,6 +18,7 @@ if vim.g.neovide then
   vim.opt.linespace = 4
   vim.o.termguicolors = false
   vim.o.termpastefilter = "BS,HT,ESC,DEL,C0,C1"
+  -- vim.o.guifont = "JetBrains Mono:h12.9"
   vim.o.guifont = "JetBrainsMonoNL Nerd Font Mono:h12.9"
   -- vim.g.neovide_input_use_logo = true
   vim.g.neovide_scale_factor = 1

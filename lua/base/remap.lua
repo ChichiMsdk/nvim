@@ -1,4 +1,3 @@
-vim.g.mapleader = " "
 vim.g.term_open = false
 vim.g.cmdFile = '.cmds'
 vim.g.makeFile = '.make'
@@ -7,7 +6,7 @@ vim.cmd('source ~/Appdata/Local/nvim/lua/remap.vim')
 
 ---------------------------------- functions -----------------------------------
 -- Redirect output of command to scratch buffer
-function Scratch()-- {{{
+function Scratch()
   vim.ui.input({ prompt = "Command: ", completion = "command" }, function(input)
     if input == nil then
       return
@@ -24,17 +23,17 @@ function Scratch()-- {{{
     vim.api.nvim_buf_set_lines(buf, 0, -1, false, output)
     vim.api.nvim_win_set_buf(0, buf)
   end)
-end-- }}}
+end
 
 -- Build
-function MakeCommand()-- {{{
+function MakeCommand()
   vim.cmd(":lua vim.g.MakeLine = GetFavCommand(vim.fn.getcwd() .. '/.make')")
   if vim.g.MakeLine then
     vim.cmd(tostring(vim.g.MakeLine))
   else
     print("No make command found. Add one in .make")
   end
-end-- }}}
+end
 
 function ExecCommand(key)
   local temp = vim.g[key]
@@ -55,10 +54,11 @@ function Mycd(cmd)
   end
 end
 
-function SendCommandToggleTerm()-- {{{
+function SendCommandToggleTerm()
   -- local command = Get_cmd_txt()
-  vim.cmd(":lua vim.g.CmdLine = GetFavCommand(vim.fn.getcwd() .. '/.cmds')")
-  local command = vim.g.CmdLine
+  -- vim.cmd(":lua vim.g.CmdLine = GetFavCommand(vim.fn.getcwd() .. '/.cmds')")
+  -- local command = vim.g.CmdLine
+  local command = vim.g.default_command
   if command then
     -- vim.cmd("1TermExec cmd=" .. command)
     if Wincmd1x:is_open() then
@@ -69,11 +69,11 @@ function SendCommandToggleTerm()-- {{{
       Wincmd1x:close()
     end
   else
-    print("No command found. Add one in .cmds")
+    print("No command found. Specify one with 'let g:default_command'.")
   end
-end-- }}}
+end
 
-function _Wincmd1x_toggle()-- {{{
+function _Wincmd1x_toggle()
   if Wincmd1x:is_float() and Wincmd1x:is_open() then
     Wincmd1x:close()
     Wincmd1x:open(120, "vertical")
@@ -84,13 +84,13 @@ function _Wincmd1x_toggle()-- {{{
     Wincmd1x:open(120, "vertical")
     -- vim.cmd[[wincmd H]]
   end
-end-- }}}
+end
 
-function _Wincmd2x_toggle()-- {{{
+function _Wincmd2x_toggle()
   if Wincmd1x:is_split() and Wincmd1x:is_open() then
     Wincmd1x:close()
     Wincmd1x:open(10, "float")
   else
     Wincmd1x:toggle(10, "float")
   end
-end-- }}}
+end

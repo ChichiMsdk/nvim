@@ -63,6 +63,7 @@ function show_file_lines(filepath)
   vim.api.nvim_buf_set_keymap(buf, 'n', '<CR>', '',
   { noremap = true, silent = true, callback = function() select_line(filepath, buf, on_line_selected) end })
 end
+
 function select_line(filepath, buf, callback)
   local line_number = vim.api.nvim_win_get_cursor(0)[1]
   local line = vim.api.nvim_buf_get_lines(buf, line_number - 1, line_number, false)[1]

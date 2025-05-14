@@ -1,4 +1,6 @@
-" ESC to normal mode in terminal
+let mapleader = " "
+
+" Terminal
 nnoremap <silent><leader>t <cmd>lua _Wincmd1x_toggle()<CR>
 " nnoremap <silent><leader>ti <cmd>lua _Wincmd2x_toggle()<CR>
 tnoremap <Esc> <C-\><C-n>
@@ -10,9 +12,11 @@ nmap <F1> :silent !firefox.exe "https://www.google.com/search?q=<cword>&btnI"<CR
 " Open output in buffer
 nnoremap <silent><leader>r :lua Scratch()<CR>
 
-" Build the mapping is in toggle_term.lua
-nnoremap <silent><leader>cm :lua show_file_lines(vim.g.makeFile)<CR>
-nnoremap <silent><leader>cc :lua show_file_lines(vim.g.cmdFile)<CR>
+" Functions in base\commander\main.lua
+" nnoremap <silent><leader>cm :lua show_file_lines(vim.g.makeFile)<CR>
+" nnoremap <silent><leader>cc :lua show_file_lines(vim.g.cmdFile)<CR>
+
+" Functions in base\remap.lua
 nnoremap <silent><C-/> :lua SendCommandToggleTerm()<CR>
 
 " Undotree
@@ -79,10 +83,15 @@ nnoremap <silent><leader>vs :vs<CR>
 nnoremap <silent><leader>vh :sp<CR>
 
 " Center screen and set jump after scroll
-nnoremap <C-d> m'<C-d>zz
-nnoremap <C-u> m'<C-u>zz
-vnoremap <C-d> m'<C-d>zz
-vnoremap <C-u> m'<C-u>zz
+" nnoremap <C-d> m'<C-d>zz
+" nnoremap <C-u> m'<C-u>zz
+" vnoremap <C-d> m'<C-d>zz
+" vnoremap <C-u> m'<C-u>zz
+
+nnoremap <C-d> <C-d>zz
+nnoremap <C-u> <C-u>zz
+vnoremap <C-d> <C-d>zz
+vnoremap <C-u> <C-u>zz
 " nnoremap { {zz
 " nnoremap } }zz
 

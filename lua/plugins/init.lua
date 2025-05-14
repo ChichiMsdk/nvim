@@ -8,12 +8,12 @@ return {
   -- {"shortcuts/no-neck-pain.nvim", version = "*"},
   -- { "danymat/neogen", config = true, version = "*", enabled = false},
   -- {'lewis6991/gitsigns.nvim', enabled = false},
+  -- {'tpope/vim-obsession'},
 
   {'godlygeek/tabular'},
   {'tikhomirov/vim-glsl'},
   {'tpope/vim-dispatch'},
   {'tpope/vim-eunuch'},
-  {'tpope/vim-obsession'},
   {'tomtom/tcomment_vim'},
 
   {'nvim-lua/plenary.nvim'},

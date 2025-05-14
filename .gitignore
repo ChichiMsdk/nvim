@@ -1,3 +1,4 @@
+*.txt
 session.vim
 lazy-lock.json
 cmd.txt
