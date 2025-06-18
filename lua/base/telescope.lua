@@ -85,13 +85,6 @@ require('telescope').setup {
 
 require'telescope'.load_extension('fzf')
 require'telescope'.load_extension('live_grep_args')
---vim.keymap.set('n', '<leader>gf', builtin.git_files, {})
---vim.keymap.set('n', '<leader>f', builtin.find_files, {})
---vim.keymap.set('n', '<leader>gl', builtin.live_grep, {})
---vim.keymap.set('n', '<leader>gt', builtin.tags, {})
---vim.keymap.set('n', '<leader>ge', builtin.lsp_references, {})
---vim.keymap.set('n', '<leader>gs', builtin.grep_string, {})
---vim.keymap.set('n', '<leader>b', builtin.buffers, {})
 
 vim.api.nvim_create_autocmd("User", {
   pattern = "TelescopePreviewerLoaded",

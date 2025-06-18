@@ -3,11 +3,9 @@ vim.g.cmdFile = '.cmds'
 vim.g.makeFile = '.make'
 
 vim.cmd('source ~/Appdata/Local/nvim/lua/remap.vim')
-
 ---------------------------------- functions -----------------------------------
 -- Redirect output of command to scratch buffer
-function Scratch()
-  vim.ui.input({ prompt = "Command: ", completion = "command" }, function(input)
+function Redir(input)
     if input == nil then
       return
     elseif input == "scratch" then
@@ -16,14 +14,14 @@ function Scratch()
 
     local cmd = vim.api.nvim_exec(input, true)
     local output = {}
-    for line in cmd:gmatch("[^\n]+") do
+    for line in cmd:gmatch("[^\n\r]+") do
       table.insert(output, line)
     end
     local buf = vim.api.nvim_create_buf(true, true)
     vim.api.nvim_buf_set_lines(buf, 0, -1, false, output)
     vim.api.nvim_win_set_buf(0, buf)
-  end)
 end
+vim.api.nvim_create_user_command('Redir', function(opts) Redir(opts.args) end, {nargs = 1})
 
 -- Build
 function MakeCommand()
@@ -53,6 +51,13 @@ function Mycd(cmd)
     vim.cmd(cmd .. ' ' .. current_d)
   end
 end
+local create_command = vim.api.nvim_create_user_command
+create_command('Ktd', function(opts) Mycd("tcd") end, {nargs = 0})
+create_command('KTd', function(opts) Mycd("tcd") end, {nargs = 0})
+create_command('Kwd', function(opts) Mycd("lcd") end, {nargs = 0})
+create_command('KWd', function(opts) Mycd("lcd") end, {nargs = 0})
+create_command('Kcd', function(opts) Mycd("cd") end, {nargs = 0})
+create_command('KCd', function(opts) Mycd("cd") end, {nargs = 0})
 
 function SendCommandToggleTerm()
   -- local command = Get_cmd_txt()
@@ -76,12 +81,16 @@ end
 function _Wincmd1x_toggle()
   if Wincmd1x:is_float() and Wincmd1x:is_open() then
     Wincmd1x:close()
-    Wincmd1x:open(120, "vertical")
+    Wincmd1x:open(10, "horizontal")
+    vim.cmd("startinsert")
+    -- Wincmd1x:open(120, "vertical")
     -- vim.cmd[[wincmd H]]
   elseif Wincmd1x:is_open() then
     Wincmd1x:close()
   else
-    Wincmd1x:open(120, "vertical")
+    -- Wincmd1x:open(120, "vertical")
+    Wincmd1x:open(10, "horizontal")
+    vim.cmd("startinsert")
     -- vim.cmd[[wincmd H]]
   end
 end

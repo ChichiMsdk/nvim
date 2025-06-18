@@ -36,9 +36,11 @@ return {
       }):find()
     end
 
-    vim.keymap.set("n", "<leader><S-g>", function() toggle_telescope(harpoon:list()) end)
-    vim.keymap.set("n", "<leader>e", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
-    vim.keymap.set("n", "<leader><S-e>", function() harpoon:list():add() end)
+    local create_command = vim.api.nvim_create_user_command
+    create_command('Th', function(opts) toggle_telescope(harpoon:list()) end, {nargs = 0})
+
+    vim.keymap.set("n", "<leader>1", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
+    vim.keymap.set("n", "<leader>2", function() harpoon:list():add() end)
     --vim.keymap.set("n", "<ESC>", function() harpoon.ui:close_quick_menu() end)
 
     vim.keymap.set("n", "<M-f>", function() harpoon:list():select(1) end)
@@ -56,9 +58,6 @@ return {
     vim.keymap.set("n", "<M-m>", function() harpoon:list():select(13) end)
     vim.keymap.set("n", "<M-,>", function() harpoon:list():select(14) end)
     vim.keymap.set("n", "<M-.>", function() harpoon:list():select(15) end)
-
-    vim.keymap.set("n", "<leader>1", function() harpoon:list():prev() end)
-    vim.keymap.set("n", "<leader>2", function() harpoon:list():next() end)
   end,
 }
 

@@ -9,9 +9,6 @@ nnoremap <silent><ESC> :noh<CR>
 " Firefox open msdn
 nmap <F1> :silent !firefox.exe "https://www.google.com/search?q=<cword>&btnI"<CR>
 
-" Open output in buffer
-nnoremap <silent><leader>r :lua Scratch()<CR>
-
 " Functions in base\commander\main.lua
 " nnoremap <silent><leader>cm :lua show_file_lines(vim.g.makeFile)<CR>
 " nnoremap <silent><leader>cc :lua show_file_lines(vim.g.cmdFile)<CR>
@@ -20,16 +17,15 @@ nnoremap <silent><leader>r :lua Scratch()<CR>
 nnoremap <silent><C-/> :lua SendCommandToggleTerm()<CR>
 
 " Undotree
-nnoremap <silent><leader>u :UndotreeToggle<CR>:UndotreeFocus<CR>
+nnoremap <silent><leader>0 :UndotreeToggle<CR>:UndotreeFocus<CR>
 
 " Telescope
-nnoremap <silent><leader>f :Telescope find_files<CR>
-nnoremap <silent><leader>b :Telescope buffers<CR>
-nnoremap <silent><leader>gl :lua require("telescope").extensions.live_grep_args.live_grep_args()<CR>
-nnoremap <silent><leader>gs :Telescope grep_string<CR>
-nnoremap <silent><leader>gt :Telescope tags<CR>
-nnoremap <silent><leader>kk :Telescope jumplist<CR>
-" nnoremap <silent><leader>te :Telescope<CR>
+nnoremap <silent><C-f> :Telescope find_files<CR>
+nnoremap <silent><C-b> :Telescope buffers<CR>
+nnoremap <silent><leader>l :lua require("telescope").extensions.live_grep_args.live_grep_args()<CR>
+command! -nargs=0 TS silent :Telescope grep_string
+command! -nargs=0 TT silent :Telescope tags
+command! -nargs=0 TJ silent :Telescope jumplist
 
 " Oil / FileExplorer
 nnoremap <silent><leader>vo :Oil<CR>
@@ -67,43 +63,31 @@ nnoremap <silent><C-j> :wincmd j<CR>
 nnoremap <silent><C-h> :wincmd h<CR>
 nnoremap <silent><C-l> :wincmd l<CR>
 
-" Cd in current buffer directory
-nnoremap <silent><leader>kc :lua Mycd("cd")<CR>
-nnoremap <silent><leader>kt :lua Mycd("tcd")<CR>
-nnoremap <silent><leader>kl :lua Mycd("lcd")<CR>
-
 " Resize
 nnoremap <C-S-Up> :resize +1<CR>
 nnoremap <C-S-Down> :resize -1<CR>
 nnoremap <C-S-Right> :vertical resize +1<CR>
 nnoremap <C-S-Left> :vertical resize -1<CR>
+nnoremap <leader>= :vertical resize +25<CR>
 
 " Split windows
 nnoremap <silent><leader>vs :vs<CR>
 nnoremap <silent><leader>vh :sp<CR>
 
-" Center screen and set jump after scroll
-" nnoremap <C-d> m'<C-d>zz
-" nnoremap <C-u> m'<C-u>zz
-" vnoremap <C-d> m'<C-d>zz
-" vnoremap <C-u> m'<C-u>zz
-
 nnoremap <C-d> <C-d>zz
 nnoremap <C-u> <C-u>zz
 vnoremap <C-d> <C-d>zz
 vnoremap <C-u> <C-u>zz
-" nnoremap { {zz
-" nnoremap } }zz
 
 " Navigate / Delete buffer
-nnoremap <silent><leader>o :bn<bar>bd #<CR>
 nnoremap <silent>]b :bn<CR>
 nnoremap <silent>[b :bp<CR>
 
 " Next/Previous qflist
-nnoremap <silent>]q :cnext<CR>
-nnoremap <silent>[q :cprevious<CR>
-nnoremap <silent><leader>co :Copen<CR>
+nnoremap <silent>]f :cnext<CR>
+nnoremap <silent>[f :cprevious<CR>
+nnoremap <silent>]c :Copen<CR>
+nnoremap <silent>[c :cw<CR>
 
 " Navigate tab
 nnoremap gy gt

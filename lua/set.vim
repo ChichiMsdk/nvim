@@ -3,7 +3,7 @@ let s:undodir_path = g:myvimrc . 'undofile'
 execute "source " . s:check_build_path
 execute "set undodir=" . s:undodir_path
 
-let g:default_command = "longsure raddbg --auto-run"
+let g:default_command = "longsure raddbg --auto_run"
 
 filetype on
 filetype plugin on
@@ -38,13 +38,13 @@ set nocursorline
 set shiftwidth=2
 set termguicolors
 set softtabstop=2
-set ssop+=options
+" set ssop+=options
 set noequalalways
-set foldlevel=1100
+set foldlevel=10
 set updatetime=4000
 set colorcolumn=""
 set fillchars=fold:\ 
-set undolevels=10000
+set undolevels=1000
 set foldmethod=indent
 set wildoptions=tagfile
 set clipboard=unnamedplus
@@ -53,15 +53,12 @@ set statusline=%<%f\ %h%m%r%{FugitiveStatusline()}%=%-14.(%l,%c%V%)\ %P
 "set complete+=i,d
 set complete-=t
 set formatoptions+=p
+set formatoptions-=o
 set completeopt=menuone,preview,popup
 
 autocmd CompleteDone * pclose
-autocmd FileType *c* set nolist
 autocmd FileType *c* set cino+=t0
 autocmd FileType *c* set listchars=tab:<->,trail:-,space:\\u00b7
-autocmd FileType *c* set shiftwidth=2
-autocmd FileType *c* set formatoptions-=o
-autocmd FileType *lua set formatoptions-=o
 
 " autocmd InsertLeave * set relativenumber
 " autocmd InsertEnter * set norelativenumber
@@ -79,7 +76,7 @@ if has ('win32')
   for f in glob('C:\vc_env\useful_tags\*tags', 1, 1)
     let &tags .= ','.f
   endfor
-  set grepprg=C:\Users\chiha\Desktop\git\ripgrep\target\debug\rg.exe\ --vimgrep\ -uu
+  set grepprg=rg\ --vimgrep\ -uu
 
   " let &path=$INCLUDE
   let $VC='C:\vc_env\msvc\'
@@ -99,6 +96,8 @@ if has ('win32')
 
   set path+=C:\clang\lib\clang\19\include
   set path+=C:\include
+  set path+=C:\devel\chihab
+  set tags+=C:\devel\chihab\tags
 
   let &shell ="cmd.exe"
 

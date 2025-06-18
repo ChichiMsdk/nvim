@@ -7,28 +7,18 @@ hi PmenuSel blend=0
 fun! C_colors()
   " syntax on
   " set syntax=c
-  syn match Global "\<g_[a-z0-9_]*"
+  syn match Global "\<g_[a-z0-9_]*\>"
   hi Global guifg=none
-  syn match chiType "\<[A-Z]*\(Str\)[0-9]*\>"
+  syn keyword chiType u8 u16 u32 u64 i8 i16 i32 i64 f32 f64 _imax _umax S8 S8Array S8_v
   hi link chiType cType
   syn match cAttribute "\[\[\S*\]\]"
   hi link cAttribute Keyword
-  syn match winType "\<[A-Z]*\(BYTE\|STR\|INT\|HANDLE\|RESULT\|BOOL\|SIZE_T\|INSTANCE\)[0-9]*\>"
-  syn match winType "\<[A-Z]*\(HWND\|MSG\|PARAM\|ICON\|CURSOR\|CLASSEX\|INFO\)\>"
-  syn match winType "\<[A-Z]*\(VOID\|WORD\|THREAD_START_ROUTINE\)\>"
-  syn match winType "\<[A-Z]*\(WIN\|HANDLE\|SYSTEM_INFO\|INTEGER\|SECURITY_ATTRIBUTES\)\>"
-  syn match winMacro "\<[A-Z_]*\(GET\|IDI\|LARGE\)[A-Z_]*\>"
+  syn match winMacro "\<[A-Z_][A-Z_0-9]*\>"
   hi link winType chiType
-  syn keyword winMacro CALLBACK EXTERN_C FAILED SUCCEEDED __FUNCTION__ COUNTOF CHECK_R
-  syn match winMacro "\<[A-Z_]*\(MAKE\|RYU\|HCHECK\)[A-Z_]*\>"
   hi link winMacro Macro
-  syn match winErrorType "\<\(E\|S\)_[A-Z_]*\>"
-  hi link winErrorType chiType
-  syn match winDefNum "\<\(WM\|WS\|SW\|CW\|CS\|MK\|MB\|VK\|FORMAT\|HEAP\)_\S*\>"
-  hi link winDef chiType
   syn match D3D12Struct "\<D3D[0-9]\{0,2}\S*_[A-Za-z0-9_]*\>\**\s\+"
   syn match DXGIStruct "\<DXGI_[A-Za-z0-9_]*\>"
-  syn match IDType "\<\(ID3D\|IDXGI\|IWIC\)[A-Za-z0-9]*\>"
+  syn match IDType "\<\(ID3D\|IDXGI\|IWIC\|IDWrite\)[A-Za-z0-9]*\>"
   hi link IDType chiType
   hi link D3D12Struct chiType
   hi link DXGIStruct chiType
@@ -42,21 +32,19 @@ fun! C_colors()
   syn keyword glmType mat4 mat3 vec4 vec3
   hi link glmType chiType
 
-  syn match glmMacro "\<GLM_\S*\>"
-  hi link glmMacro Macro
-
-  syn keyword myStorage force_inline global __force_inline
+  syn keyword myStorage thread_static force_inline global __force_inline EXTERN_C read_only
   hi link myStorage cStorageClass
 
-  syn keyword moreBool TRUE FALSE
+  syn keyword moreBool TRUE FALSE true false success fail
   syn keyword moreConditional case default
   hi link moreBool Boolean
   hi link cond Boolean
   hi link moreConditional cConditional
 
-  syn keyword moreKeywords sizeof typeof
-  " hi link moreKeywords Keyword
+  syn keyword moreKeywords sizeof typeof FT ND MU countof offsetof _Generic
+  hi link moreKeywords Keyword
   syn match Operand "\(&&\|||\|>=\|>\|<\|=\|==\|->\|&\|<=\|\*\)"
+	hi link cUserLabel Macro
 endfun
 
 augroup c_colors

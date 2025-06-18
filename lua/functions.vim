@@ -10,6 +10,7 @@ function! Check_build_file()
 endfunction
 
 autocmd DirChanged * call Check_build_file()
+autocmd BufRead,BufNewFile *jai compiler jai
 
 fun! TrimWhitespace()
   let l:save = winsaveview()
